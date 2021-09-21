@@ -1,0 +1,12 @@
+C:\praticas\is\sheet_1\SolutionWorksheet_1\OrganizationLib\bin\Debug\OrganizationLib.dll
+C:\praticas\is\sheet_1\SolutionWorksheet_1\OrganizationLib\bin\Debug\OrganizationLib.pdb
+C:\praticas\is\sheet_1\SolutionWorksheet_1\OrganizationLib\obj\Debug\OrganizationLib.csproj.CoreCompileInputs.cache
+C:\praticas\is\sheet_1\SolutionWorksheet_1\OrganizationLib\obj\Debug\OrganizationLib.dll
+C:\praticas\is\sheet_1\SolutionWorksheet_1\OrganizationLib\obj\Debug\OrganizationLib.pdb
+C:\praticas\is\sheet_1\SolutionWorksheet_1\OrganizationLib\obj\Debug\OrganizationLib.csproj.AssemblyReference.cache
+C:\pratices\is\sheet_1\SolutionWorksheet_1\OrganizationLib\bin\Debug\OrganizationLib.dll
+C:\pratices\is\sheet_1\SolutionWorksheet_1\OrganizationLib\bin\Debug\OrganizationLib.pdb
+C:\pratices\is\sheet_1\SolutionWorksheet_1\OrganizationLib\obj\Debug\OrganizationLib.csproj.AssemblyReference.cache
+C:\pratices\is\sheet_1\SolutionWorksheet_1\OrganizationLib\obj\Debug\OrganizationLib.csproj.CoreCompileInputs.cache
+C:\pratices\is\sheet_1\SolutionWorksheet_1\OrganizationLib\obj\Debug\OrganizationLib.dll
+C:\pratices\is\sheet_1\SolutionWorksheet_1\OrganizationLib\obj\Debug\OrganizationLib.pdb
