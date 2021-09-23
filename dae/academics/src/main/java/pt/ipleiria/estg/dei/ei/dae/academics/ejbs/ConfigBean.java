@@ -15,7 +15,7 @@ public class ConfigBean {
 
     @PostConstruct
     public void populateDB() {
-        studentBean.create("123_ana", "qqk41-fm7Q", "Ana Gomes", "ana.gomes@gmai.com");
+        studentBean.create("carlaSoffia", "Fp73-Uk70", "Carla Sofia", "2191170@my.ipleiria.pt");
         System.out.println("-----------------   THE END   -----------------");
     }
 

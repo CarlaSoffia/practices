@@ -17,6 +17,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="EclipseLink" />
         <datasource-mapping>
+          <factory-entry name="AcademicsPersistenceUnit" />
           <factory-entry name="academics" />
         </datasource-mapping>
         <naming-strategy-map />
