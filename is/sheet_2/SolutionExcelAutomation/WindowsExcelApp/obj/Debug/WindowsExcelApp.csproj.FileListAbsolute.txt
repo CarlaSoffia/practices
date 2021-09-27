@@ -1,0 +1,13 @@
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\bin\Debug\WindowsExcelApp.exe.config
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\bin\Debug\WindowsExcelApp.exe
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\bin\Debug\WindowsExcelApp.pdb
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\obj\Debug\WindowsExcelApp.csproj.AssemblyReference.cache
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\obj\Debug\WindowsExcelApp.Properties.Resources.resources
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\obj\Debug\WindowsExcelApp.csproj.GenerateResource.cache
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\obj\Debug\WindowsExcelApp.csproj.CoreCompileInputs.cache
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\obj\Debug\WindowsExcelApp.exe
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\obj\Debug\WindowsExcelApp.pdb
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\bin\Debug\Excel-Lib.dll
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\bin\Debug\Excel-Lib.pdb
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\obj\Debug\WindowsExcelApp.Form1.resources
+C:\practices\is\sheet_2\SolutionExcelAutomation\WindowsExcelApp\obj\Debug\WindowsExcelApp.csproj.CopyComplete

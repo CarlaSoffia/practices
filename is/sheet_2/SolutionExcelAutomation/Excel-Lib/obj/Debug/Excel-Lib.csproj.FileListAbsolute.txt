@@ -1,0 +1,7 @@
+C:\practices\is\sheet_2\SolutionExcelAutomation\Excel-Lib\bin\Debug\Excel-Lib.dll
+C:\practices\is\sheet_2\SolutionExcelAutomation\Excel-Lib\bin\Debug\Excel-Lib.pdb
+C:\practices\is\sheet_2\SolutionExcelAutomation\Excel-Lib\obj\Debug\Excel-Lib.csproj.AssemblyReference.cache
+C:\practices\is\sheet_2\SolutionExcelAutomation\Excel-Lib\obj\Debug\Excel-Lib.csproj.ResolveComReference.cache
+C:\practices\is\sheet_2\SolutionExcelAutomation\Excel-Lib\obj\Debug\Excel-Lib.csproj.CoreCompileInputs.cache
+C:\practices\is\sheet_2\SolutionExcelAutomation\Excel-Lib\obj\Debug\Excel-Lib.dll
+C:\practices\is\sheet_2\SolutionExcelAutomation\Excel-Lib\obj\Debug\Excel-Lib.pdb
