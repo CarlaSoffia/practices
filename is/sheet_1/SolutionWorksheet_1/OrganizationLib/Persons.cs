@@ -37,13 +37,12 @@ namespace OrganizationLib
 
         public int NumberOfProgrammers()
         {
-            Programmer p1 = new Programmer("Ana", "Mendes", new DateTime(2000, 09, 22), 1500);
-            Type typeProg = p1.GetType();
+
             int numberProgrammers = 0;
 
             foreach (Person p in this)
             {
-                if (p.GetType() == typeProg)
+                if (p.GetType() == typeof(Programmer))
                 {
                     numberProgrammers++;
                 }
@@ -52,13 +51,11 @@ namespace OrganizationLib
         }
         public int NumberOfManagers()
         {
-            Manager m1 = new Manager("Carla","Mendes",new DateTime(2000, 09, 22), 1000);
-            Type typeMan = m1.GetType();
             int numberManagers = 0;
 
             foreach (Person p in this)
             {
-                if (p.GetType() == typeMan)
+                if (p.GetType() == typeof(Manager))
                 {
                     numberManagers++;
                 }
