@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
+import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,10 +17,21 @@ public class CourseBean {
     public void create(int code, String name){
         Course course = new Course(code, name);
         entityManager.persist(course);
-        this.getAllCourses();
     }
-
+    //TO-DO
+    public void remove(Course course){
+        List<Student> students = course.getStudents();
+        for (Student student:students) {
+            course.removeStudent(student);
+            entityManager.remove(student);
+        }
+        entityManager.remove(course);
+    }
     public List<Course> getAllCourses() {
         return (List<Course>) entityManager.createNamedQuery("getAllCourses").getResultList();
+    }
+
+    public Course findCourse(int courseCode) {
+        return entityManager.find(Course.class, courseCode);
     }
 }

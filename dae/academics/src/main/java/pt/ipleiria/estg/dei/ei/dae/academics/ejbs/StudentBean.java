@@ -21,9 +21,13 @@ public class StudentBean {
         entityManager.persist(student);
         course.addStudent(student);
     }
+
     public List<Student> getAllStudents() {
         // remember, maps to: “SELECT s FROM Student s ORDER BY s.name”
         return (List<Student>) entityManager.createNamedQuery("getAllStudents").getResultList();
+    }
+    public Student findStudent(String username) {
+        return entityManager.find(Student.class, username);
     }
 
 }
