@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ejbs;
 
+import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 
 import javax.ejb.Stateless;
@@ -13,9 +14,12 @@ public class StudentBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create(String username, String password, String name, String email){
-           Student student = new Student(username, password, name, email);
-           entityManager.persist(student);
+    public void create(String username, String password, String name, String email, int courseCode){
+        Course course = entityManager.find(Course.class, courseCode);
+        if(course == null) return;
+        Student student = new Student(username, password, name, email, course);
+        entityManager.persist(student);
+        course.addStudent(student);
     }
     public List<Student> getAllStudents() {
         // remember, maps to: “SELECT s FROM Student s ORDER BY s.name”

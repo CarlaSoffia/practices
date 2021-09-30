@@ -1,7 +1,9 @@
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\Student.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\Course.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ws\StudentService.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\dtos\StudentDTO.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\ConfigBean.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\StudentBean.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\CourseBean.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\providers\CorsFilter.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\AcademicsApplication.java
