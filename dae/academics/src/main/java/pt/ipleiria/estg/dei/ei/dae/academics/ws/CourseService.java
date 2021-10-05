@@ -51,4 +51,44 @@ public class CourseService {
                 .entity(toDTO(newCourse))
                 .build();
     }
+
+    @PUT
+    @Path("/")
+    public Response updateCourse( CourseDTO courseDTO){
+
+        Course course = courseBean.findCourse(courseDTO.getCode());
+        if(course == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        courseBean.update(course, courseDTO.getName());
+        return Response.status(Response.Status.ACCEPTED)
+                .entity(toDTO(course))
+                .build();
+    }
+
+    @DELETE
+    @Path("/")
+    public Response deleteCourse(CourseDTO courseDTO) {
+        Course course = courseBean.findCourse(courseDTO.getCode());
+        if(course == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        courseBean.remove(course);
+        return Response.status(Response.Status.ACCEPTED)
+                .entity(toDTO(course))
+                .build();
+    }
+
+
+    @GET
+    @Path("/")
+    public Response getCourse(CourseDTO courseDTO) {
+        Course course = courseBean.findCourse(courseDTO.getCode());
+        if(course == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.FOUND)
+                .entity(toDTO(course))
+                .build();
+    }
 }

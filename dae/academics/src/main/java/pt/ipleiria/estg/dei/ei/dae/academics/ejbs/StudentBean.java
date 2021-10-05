@@ -20,6 +20,7 @@ public class StudentBean {
         Student student = new Student(username, password, name, email, course);
         entityManager.persist(student);
         course.addStudent(student);
+        entityManager.merge(course);
     }
 
     public List<Student> getAllStudents() {

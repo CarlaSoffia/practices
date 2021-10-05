@@ -20,12 +20,17 @@ public class CourseBean {
     }
     //TO-DO
     public void remove(Course course){
-        List<Student> students = course.getStudents();
-        for (Student student:students) {
-            course.removeStudent(student);
-            entityManager.remove(student);
+       List<Student> students = course.getStudents();
+        if(!students.isEmpty()) {
+            for (Student student : students) {
+                course.removeStudent(student);
+            }
         }
-        entityManager.remove(course);
+        Course courseWithoutStudents = entityManager.merge(course);
+        entityManager.remove(courseWithoutStudents);
+
+
+
     }
     public List<Course> getAllCourses() {
         return (List<Course>) entityManager.createNamedQuery("getAllCourses").getResultList();
@@ -33,5 +38,13 @@ public class CourseBean {
 
     public Course findCourse(int courseCode) {
         return entityManager.find(Course.class, courseCode);
+    }
+
+    public void update(Course course, String name) {
+        if(name == null){
+            return;
+        }
+        course.setName(name);
+        entityManager.merge(course);
     }
 }

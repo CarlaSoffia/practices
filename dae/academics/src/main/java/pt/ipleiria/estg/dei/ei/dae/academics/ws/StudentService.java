@@ -29,10 +29,10 @@ public class StudentService {
     private StudentDTO toDTO(Student student) {
         Course course =student.getCourse();
         return new StudentDTO(
+                student.getEmail(),
+                student.getName(),
                 student.getUsername(),
                 student.getPassword(),
-                student.getName(),
-                student.getEmail(),
                 course.getCode(),
                 course.getName()
         );

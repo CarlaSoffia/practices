@@ -961,6 +961,7 @@ UC/10
     </access-method>
     <table id="29" parent="17" name="courses">
       <ObjectId>16588</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>657</StateNumber>
     </table>
