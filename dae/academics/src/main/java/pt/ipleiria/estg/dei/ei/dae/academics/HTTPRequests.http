@@ -29,27 +29,19 @@ Content-Type: application/json
 }
 
 ### Courses
-PUT http://localhost:8080/academics/api/courses
+PUT http://localhost:8080/academics/api/courses/1234
 Content-Type: application/json
 
 {
-  "code":"1234",
   "name": "Biology"
 }
 
-### Courses
-DELETE http://localhost:8080/academics/api/courses
-Content-Type: application/json
 
-{
-  "code":"1234"
-}
+### Courses
+DELETE http://localhost:8080/academics/api/courses/1234
+
 
 
 ### Courses
-GET http://localhost:8080/academics/api/courses
-Content-Type: application/json
+GET http://localhost:8080/academics/api/courses/9991
 
-{
-  "code":"9991"
-}

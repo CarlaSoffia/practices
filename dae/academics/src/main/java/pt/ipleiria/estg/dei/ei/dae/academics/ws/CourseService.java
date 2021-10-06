@@ -53,10 +53,10 @@ public class CourseService {
     }
 
     @PUT
-    @Path("/")
-    public Response updateCourse( CourseDTO courseDTO){
+    @Path("/{id}")
+    public Response updateCourse(@PathParam("id") int id, CourseDTO courseDTO){
 
-        Course course = courseBean.findCourse(courseDTO.getCode());
+        Course course = courseBean.findCourse(id);
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -67,9 +67,9 @@ public class CourseService {
     }
 
     @DELETE
-    @Path("/")
-    public Response deleteCourse(CourseDTO courseDTO) {
-        Course course = courseBean.findCourse(courseDTO.getCode());
+    @Path("/{id}")
+    public Response deleteCourse(@PathParam("id") int id) {
+        Course course = courseBean.findCourse(id);
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -81,9 +81,9 @@ public class CourseService {
 
 
     @GET
-    @Path("/")
-    public Response getCourse(CourseDTO courseDTO) {
-        Course course = courseBean.findCourse(courseDTO.getCode());
+    @Path("/{id}")
+    public Response getCourse(@PathParam("id") int id)  {
+        Course course = courseBean.findCourse(id);
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
