@@ -23,7 +23,7 @@ public class CourseService {
     private CourseBean courseBean;
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
-    @Path("/") // means: the relative url path is “/api/courses/”
+    @Path("/") // means: the relative url path is "/api/courses/"
     public List<CourseDTO> getAllCoursesWS() {
         return toDTOs(courseBean.getAllCourses());
     }
@@ -53,10 +53,10 @@ public class CourseService {
     }
 
     @PUT
-    @Path("/{id}")
-    public Response updateCourse(@PathParam("id") int id, CourseDTO courseDTO){
+    @Path("/{code}")
+    public Response updateCourse(@PathParam("code") int code, CourseDTO courseDTO){
 
-        Course course = courseBean.findCourse(id);
+        Course course = courseBean.findCourse(code);
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -67,9 +67,9 @@ public class CourseService {
     }
 
     @DELETE
-    @Path("/{id}")
-    public Response deleteCourse(@PathParam("id") int id) {
-        Course course = courseBean.findCourse(id);
+    @Path("/{code}")
+    public Response deleteCourse(@PathParam("code") int code) {
+        Course course = courseBean.findCourse(code);
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -81,9 +81,9 @@ public class CourseService {
 
 
     @GET
-    @Path("/{id}")
-    public Response getCourse(@PathParam("id") int id)  {
-        Course course = courseBean.findCourse(id);
+    @Path("/{code}")
+    public Response getCourse(@PathParam("code") int code)  {
+        Course course = courseBean.findCourse(code);
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }

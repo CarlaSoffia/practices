@@ -27,6 +27,7 @@ public class CourseBean {
             }
         }
         Course courseWithoutStudents = entityManager.merge(course);
+
         entityManager.remove(courseWithoutStudents);
 
 
@@ -41,7 +42,7 @@ public class CourseBean {
     }
 
     public void update(Course course, String name) {
-        if(name == null){
+        if(name == null || name.equals(course.getName())){
             return;
         }
         course.setName(name);

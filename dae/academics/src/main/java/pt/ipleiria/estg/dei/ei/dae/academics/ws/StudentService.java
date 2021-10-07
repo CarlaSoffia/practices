@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ws;
 
+import pt.ipleiria.estg.dei.ei.dae.academics.dtos.CourseDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.StudentBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
@@ -59,4 +60,42 @@ public class StudentService {
         return students.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
+    @GET
+    @Path("/{username}")
+    public Response getStudent(@PathParam("username") String username)  {
+        Student student = studentBean.findStudent(username);
+        if(student == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.FOUND)
+                .entity(toDTO(student))
+                .build();
+    }
+
+    @DELETE
+    @Path("/{username}")
+    public Response deleteCourse(@PathParam("username") String username) {
+        Student student = studentBean.findStudent(username);
+        if(student == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        studentBean.remove(student);
+        return Response.status(Response.Status.ACCEPTED)
+                .entity(toDTO(student))
+                .build();
+    }
+
+    @PUT
+    @Path("/{username}")
+    public Response updateCourse(@PathParam("username") String username, StudentDTO studentDTO){
+
+        Student student = studentBean.findStudent(username);
+        if(student == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        studentBean.update(student, studentDTO);
+        return Response.status(Response.Status.ACCEPTED)
+                .entity(toDTO(student))
+                .build();
+    }
 }

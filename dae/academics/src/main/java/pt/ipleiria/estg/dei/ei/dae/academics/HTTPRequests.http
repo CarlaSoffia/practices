@@ -10,14 +10,27 @@ Content-Type: application/json
  "name": "John Doe",
  "username": "john",
  "password": "jd",
- "courseCode":"9991",
- "courseName": "Computer Engineer"
+ "courseCode":"9991"
 }
 
+### Students
+DELETE http://localhost:8080/academics/api/students/john
 
-##### Students
+
+### Students
+PUT http://localhost:8080/academics/api/students/john
+Content-Type: application/json
+
+{
+  "password": "1234",
+  "email": "johndoe_12345@gmail.com",
+  "courseCode": 3332
+}
+
+##### Courses
 GET http://localhost:8080/academics/api/courses
 Accept: application/json
+
 
 ### Courses
 POST http://localhost:8080/academics/api/courses
@@ -38,10 +51,10 @@ Content-Type: application/json
 
 
 ### Courses
-DELETE http://localhost:8080/academics/api/courses/1234
+DELETE http://localhost:8080/academics/api/courses/3332
 
 
 
 ### Courses
-GET http://localhost:8080/academics/api/courses/9991
+GET http://localhost:8080/academics/api/courses/3332
 
