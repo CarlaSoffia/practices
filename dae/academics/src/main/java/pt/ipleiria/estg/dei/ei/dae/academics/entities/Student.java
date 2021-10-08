@@ -4,6 +4,8 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 
@@ -14,63 +16,24 @@ import javax.validation.constraints.Email;
         )
 })
 
-@Table(name="STUDENTS")
-public class Student {
-    @Id
-    private String username;
-    @NotNull
-    private String password;
-    @NotNull
-    private String name;
-    @NotNull
-    @Email
-    private String email;
+
+public class Student extends User{
+
     @ManyToOne
     @JoinColumn(name = "COURSE_CODE")
     @NotNull
     private Course course;
+    @ManyToMany(mappedBy = "students")
+    private List<Subject> subjects;
 
     public Student() {
+        this.subjects = new LinkedList<Subject>();
     }
 
     public Student(String username, String password, String name, String email, Course course) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.email = email;
+        super(username,password,name, email);
         this.course = course;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        this.subjects = new LinkedList<Subject>();
     }
 
     public Course getCourse() {
@@ -79,5 +42,25 @@ public class Student {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+    public void addSubject(Subject subject){
+        if(subject == null || subjects.contains(subject)){
+            return;
+        }
+        subjects.add(subject);
+    }
+
+    public void removeSubject(Subject subject){
+        if(subject == null || !subjects.contains(subject)){
+            return;
+        }
+        subjects.remove(subject);
     }
 }

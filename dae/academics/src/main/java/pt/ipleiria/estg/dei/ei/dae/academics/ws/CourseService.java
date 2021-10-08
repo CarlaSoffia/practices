@@ -87,7 +87,7 @@ public class CourseService {
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.status(Response.Status.FOUND)
+        return Response.status(Response.Status.ACCEPTED)
                 .entity(toDTO(course))
                 .build();
     }

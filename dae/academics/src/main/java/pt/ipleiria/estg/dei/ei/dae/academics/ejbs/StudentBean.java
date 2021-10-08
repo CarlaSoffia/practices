@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.academics.ejbs;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
+import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -62,5 +63,41 @@ public class StudentBean {
             }
         }
         entityManager.merge(student);
+    }
+
+
+    public boolean enrollStudentInSubject(String username, int subjectCode){
+        Student student = entityManager.find(Student.class, username);
+        if(student == null){
+            return false;
+        }
+        Subject subject = entityManager.find(Subject.class, subjectCode);
+        if(subject == null){
+            return false;
+        }
+        if(!student.getCourse().equals(subject.getCourse())){
+            return false;
+        }
+        subject.addStudent(student);
+        student.addSubject(subject);
+        return true;
+    }
+
+
+    public boolean unrollStudentInSubject(String username, int subjectCode){
+        Student student = entityManager.find(Student.class, username);
+        if(student == null){
+            return false;
+        }
+        Subject subject = entityManager.find(Subject.class, subjectCode);
+        if(subject == null){
+            return false;
+        }
+        if(!student.getCourse().equals(subject.getCourse())){
+            return false;
+        }
+        subject.removeStudent(student);
+        student.removeSubject(subject);
+        return true;
     }
 }

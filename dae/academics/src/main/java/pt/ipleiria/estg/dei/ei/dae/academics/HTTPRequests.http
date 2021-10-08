@@ -58,3 +58,44 @@ DELETE http://localhost:8080/academics/api/courses/3332
 ### Courses
 GET http://localhost:8080/academics/api/courses/3332
 
+
+
+### Students
+GET http://localhost:8080/academics/api/students/carlaSoffia/subjects
+
+### Students
+GET http://localhost:8080/academics/api/students/carlaSoffia
+
+
+### Subjects
+GET http://localhost:8080/academics/api/subjects/1/students
+
+### Students
+POST http://localhost:8080/academics/api/students/carlaSoffia/unroll/2
+
+### Students
+POST http://localhost:8080/academics/api/students/carlaSoffia/enroll/5
+
+### Teachers
+POST http://localhost:8080/academics/api/teachers/teacherJoao/associate/2
+
+### Teachers
+POST http://localhost:8080/academics/api/teachers/teacherJoao/associate/3
+
+### Teachers
+POST http://localhost:8080/academics/api/teachers/teacherJoao/associate/4
+
+### Teachers
+POST http://localhost:8080/academics/api/teachers/teacherBruna/associate/1
+
+### Teachers
+POST http://localhost:8080/academics/api/teachers/teacherBruna/associate/2
+
+### Teachers
+POST http://localhost:8080/academics/api/teachers/teacherJoao/dissociate/2
+
+### Teachers
+GET http://localhost:8080/academics/api/teachers/teacherJoao/subjects
+
+### Subject
+GET http://localhost:8080/academics/api/subjects/2/teachers
