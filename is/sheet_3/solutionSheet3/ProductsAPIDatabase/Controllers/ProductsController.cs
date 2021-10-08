@@ -10,7 +10,9 @@ namespace ProductsAPIDatabase.Controllers
 {
     public class ProductsController : ApiController
     {
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DDProds.mdf;Integrated Security=True";
+        //string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DDProds.mdf;Integrated Security=True";
+
+        string connectionString = Properties.Settings.Default.ConnStr;
 
         // GET: api/Products
         [Route("api/products")]
@@ -135,18 +137,109 @@ namespace ProductsAPIDatabase.Controllers
         }
 
         // POST: api/Products
-        public void Post([FromBody]string value)
+        [Route("api/products")]
+        public IHttpActionResult Post([FromBody]Product product)
         {
+            SqlConnection connection = null;
+            try
+            {
+                connection = new SqlConnection(connectionString);
+                connection.Open();
+                string sql = "INSERT INTO Prods VALUES(@name, @cat, @price)";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@name", product.Name);
+                command.Parameters.AddWithValue("@cat", product.Category);
+                command.Parameters.AddWithValue("@price", product.Price);
+                int affectedRows = command.ExecuteNonQuery();
+                connection.Close();
+                if (affectedRows == 1) {
+                    return Ok(product);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception)
+            {
+
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+                return InternalServerError();
+            }
         }
 
         // PUT: api/Products/5
-        public void Put(int id, [FromBody]string value)
+        [Route("api/products/{id}")]
+        public IHttpActionResult Put(int id, [FromBody]Product product)
         {
+            SqlConnection connection = null;
+            try
+            {
+                connection = new SqlConnection(connectionString);
+                connection.Open();
+                string sql = "UPDATE Prods SET name=@name, category=@cat, price=@price WHERE id=@id";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@name", product.Name);
+                command.Parameters.AddWithValue("@cat",  product.Category);
+                command.Parameters.AddWithValue("@price", product.Price);
+                command.Parameters.AddWithValue("@id", id);
+                int affectedRows = command.ExecuteNonQuery();
+                connection.Close();
+                if (affectedRows == 1)
+                {
+                    return Ok(product);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception)
+            {
+
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+                return InternalServerError();
+            }
         }
 
         // DELETE: api/Products/5
-        public void Delete(int id)
+        [Route("api/products/{id}")]
+        public IHttpActionResult Delete(int id)
         {
+            SqlConnection connection = null;
+            try
+            {
+                connection = new SqlConnection(connectionString);
+                connection.Open();
+                string sql = "DELETE FROM Prods WHERE id=@id";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@id", id);
+                int affectedRows = command.ExecuteNonQuery();
+                connection.Close();
+                if (affectedRows == 1)
+                {
+                    return Ok("Product deleted!");
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception)
+            {
+
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+                return InternalServerError();
+            }
         }
     }
 }

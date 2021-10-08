@@ -65,3 +65,6 @@ C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\obj\Debug\ProductsAPI
 C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\obj\Debug\ProductsAPIDatabase.dll
 C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\obj\Debug\ProductsAPIDatabase.pdb
 C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\obj\Debug\ProductsAPIDatabase.csproj.AssemblyReference.cache
+C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\bin\Microsoft.Web.Infrastructure.dll
+C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\bin\Swashbuckle.Core.dll
+C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\bin\WebActivatorEx.dll
