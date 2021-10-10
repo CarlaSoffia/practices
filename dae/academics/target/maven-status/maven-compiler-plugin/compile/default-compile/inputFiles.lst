@@ -5,6 +5,7 @@ C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\w
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\TeacherBean.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ws\TeacherService.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\SubjectBean.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ws\AdministratorService.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\dtos\SubjectDTO.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\Subject.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\providers\CorsFilter.java
@@ -16,6 +17,7 @@ C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\d
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\ConfigBean.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\AdministratorBean.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\StudentBean.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\dtos\AdministratorDTO.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\CourseBean.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ws\CourseService.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\Teacher.java

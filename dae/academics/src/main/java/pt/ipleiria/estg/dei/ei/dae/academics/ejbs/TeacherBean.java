@@ -1,13 +1,13 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ejbs;
 
-import pt.ipleiria.estg.dei.ei.dae.academics.entities.Administrator;
-import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
-import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
-import pt.ipleiria.estg.dei.ei.dae.academics.entities.Teacher;
+import pt.ipleiria.estg.dei.ei.dae.academics.dtos.SubjectDTO;
+import pt.ipleiria.estg.dei.ei.dae.academics.dtos.TeacherDTO;
+import pt.ipleiria.estg.dei.ei.dae.academics.entities.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless
 public class TeacherBean {
@@ -20,6 +20,9 @@ public class TeacherBean {
         entityManager.persist(teacher);
     }
 
+    public List<Teacher> getAllTeachers(){
+        return (List<Teacher>) entityManager.createNamedQuery("getAllTeachers").getResultList();
+    }
     public Teacher findTeacher(String username) {
         return entityManager.find(Teacher.class, username);
     }
@@ -54,4 +57,27 @@ public class TeacherBean {
         teacher.removeSubject(subject);
         return true;
     }
+
+    public void update(Teacher teacher, TeacherDTO teacherDTO) {
+        if(teacherDTO.getName() != null && !teacher.getName().equals(teacherDTO.getName())){
+            teacher.setName(teacherDTO.getName());
+        }
+        if(teacherDTO.getPassword() != null && !teacher.getPassword().equals(teacherDTO.getPassword())){
+            teacher.setPassword(teacherDTO.getPassword());
+        }
+        if(teacherDTO.getEmail() != null && !teacher.getEmail().equals(teacherDTO.getEmail())){
+            teacher.setEmail(teacherDTO.getEmail());
+        }
+        if(teacherDTO.getOffice() != null && !teacher.getOffice().equals(teacherDTO.getOffice())){
+            teacher.setOffice(teacherDTO.getOffice());
+        }
+
+        entityManager.merge(teacher);
+    }
+
+    public void remove(Teacher teacher){
+        Teacher teacherMerged = entityManager.merge(teacher);
+        entityManager.remove(teacherMerged);
+    }
+
 }

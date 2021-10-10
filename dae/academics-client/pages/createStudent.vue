@@ -1,12 +1,14 @@
 <template>
-  <form @submit.prevent="create">
-    <div>username: <input v-model="username" type="text" /></div>
-    <div>password: <input v-model="password" type="password" /></div>
-    <div>name: <input v-model="name" type="text" /></div>
-    <div>email: <input v-model="email" type="email" /></div>
+<div>
+  <b-container class="form-group w-50"
+      style="margin-left: 75px" @submit.prevent="create">
+    <div>username: <input v-model="username" type="text" class="form-control" /></div>
+    <div>password: <input v-model="password" type="password" class="form-control"/></div>
+    <div>name: <input v-model="name" class="form-control" type="text" /></div>
+    <div>email: <input v-model="email" class="form-control" type="email" /></div>
     <div>
       course code:
-      <select v-model="courseCode">
+      <select class="form-control" v-model="courseCode">
         <template v-for="course in courses">
           <option :key="course.code" :value="course.code">
             {{ course.name }}
@@ -15,9 +17,10 @@
       </select>
     </div>
     <nuxt-link to="/">Return</nuxt-link>
-    <button type="reset">RESET</button>
-    <button @click.prevent="create">CREATE</button>
-  </form>
+    <button class="btn btn-info" type="reset">RESET</button>
+    <button class="btn btn-info" @click.prevent="create">CREATE</button>
+  </b-container>
+  </div>
 </template>
 <script>
 export default {
@@ -47,7 +50,8 @@ export default {
           courseCode: this.courseCode,
         })
         .then(() => {
-          this.$router.push("/");
+          this.$router.push("/students");
+          alert("Student created with sucess!");
         });
     },
   },

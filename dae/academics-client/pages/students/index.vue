@@ -3,56 +3,75 @@
     <b-container>
       <h2>Students</h2>
       <b-table striped over :items="students" :fields="fieldsStudents">
-        <template v-slot:cell(actions)="row">
-          <nuxt-link class="btn btn-link" :to="`/students/${row.item.username}`"
-            >Details</nuxt-link
+        <template v-slot:cell(details)="row">
+          <button class="btn btn-link" :to="`/students/${row.item.username}`">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/1150/1150592.png"
+              alt="view"
+              width="25"
+              height="25"
+            />
+          </button>
+        </template>
+        <template v-slot:cell(update)="row">
+          <button class="btn btn-link" @click="showHideForm(row.item.username)">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/833/833275.png"
+              alt="update"
+              width="25"
+              height="25"
+            />
+          </button>
+        </template>
+        <template v-slot:cell(delete)="row">
+          <button
+            class="btn btn-link"
+            @click.prevent="deleteStudent(row.item.username)"
           >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/447/447047.png"
+              alt="update"
+              width="25"
+              height="25"
+            />
+          </button>
         </template>
       </b-table>
-      <nuxt-link to="/">Back</nuxt-link>
+      <div class="d-flex justify-content-between">
+        <nuxt-link to="/"
+          ><img
+            src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
+            alt="update"
+            width="25"
+            height="25"
+        /></nuxt-link>
+        <nuxt-link to="/createStudent" class="btn btn-info"
+          >Create a New Student</nuxt-link
+        >
+      </div>
     </b-container>
     <br />
-    <b-container>
-      <h2>Courses</h2>
-      <b-table striped over :items="courses" :fields="fieldsCourses" />
-      <nuxt-link to="/createCourse">Create a New Course</nuxt-link>
-      <br /><br />
-      <form>
-        <h3>Update/Delete/View Course</h3>
-        <select v-model="code">
-          <template v-for="course in courses">
-            <option :key="course.code" :value="course.code">
-              {{ course.name }}
-            </option>
-          </template>
-        </select>
-        <input v-model="name" placeholder="Course name" type="text" />
-        <button @click.prevent="updateCourse()">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/833/833275.png"
-            alt="update"
-            width="25"
-            height="25"
-          />
-        </button>
-        <button @click.prevent="deleteCourse()">
-          <img
-            src="https://img-premium.flaticon.com/png/512/657/premium/657059.png?token=exp=1633599757~hmac=0ef5b1c5954a9ae95cf946e75a40d56b"
-            alt="update"
-            width="25"
-            height="25"
-          />
-        </button>
-        <button @click.prevent="viewCourse()">
-          <img
-            src="https://img-premium.flaticon.com/png/512/1078/premium/1078327.png?token=exp=1633600313~hmac=0416291c19836dc33a2dd6e88386bb5b"
-            alt="view"
-            width="25"
-            height="25"
-          />
-        </button>
-        <div v-html="HTMLCourse"></div>
-      </form>
+    <b-container
+      v-if="updateClicked"
+      class="form-group w-50"
+      style="margin-left: 75px"
+    >
+      <h4>Update Student: {{ studentUsername }}</h4>
+      <label for="name">Name</label>
+      <input v-model="name" type="text" class="form-control" />
+      <label for="password">Password</label>
+      <input v-model="password" type="password" class="form-control" />
+      <label for="email">Email</label>
+      <input v-model="email" type="email" class="form-control" />
+      <label for="course">Course code</label>
+      <input
+        v-model="courseCode"
+        type="number"
+        class="form-control"
+      /><br />
+      <button class="btn btn-info" @click.prevent="updateStudent()">
+        Submit
+      </button>
     </b-container>
   </div>
 </template>
@@ -65,67 +84,72 @@ export default {
         "name",
         "email",
         "courseName",
-        "actions"
+        "details",
+        "update",
+        "delete",
       ],
       students: [],
-      fieldsCourses: ["code", "name"],
-      courses: [],
-      name: null,
-      code: null,
-      HTMLCourse: "",
+      updateClicked: false,
+      studentUsername: null,
+      name: "",
+      password: "",
+      email: "",
+      courseCode: "",
     };
   },
   methods: {
-    viewCourse() {
-      if (this.code == null) {
-        alert("No Course was selected!");
-        return;
-      }
-      this.$axios.$get(`/api/courses/${this.code}`).then((course) => {
-        this.HTMLcontent = `<h5>Course Info</h5>
-          <p>Code: ${course.code}</p>
-          <p>Name:  ${course.name}</p>`;
-        this.code = null;
+    deleteStudent(username) {
+      this.$axios.$delete(`/api/students/${username}`).then((student) => {
+        alert(`Student ${student.name} removed!`);
       });
     },
-    deleteCourse() {
-      if (this.code == null) {
-        alert("No Course was selected!");
-        return;
-      }
-      this.$axios.$delete(`/api/courses/${this.code}`).then((course) => {
-        alert(`Course ${course.name} removed!`);
-        this.code = null;
-      });
+    showHideForm(username) {
+      this.studentUsername = this.studentUsername == username ? null : username;
+      this.updateClicked = !this.updateClicked;
     },
-    updateCourse() {
-      if (this.code == null) {
-        alert("No Course was selected!");
+
+    updateStudent() {
+      let updateData = { name: "", password: "", email: "", courseCode: "" };
+      if (
+        this.name == "" &&
+        this.password == "" &&
+        this.email == "" &&
+        this.courseCode == ""
+      ) {
+        alert("All fields are empty!");
         return;
       }
-      if (this.name == null || this.name == "") {
-        alert("Course name is empty!");
-        return;
+      if (this.name == "") {
+        this.$delete(updateData, "name");
+      } else {
+        updateData.name = this.name;
+      }
+      if (this.password == "") {
+        this.$delete(updateData, "password");
+      } else {
+        updateData.password = this.password;
+      }
+      if (this.email == "") {
+        this.$delete(updateData, "email");
+      } else {
+        updateData.email = this.email;
+      }
+      if (this.courseCode == "") {
+        this.$delete(updateData, "courseCode");
+      } else {
+        updateData.courseCode = this.courseCode;
       }
 
       this.$axios
-        .$put(`/api/courses/${this.code}`, {
-          name: this.name,
-        })
-        .then(() => {
-          alert("Course updated!");
-          this.code = null;
-          this.name = null;
+        .$put(`/api/students/${this.studentUsername}`, updateData)
+        .then((student) => {
+          alert(`Student ${student.name}  updated!`);
         });
     },
   },
   created() {
     this.$axios.$get("/api/students/").then((students) => {
       this.students = students;
-    });
-
-    this.$axios.$get("/api/courses/").then((courses) => {
-      this.courses = courses;
     });
   },
 };

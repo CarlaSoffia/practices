@@ -36,11 +36,11 @@ public class ConfigBean {
         studentBean.create("claire", "dfF234", "Claire Fraser", "claire@outlook.en", 9991);
 
         studentBean.create("anaMendes", "Sk43#Wk76", "Ana Mendes", "2181264@my.ipleiria.pt", 1222);
-        subjectBean.create(1, "DAE", courseBean.findCourse(9991),3, 2021);
-        subjectBean.create(2, "SBD", courseBean.findCourse(9991),2, 2021);
-        subjectBean.create(3, "CFI", courseBean.findCourse(1222),1, 2019);
-        subjectBean.create(4, "DEII", courseBean.findCourse(1222),3, 2019);
-        subjectBean.create(5, "RC", courseBean.findCourse(9991),2, 2018);
+        subjectBean.create(1, "DAE", 9991,3, 2021);
+        subjectBean.create(2, "SBD", 9991,2, 2021);
+        subjectBean.create(3, "CFI", 1222,1, 2019);
+        subjectBean.create(4, "DEII", 1222,3, 2019);
+        subjectBean.create(5, "RC", 9991,2, 2018);
 
         studentBean.enrollStudentInSubject("carlaSoffia", 1);
         studentBean.enrollStudentInSubject("carlaSoffia", 2);

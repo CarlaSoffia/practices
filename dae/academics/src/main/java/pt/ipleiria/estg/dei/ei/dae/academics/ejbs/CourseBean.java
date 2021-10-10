@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ejbs;
 
+import pt.ipleiria.estg.dei.ei.dae.academics.dtos.CourseDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 
@@ -41,11 +42,10 @@ public class CourseBean {
         return entityManager.find(Course.class, courseCode);
     }
 
-    public void update(Course course, String name) {
-        if(name == null || name.equals(course.getName())){
-            return;
+    public void update(Course course, CourseDTO courseDTO) {
+        if(courseDTO.getName() != null && course.getName().equals(courseDTO.getName())){
+            course.setName(courseDTO.getName());
+            entityManager.merge(course);
         }
-        course.setName(name);
-        entityManager.merge(course);
     }
 }

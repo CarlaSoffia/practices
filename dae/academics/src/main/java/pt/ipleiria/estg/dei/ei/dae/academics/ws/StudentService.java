@@ -87,7 +87,7 @@ public class StudentService {
         if (student == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.status(Response.Status.ACCEPTED)
+        return Response.status(Response.Status.OK)
                 .entity(toDTO(student))
                 .build();
     }
@@ -100,21 +100,21 @@ public class StudentService {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         studentBean.remove(student);
-        return Response.status(Response.Status.ACCEPTED)
+        return Response.status(Response.Status.OK)
                 .entity(toDTO(student))
                 .build();
     }
 
     @PUT
     @Path("/{username}")
-    public Response updateCourse(@PathParam("username") String username, StudentDTO studentDTO) {
+    public Response updateStudent(@PathParam("username") String username, StudentDTO studentDTO) {
 
         Student student = studentBean.findStudent(username);
         if (student == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         studentBean.update(student, studentDTO);
-        return Response.status(Response.Status.ACCEPTED)
+        return Response.status(Response.Status.OK)
                 .entity(toDTO(student))
                 .build();
     }

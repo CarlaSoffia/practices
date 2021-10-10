@@ -77,5 +77,6 @@ public class SubjectDTO  implements Serializable {
     public void setCourseCode(int courseCode) {
         this.courseCode = courseCode;
     }
+
 }
 

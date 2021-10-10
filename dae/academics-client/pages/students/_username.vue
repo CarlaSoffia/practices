@@ -14,7 +14,12 @@
       :fields="subjectFields"
     />
     <p v-else>No subjects enrolled.</p>
-    <nuxt-link to="/students">Back</nuxt-link>
+     <nuxt-link to="/"><img
+              src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
+              alt="update"
+              width="25"
+              height="25"
+      /></nuxt-link>
   </b-container>
 </template>
 <script>

@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
+import pt.ipleiria.estg.dei.ei.dae.academics.dtos.SubjectDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.TeacherDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.SubjectBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
@@ -26,9 +27,14 @@ public class SubjectService {
 
 
     // converts an entire list of entities into a list of DTOs
-    private List<StudentDTO> toDTOs(List<Student> students) {
+    private List<StudentDTO> studentsToDTOs(List<Student> students) {
         return students.stream().map(this::toDTO).collect(Collectors.toList());
     }
+
+    private List<SubjectDTO> toDTOs(List<Subject> subjects) {
+        return subjects.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
     private StudentDTO toDTO(Student student) {
         Course course =student.getCourse();
         return new StudentDTO(
@@ -40,7 +46,17 @@ public class SubjectService {
                 course.getName()
         );
     }
-
+    private SubjectDTO toDTO(Subject subject) {
+        Course course = subject.getCourse();
+        return new SubjectDTO(
+                subject.getCode(),
+                subject.getName(),
+                course.getCode(),
+                course.getName(),
+                subject.getCourseYear(),
+                subject.getScholarYear()
+        );
+    }
     private TeacherDTO toDTO(Teacher teacher) {
         return new TeacherDTO(
                 teacher.getUsername(),
@@ -49,7 +65,6 @@ public class SubjectService {
                 teacher.getEmail(),
                 teacher.getOffice()
         );
-
     }
     private List<TeacherDTO> teacherToDTOs(List<Teacher> teachers) {
         return teachers.stream().map(this::toDTO).collect(Collectors.toList());
@@ -60,7 +75,7 @@ public class SubjectService {
     public Response getStudentsSubject(@PathParam("code") int code) {
         Subject subject = subjectBean.findSubject(code);
         if (subject != null) {
-            return Response.ok(toDTOs(subject.getStudents())).build();
+            return Response.ok(this.studentsToDTOs(subject.getStudents())).build();
         }
         return Response.status(Response.Status.NOT_FOUND)
                 .entity("ERROR_FINDING_STUDENT")
@@ -76,6 +91,66 @@ public class SubjectService {
         }
         return Response.status(Response.Status.NOT_FOUND)
                 .entity("ERROR_FINDING_SUBJECT")
+                .build();
+    }
+
+    @POST
+    @Path("/")
+    public Response createSubject(SubjectDTO subjectDTO){
+        subjectBean.create(subjectDTO.getCode(), subjectDTO.getName(), subjectDTO.getCourseCode(), subjectDTO.getCourseYear(), subjectDTO.getScholarYear());
+        Subject subject = subjectBean.findSubject(subjectDTO.getCode());
+        if(subject == null){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+        return Response.status(Response.Status.CREATED)
+                .entity(toDTO(subject))
+                .build();
+    }
+
+    @PUT
+    @Path("/{code}")
+    public Response updateSubject(@PathParam("code") int code, SubjectDTO subjectDTO){
+
+    Subject subject  = subjectBean.findSubject(code);
+
+        if(subject == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        subjectBean.update(subject, subjectDTO);
+        return Response.status(Response.Status.ACCEPTED)
+                .entity(toDTO(subject))
+                .build();
+    }
+
+    @GET
+    @Path("/")
+    public List<SubjectDTO> getAllSubjectsWS() {
+        return toDTOs(subjectBean.getAllSubjects());
+    }
+
+    @GET
+    @Path("/{code}")
+    public Response getSubjectDetails(@PathParam("code") int code) {
+       Subject subject = subjectBean.findSubject(code);
+        if (subject == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK)
+                .entity(toDTO(subject))
+                .build();
+    }
+
+
+    @DELETE
+    @Path("/{code}")
+    public Response deleteSubject(@PathParam("code") int code) {
+        Subject subject = subjectBean.findSubject(code);
+        if (subject == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        subjectBean.remove(subject);
+        return Response.status(Response.Status.OK)
+                .entity(toDTO(subject))
                 .build();
     }
 }

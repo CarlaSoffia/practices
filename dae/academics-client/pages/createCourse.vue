@@ -31,7 +31,8 @@ export default {
           name: this.name,
         })
         .then(() => {
-          this.$router.push("/");
+          this.$router.push("/courses");
+          alert("Course created with sucess!");
         });
     },
   },

@@ -1,23 +1,64 @@
-##### Students
-GET http://localhost:8080/academics/api/students
-Accept: application/json
-###
+##### ****************************** CREATE ******************************
+
+### STUDENTS
 POST http://localhost:8080/academics/api/students
 Content-Type: application/json
 
 {
- "email": "johndoe@mail.com",
- "name": "John Doe",
- "username": "john",
- "password": "jd",
- "courseCode":"9991"
+  "email": "johndoe@gmail.com",
+  "name": "John Doe",
+  "username": "john",
+  "password": "jd",
+  "courseCode":"9991"
 }
 
-### Students
-DELETE http://localhost:8080/academics/api/students/john
+### TEACHERS
+POST http://localhost:8080/academics/api/teachers
+Content-Type: application/json
 
+{
+  "email": "rolando_F@gmail.com",
+  "name": "Rolando Ferreira",
+  "username": "rolandoF",
+  "password": "12Rk6_s",
+  "office": "D.S.1.5"
+}
 
-### Students
+### ADMINISTRATOR
+POST http://localhost:8080/academics/api/administrators
+Content-Type: application/json
+
+{
+  "email": "nicolasG@gmail.com",
+  "name": "Nicolas Gonçales",
+  "username": "nicolasGonc",
+  "password": "kf623Fsb"
+}
+
+### COURSES
+POST http://localhost:8080/academics/api/courses
+Content-Type: application/json
+
+{
+  "code":"1234",
+  "name": "Micro-Biology"
+}
+
+### SUBJECTS
+POST http://localhost:8080/academics/api/subjects
+Content-Type: application/json
+
+{
+  "code":"6",
+  "name": "IA",
+  "courseCode":"9991",
+  "courseYear":"2",
+  "scholarYear":"2021"
+}
+
+##### ****************************** UPDATE ******************************
+
+### STUDENTS
 PUT http://localhost:8080/academics/api/students/john
 Content-Type: application/json
 
@@ -27,21 +68,7 @@ Content-Type: application/json
   "courseCode": 3332
 }
 
-##### Courses
-GET http://localhost:8080/academics/api/courses
-Accept: application/json
-
-
-### Courses
-POST http://localhost:8080/academics/api/courses
-Content-Type: application/json
-
-{
-  "code":"1234",
-  "name": "Micro-Biology"
-}
-
-### Courses
+### COURSES
 PUT http://localhost:8080/academics/api/courses/1234
 Content-Type: application/json
 
@@ -50,52 +77,143 @@ Content-Type: application/json
 }
 
 
-### Courses
-DELETE http://localhost:8080/academics/api/courses/3332
+### SUBJECTS
+PUT http://localhost:8080/academics/api/subjects/6
+Content-Type: application/json
+
+{
+  "name": "Inteligencia Artificial",
+  "courseCode":"9991",
+  "courseYear":"3",
+  "scholarYear":"2020"
+}
+
+### TEACHERS
+PUT http://localhost:8080/academics/api/teachers/rolandoF
+Content-Type: application/json
+
+{
+  "email": "rolandoFerreira@gmail.com",
+  "password": "59_dhdF2",
+  "office": "D.S.2.5"
+}
 
 
+### ADMINISTRATORS
+PUT http://localhost:8080/academics/api/administrators/nicolasGonc
+Content-Type: application/json
 
-### Courses
-GET http://localhost:8080/academics/api/courses/3332
+{
+  "email": "nicolas_Goncalves@gmail.com",
+  "name": "Nicolas Domingos Gonçales",
+  "password": "fkfj43_d$"
+}
+
+##### ****************************** READ ******************************
+
+##### STUDENTS
+GET http://localhost:8080/academics/api/students
+
+##### COURSES
+GET http://localhost:8080/academics/api/courses
+
+### ADMINISTRATORS
+GET http://localhost:8080/academics/api/administrators
+
+### SUBJECTS
+GET http://localhost:8080/academics/api/subjects
+
+### TEACHERS
+GET http://localhost:8080/academics/api/teachers
 
 
+##### ****************************** FIND ******************************
 
-### Students
+##### STUDENTS
+GET http://localhost:8080/academics/api/students/john
+
+##### COURSES
+GET http://localhost:8080/academics/api/courses/1234
+
+### ADMINISTRATORS
+GET http://localhost:8080/academics/api/administrators/nicolasGonc
+
+### SUBJECTS
+GET http://localhost:8080/academics/api/subjects/6
+
+### TEACHERS
+GET http://localhost:8080/academics/api/teachers/rolandoF
+
+##### ****************************** DELETE ******************************
+
+##### STUDENTS
+DELETE http://localhost:8080/academics/api/students/john
+
+##### COURSES
+DELETE http://localhost:8080/academics/api/courses/1234
+
+### ADMINISTRATORS
+DELETE http://localhost:8080/academics/api/administrators/nicolasGonc
+
+### SUBJECTS
+DELETE http://localhost:8080/academics/api/subjects/6
+
+### TEACHERS
+DELETE http://localhost:8080/academics/api/teachers/rolandoF
+
+
+##### ****************************** STUDENT SUBJECTS ******************************
+
+### STUDENTS
 GET http://localhost:8080/academics/api/students/carlaSoffia/subjects
 
-### Students
-GET http://localhost:8080/academics/api/students/carlaSoffia
-
-
-### Subjects
-GET http://localhost:8080/academics/api/subjects/1/students
-
-### Students
+### STUDENTS
 POST http://localhost:8080/academics/api/students/carlaSoffia/unroll/2
 
-### Students
+### STUDENTS
 POST http://localhost:8080/academics/api/students/carlaSoffia/enroll/5
 
-### Teachers
-POST http://localhost:8080/academics/api/teachers/teacherJoao/associate/2
 
-### Teachers
-POST http://localhost:8080/academics/api/teachers/teacherJoao/associate/3
+##### ****************************** SUBJECT STUDENTS ******************************
 
-### Teachers
-POST http://localhost:8080/academics/api/teachers/teacherJoao/associate/4
+### SUBJECTS
+GET http://localhost:8080/academics/api/subjects/1/students
 
-### Teachers
-POST http://localhost:8080/academics/api/teachers/teacherBruna/associate/1
 
-### Teachers
-POST http://localhost:8080/academics/api/teachers/teacherBruna/associate/2
+##### ****************************** SUBJECT TEACHERS ******************************
 
-### Teachers
-POST http://localhost:8080/academics/api/teachers/teacherJoao/dissociate/2
+### SUBJECTS
+GET http://localhost:8080/academics/api/subjects/2/teachers
+
+##### ****************************** TEACHER SUBJECTS ******************************
 
 ### Teachers
 GET http://localhost:8080/academics/api/teachers/teacherJoao/subjects
 
-### Subject
-GET http://localhost:8080/academics/api/subjects/2/teachers
+##### ****************************** TEACHERS ASSOCIATE SUBJECT ******************************
+
+### TEACHERS
+POST http://localhost:8080/academics/api/teachers/teacherJoao/associate/2
+
+### TEACHERS
+POST http://localhost:8080/academics/api/teachers/teacherBruna/associate/3
+
+### TEACHERS
+POST http://localhost:8080/academics/api/teachers/teacherJoao/associate/4
+
+### TEACHERS
+POST http://localhost:8080/academics/api/teachers/teacherBruna/associate/1
+
+### TEACHERS
+POST http://localhost:8080/academics/api/teachers/teacherBruna/associate/2
+
+
+##### ****************************** TEACHERS DISSOCIATE SUBJECT ******************************
+
+### Teachers
+POST http://localhost:8080/academics/api/teachers/teacherBruna/dissociate/2
+
+### Teachers
+POST http://localhost:8080/academics/api/teachers/teacherJoao/dissociate/4
+
+

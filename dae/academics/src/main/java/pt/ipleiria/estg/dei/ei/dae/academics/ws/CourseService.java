@@ -60,7 +60,7 @@ public class CourseService {
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        courseBean.update(course, courseDTO.getName());
+        courseBean.update(course, courseDTO);
         return Response.status(Response.Status.ACCEPTED)
                 .entity(toDTO(course))
                 .build();
