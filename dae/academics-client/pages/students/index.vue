@@ -4,14 +4,14 @@
       <h2>Students</h2>
       <b-table striped over :items="students" :fields="fieldsStudents">
         <template v-slot:cell(details)="row">
-          <button class="btn btn-link" :to="`/students/${row.item.username}`">
+          <nuxt-link class="btn btn-link" :to="`/students/${row.item.username}`">
             <img
               src="https://cdn-icons-png.flaticon.com/512/1150/1150592.png"
               alt="view"
               width="25"
               height="25"
             />
-          </button>
+          </nuxt-link>
         </template>
         <template v-slot:cell(update)="row">
           <button class="btn btn-link" @click="showHideForm(row.item.username)">
@@ -36,7 +36,7 @@
             />
           </button>
         </template>
-      </b-table>
+      </b-table><br>
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -49,8 +49,7 @@
           >Create a New Student</nuxt-link
         >
       </div>
-    </b-container>
-    <br />
+    </b-container><br>
     <b-container
       v-if="updateClicked"
       class="form-group w-50"
@@ -63,12 +62,14 @@
       <input v-model="password" type="password" class="form-control" />
       <label for="email">Email</label>
       <input v-model="email" type="email" class="form-control" />
-      <label for="course">Course code</label>
-      <input
-        v-model="courseCode"
-        type="number"
-        class="form-control"
-      /><br />
+      <label for="course">Course</label>
+       <select class="form-control" v-model="courseCode">
+        <template v-for="course in courses">
+          <option :key="course.code" :value="course.code">
+            {{ course.name }}
+          </option>
+        </template>
+      </select><br>
       <button class="btn btn-info" @click.prevent="updateStudent()">
         Submit
       </button>
@@ -95,6 +96,7 @@ export default {
       password: "",
       email: "",
       courseCode: "",
+      courses: []
     };
   },
   methods: {
@@ -150,6 +152,9 @@ export default {
   created() {
     this.$axios.$get("/api/students/").then((students) => {
       this.students = students;
+    });
+    this.$axios.$get("/api/courses/").then((courses) => {
+      this.courses = courses;
     });
   },
 };

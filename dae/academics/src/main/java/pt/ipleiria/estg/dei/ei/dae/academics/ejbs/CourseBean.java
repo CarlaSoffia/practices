@@ -43,7 +43,7 @@ public class CourseBean {
     }
 
     public void update(Course course, CourseDTO courseDTO) {
-        if(courseDTO.getName() != null && course.getName().equals(courseDTO.getName())){
+        if(courseDTO.getName() != null && !course.getName().equals(courseDTO.getName())){
             course.setName(courseDTO.getName());
             entityManager.merge(course);
         }

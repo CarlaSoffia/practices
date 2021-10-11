@@ -12,7 +12,7 @@
       :fields="subjectFields"
     />
     <p v-else>This course has no subjects. [NOT IMPLEMENTED]</p>
-     <nuxt-link to="/"><img
+     <nuxt-link to="/courses"><img
               src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
               alt="update"
               width="25"

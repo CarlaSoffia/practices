@@ -136,13 +136,13 @@ GET http://localhost:8080/academics/api/students/john
 GET http://localhost:8080/academics/api/courses/1234
 
 ### ADMINISTRATORS
-GET http://localhost:8080/academics/api/administrators/nicolasGonc
+GET http://localhost:8080/academics/api/administrators/adminFabio
 
 ### SUBJECTS
-GET http://localhost:8080/academics/api/subjects/6
+GET http://localhost:8080/academics/api/subjects/3
 
 ### TEACHERS
-GET http://localhost:8080/academics/api/teachers/rolandoF
+GET http://localhost:8080/academics/api/teachers/teacherJoao
 
 ##### ****************************** DELETE ******************************
 

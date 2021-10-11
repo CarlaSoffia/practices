@@ -2,12 +2,13 @@
 <div>
   <b-container class="form-group w-50"
       style="margin-left: 75px" @submit.prevent="create">
-    <div>username: <input v-model="username" type="text" class="form-control" /></div>
-    <div>password: <input v-model="password" type="password" class="form-control"/></div>
-    <div>name: <input v-model="name" class="form-control" type="text" /></div>
-    <div>email: <input v-model="email" class="form-control" type="email" /></div>
+    <h4>Create new Student</h4>
+    <div>Username: <input v-model="username" type="text" class="form-control" /></div>
+    <div>Password: <input v-model="password" type="password" class="form-control"/></div>
+    <div>Name: <input v-model="name" class="form-control" type="text" /></div>
+    <div>Email: <input v-model="email" class="form-control" type="email" /></div>
     <div>
-      course code:
+      Course:
       <select class="form-control" v-model="courseCode">
         <template v-for="course in courses">
           <option :key="course.code" :value="course.code">
@@ -16,9 +17,16 @@
         </template>
       </select>
     </div>
-    <nuxt-link to="/">Return</nuxt-link>
-    <button class="btn btn-info" type="reset">RESET</button>
-    <button class="btn btn-info" @click.prevent="create">CREATE</button>
+    <br>
+     <nuxt-link to="/students"
+          ><img
+            src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
+            alt="update"
+            width="25"
+            height="25"
+        /></nuxt-link>
+    <button class="btn btn-info" type="reset">Reset</button>
+    <button class="btn btn-info" @click.prevent="create">Create</button>
   </b-container>
   </div>
 </template>
@@ -51,7 +59,7 @@ export default {
         })
         .then(() => {
           this.$router.push("/students");
-          alert("Student created with sucess!");
+          alert("Student created with success!");
         });
     },
   },
