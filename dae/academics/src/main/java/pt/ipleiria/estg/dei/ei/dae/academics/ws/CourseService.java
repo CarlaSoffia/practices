@@ -3,9 +3,11 @@ package pt.ipleiria.estg.dei.ei.dae.academics.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.CourseDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
+import pt.ipleiria.estg.dei.ei.dae.academics.dtos.SubjectDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.CourseBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
+import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -34,10 +36,23 @@ public class CourseService {
                 course.getName()
         );
     }
+    private SubjectDTO toDTO(Subject subject){
+        Course course = subject.getCourse();
+        return new SubjectDTO(
+                subject.getCode(),
+                subject.getName(),
+                course.getCode(),
+                course.getName(),
+                subject.getCourseYear(),
+                subject.getScholarYear()
+        );
+    }
     private List<CourseDTO> toDTOs(List<Course> courses) {
         return courses.stream().map(this::toDTO).collect(Collectors.toList());
     }
-
+    private List<SubjectDTO> subjectsToDTOs(List<Subject> subjects) {
+        return subjects.stream().map(this::toDTO).collect(Collectors.toList());
+    }
 
     @POST // means: to call this endpoint, we need to use the HTTP POST method
     @Path("/")
@@ -91,4 +106,19 @@ public class CourseService {
                 .entity(toDTO(course))
                 .build();
     }
+
+
+    @GET
+    @Path("/{code}/subjects")
+    public Response getCourseSubjects(@PathParam("code") int code)  {
+        Course course = courseBean.findCourse(code);
+        if(course == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        List<Subject> subjects = course.getSubjects();
+        return Response.status(Response.Status.ACCEPTED)
+                .entity(subjectsToDTOs(subjects))
+                .build();
+    }
+
 }

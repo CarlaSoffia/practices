@@ -22,7 +22,9 @@ public class SubjectBean {
         Course course= entityManager.find(Course.class, courseCode);
         if(course == null) return;
         Subject subject = new Subject(code, name, course,courseYear, scholarYear);
+        course.addSubject(subject);
         entityManager.persist(subject);
+        entityManager.merge(course);
     }
     public Subject findSubject(int code) {
         return entityManager.find(Subject.class, code);

@@ -6,7 +6,22 @@
     <p>Course: {{ subject.courseName }}</p>
     <p>Scholar Year: {{ subject.scholarYear }}</p>
     <p>Course Year: {{ subject.courseYear }}</p>
-
+    <h4>Students enrolled:</h4>
+    <b-table
+          v-if="students.length"
+          striped
+          over
+          :items="students"
+          :fields="studentsTeacherFields"
+        ></b-table>
+    <h4>Teachers enrolled:</h4>
+    <b-table
+          v-if="teachers.length"
+          striped
+          over
+          :items="teachers"
+          :fields="studentsTeacherFields"
+        ></b-table>
      <nuxt-link to="/subjects"><img
               src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
               alt="update"
@@ -19,7 +34,10 @@
 export default {
   data() {
     return {
-      subject: {}
+      subject: {},
+      students: [],
+      studentsTeacherFields: ["name", "email"],
+      teachers:[]
     }
   },
   computed: {
@@ -30,7 +48,15 @@ export default {
   created() {
     this.$axios
       .$get(`/api/subjects/${this.code}`)
-      .then((subject) => (this.subject = subject || {}))
+      .then((subject) => (this.subject = subject || {}));
+
+       this.$axios
+          .$get(`/api/subjects/${this.code}/students`)
+          .then((students) => (this.students = students || {}));
+       this.$axios
+          .$get(`/api/subjects/${this.code}/teachers`)
+          .then((teachers) => (this.teachers = teachers || {}))
+
   },
 };
 </script>

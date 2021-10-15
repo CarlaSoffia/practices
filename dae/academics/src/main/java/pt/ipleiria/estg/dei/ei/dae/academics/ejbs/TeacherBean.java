@@ -37,7 +37,6 @@ public class TeacherBean {
         if(subject == null){
             return false;
         }
-
         subject.addTeacher(teacher);
         teacher.addSubject(subject);
         return true;

@@ -3,7 +3,7 @@
     <h4>Course Details:</h4>
     <p>Code: {{ course.code }}</p>
     <p>Name: {{ course.name }}</p>
-    <h4>Subjects enrolled:</h4>
+    <h4>Subjects:</h4>
     <b-table
       v-if="subjects.length"
       striped
@@ -11,7 +11,7 @@
       :items="subjects"
       :fields="subjectFields"
     />
-    <p v-else>This course has no subjects. [NOT IMPLEMENTED]</p>
+    <p v-else>This course has no subjects.</p>
      <nuxt-link to="/courses"><img
               src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
               alt="update"
@@ -29,7 +29,6 @@ export default {
       subjectFields: [
         "code",
         "name",
-        "courseCode",
         "courseYear",
         "scholarYear",
       ],

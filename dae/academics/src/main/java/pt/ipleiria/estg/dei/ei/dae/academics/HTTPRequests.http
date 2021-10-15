@@ -133,7 +133,7 @@ GET http://localhost:8080/academics/api/teachers
 GET http://localhost:8080/academics/api/students/john
 
 ##### COURSES
-GET http://localhost:8080/academics/api/courses/1234
+GET http://localhost:8080/academics/api/courses/9991/subjects
 
 ### ADMINISTRATORS
 GET http://localhost:8080/academics/api/administrators/adminFabio
@@ -142,7 +142,7 @@ GET http://localhost:8080/academics/api/administrators/adminFabio
 GET http://localhost:8080/academics/api/subjects/3
 
 ### TEACHERS
-GET http://localhost:8080/academics/api/teachers/teacherJoao
+GET http://localhost:8080/academics/api/teachers/teacherBruna/subjects
 
 ##### ****************************** DELETE ******************************
 
@@ -168,7 +168,11 @@ DELETE http://localhost:8080/academics/api/teachers/rolandoF
 GET http://localhost:8080/academics/api/students/carlaSoffia/subjects
 
 ### STUDENTS
-POST http://localhost:8080/academics/api/students/carlaSoffia/unroll/2
+POST http://localhost:8080/academics/api/students/carlaSoffia/unroll/5
+
+### STUDENTS
+POST http://localhost:8080/academics/api/students/carlaSoffia/unroll/6
+
 
 ### STUDENTS
 POST http://localhost:8080/academics/api/students/carlaSoffia/enroll/5
@@ -188,7 +192,7 @@ GET http://localhost:8080/academics/api/subjects/2/teachers
 ##### ****************************** TEACHER SUBJECTS ******************************
 
 ### Teachers
-GET http://localhost:8080/academics/api/teachers/teacherJoao/subjects
+GET http://localhost:8080/academics/api/teachers/teacherBruna/subjects
 
 ##### ****************************** TEACHERS ASSOCIATE SUBJECT ******************************
 
@@ -211,7 +215,7 @@ POST http://localhost:8080/academics/api/teachers/teacherBruna/associate/2
 ##### ****************************** TEACHERS DISSOCIATE SUBJECT ******************************
 
 ### Teachers
-POST http://localhost:8080/academics/api/teachers/teacherBruna/dissociate/2
+POST http://localhost:8080/academics/api/teachers/teacherBruna/dissociate/1
 
 ### Teachers
 POST http://localhost:8080/academics/api/teachers/teacherJoao/dissociate/4
