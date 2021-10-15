@@ -1,0 +1,10 @@
+C:\practices\is\sheet_4\ProjectXML_base\bin\Debug\ProjectXML.exe.config
+C:\practices\is\sheet_4\ProjectXML_base\bin\Debug\ProjectXML.exe
+C:\practices\is\sheet_4\ProjectXML_base\bin\Debug\ProjectXML.pdb
+C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.csproj.AssemblyReference.cache
+C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.Form1.resources
+C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.Properties.Resources.resources
+C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.csproj.GenerateResource.cache
+C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.csproj.CoreCompileInputs.cache
+C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.exe
+C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.pdb

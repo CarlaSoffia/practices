@@ -136,11 +136,10 @@ export default {
       .$get(`/api/teachers/${this.username}/subjects`)
       .then((subjects) => {
         this.subjects = subjects || {};
-        if (this.subjects.length != 0) {
           this.$axios
-            .$get(`/api/courses/${this.subjects[0].courseCode}/subjects`)
-            .then((subjectsCourse) => {
-              this.allSubjectsAssociate = subjectsCourse;
+            .$get(`/api/subjects/`)
+            .then((subjectsAll) => {
+              this.allSubjectsAssociate = subjectsAll;
               let removed = false;
               for (let i = 0; i < this.allSubjectsAssociate.length; i++) {
                 if (removed == true) i = 0;
@@ -154,13 +153,7 @@ export default {
                 });
               }
             });
-        }else{
-              this.$axios
-              .$get("/api/subjects/")
-              .then((subjectsAll) => {
-                this.allSubjectsAssociate = subjectsAll || {}
-              });
-          }
+
       });
   },
 };
