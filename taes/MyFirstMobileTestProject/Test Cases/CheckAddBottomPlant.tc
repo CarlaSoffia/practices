@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>AddPlantTestCase</name>
+   <name>CheckAddBottomPlant</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>41e648e8-8a11-472d-88d5-c77c115bb424</testCaseGuid>
+   <testCaseGuid>2d6e5a08-e4ab-4f0a-b17d-a0a24ace1ddb</testCaseGuid>
 </TestCaseEntity>

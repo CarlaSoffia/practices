@@ -17,9 +17,19 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Mobile.startApplication('appForTest/Sunflower.apk', false)
+Mobile.startApplication('C:\\practices\\taes\\MyFirstMobileTestProject\\appForTest\\Sunflower.apk', true)
 
-Mobile.verifyElementExist(findTestObject('null'), 0)
+Mobile.tap(findTestObject('Object Repository/android.widget.TextView - PLANT LIST (1)'), 0)
+
+Mobile.scrollToText('Watermelon')
+
+Mobile.tap(findTestObject('Object Repository/android.widget.TextView - Watermelon'), 0)
+
+Mobile.tap(findTestObject('Object Repository/android.widget.ImageButton (8)'), 0)
+
+Mobile.tap(findTestObject('Object Repository/android.widget.ImageButton (9)'), 0)
+
+Mobile.tap(findTestObject('Object Repository/android.widget.TextView - MY GARDEN (3)'), 0)
 
 Mobile.closeApplication()
 

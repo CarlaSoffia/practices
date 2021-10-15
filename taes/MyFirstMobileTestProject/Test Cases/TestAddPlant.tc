@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>CheckEggPlantDetails</name>
+   <name>TestAddPlant</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>091e9c82-681d-4c64-a36f-abdc40e547b7</testCaseGuid>
+   <testCaseGuid>50d25d63-4ff7-4244-ac16-84aeefdcae6e</testCaseGuid>
 </TestCaseEntity>

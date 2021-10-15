@@ -17,13 +17,13 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Mobile.startApplication('C:\\practices\\taes\\MyFirstMobileTestProject\\appForTest\\Sunflower.apk', true)
+WebUI.openBrowser('')
 
-Mobile.tap(findTestObject('Object Repository/android.widget.Button - ADD PLANT (1)'), 0)
+WebUI.navigateToUrl('https://www.google.com/')
 
-Mobile.tap(findTestObject('Object Repository/android.view.ViewGroup (2)'), 0)
+WebUI.click(findTestObject('Object Repository/Page_Google/div_Aceito'))
 
-Mobile.tap(findTestObject('Object Repository/android.widget.ImageButton (1)'), 0)
+WebUI.verifyElementText(findTestObject('Object Repository/Page_Google/input__q'), '')
 
-Mobile.closeApplication()
+WebUI.closeBrowser()
 

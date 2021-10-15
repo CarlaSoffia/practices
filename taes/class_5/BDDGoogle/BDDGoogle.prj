@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
    <description></description>
-   <name>MyFirstMobileTestProject</name>
+   <name>BDDGoogle</name>
    <tag></tag>
-   <UUID>446d80e7-60c1-4dd9-b9d0-459097b4b9cf</UUID>
+   <UUID>c7ed7da1-a643-4d8c-a0ae-3ae64dbea7f8</UUID>
    <migratedVersion>5.9.0</migratedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
-   <projectFileLocation>C:\practices\taes\MyFirstMobileTestProject\MyFirstMobileTestProject.prj</projectFileLocation>
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>
@@ -25,5 +24,5 @@
          </systemFolderConfiguration>
       </systemFolderList>
    </sourceContent>
-   <type>MOBILE</type>
+   <type>GENERIC</type>
 </Project>
