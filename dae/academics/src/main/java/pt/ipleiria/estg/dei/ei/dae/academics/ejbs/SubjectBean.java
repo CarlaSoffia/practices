@@ -9,6 +9,7 @@ import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless

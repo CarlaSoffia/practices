@@ -114,8 +114,9 @@ public class StudentService {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         studentBean.update(student, studentDTO);
+        Student studentUpdated = studentBean.findStudent(username);
         return Response.status(Response.Status.OK)
-                .entity(toDTO(student))
+                .entity(toDTO(studentUpdated))
                 .build();
     }
 
@@ -135,9 +136,10 @@ public class StudentService {
     @POST
     @Path("/{username}/unroll/{code}")
     public Response unrollStudentSubject(@PathParam("username") String username, @PathParam("code") int code) {
-        boolean studentUnnrolled = studentBean.unrollStudentInSubject(username, code);
 
-        if (!studentUnnrolled) {
+        boolean studentUnrolled = studentBean.unrollStudentInSubject(username, code);
+
+        if (!studentUnrolled) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("ERROR_UNROLLING_STUDENT")
                     .build();

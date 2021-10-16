@@ -59,13 +59,11 @@ Content-Type: application/json
 ##### ****************************** UPDATE ******************************
 
 ### STUDENTS
-PUT http://localhost:8080/academics/api/students/john
+PUT http://localhost:8080/academics/api/students/carlaSoffia
 Content-Type: application/json
 
 {
-  "password": "1234",
-  "email": "johndoe_12345@gmail.com",
-  "courseCode": 3332
+  "courseCode": 1222
 }
 
 ### COURSES
@@ -78,14 +76,11 @@ Content-Type: application/json
 
 
 ### SUBJECTS
-PUT http://localhost:8080/academics/api/subjects/6
+PUT http://localhost:8080/academics/api/subjects/1
 Content-Type: application/json
 
 {
-  "name": "Inteligencia Artificial",
-  "courseCode":"9991",
-  "courseYear":"3",
-  "scholarYear":"2020"
+  "courseCode":"1222"
 }
 
 ### TEACHERS
@@ -181,7 +176,7 @@ POST http://localhost:8080/academics/api/students/carlaSoffia/enroll/5
 ##### ****************************** SUBJECT STUDENTS ******************************
 
 ### SUBJECTS
-GET http://localhost:8080/academics/api/subjects/1/students
+GET http://localhost:8080/academics/api/subjects/2/students
 
 
 ##### ****************************** SUBJECT TEACHERS ******************************

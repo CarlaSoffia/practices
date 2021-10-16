@@ -8,6 +8,7 @@ import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -31,7 +32,6 @@ public class StudentBean {
     }
 
     public List<Student> getAllStudents() {
-        // remember, maps to: “SELECT s FROM Student s ORDER BY s.name”
         return (List<Student>) entityManager.createNamedQuery("getAllStudents").getResultList();
     }
     public Student findStudent(String username) {
@@ -52,7 +52,13 @@ public class StudentBean {
         if(studentDTO.getCourseCode() != 0 && student.getCourse().getCode() != studentDTO.getCourseCode()){
             Course course = entityManager.find(Course.class, studentDTO.getCourseCode());
             if(course != null){
-                //Removes from the previous course
+                for (Subject s:
+                        student.getSubjects()) {
+                    unrollStudentInSubject(student.getUsername(), s.getCode());
+                    student = entityManager.find(Student.class, student.getUsername());
+
+                }
+
                 student.getCourse().removeStudent(student);
                 entityManager.merge(student.getCourse());
 
@@ -75,11 +81,13 @@ public class StudentBean {
         if(subject == null){
             return false;
         }
-        if(!student.getCourse().equals(subject.getCourse())){
+        if(student.getCourse().getCode() != subject.getCourse().getCode()){
             return false;
         }
         subject.addStudent(student);
         student.addSubject(subject);
+        entityManager.merge(student);
+        entityManager.merge(subject);
         return true;
     }
 
@@ -93,11 +101,13 @@ public class StudentBean {
         if(subject == null){
             return false;
         }
-        if(!student.getCourse().equals(subject.getCourse())){
+        if(student.getCourse().getCode() != subject.getCourse().getCode()){
             return false;
         }
         subject.removeStudent(student);
         student.removeSubject(subject);
+        entityManager.merge(student);
+        entityManager.merge(subject);
         return true;
     }
 }

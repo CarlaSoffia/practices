@@ -19,7 +19,6 @@ public class CourseBean {
         Course course = new Course(code, name);
         entityManager.persist(course);
     }
-    //TO-DO
     public void remove(Course course){
        List<Student> students = course.getStudents();
         if(!students.isEmpty()) {
