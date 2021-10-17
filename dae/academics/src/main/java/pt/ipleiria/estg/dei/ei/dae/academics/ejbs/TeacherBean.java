@@ -39,6 +39,8 @@ public class TeacherBean {
         }
         subject.addTeacher(teacher);
         teacher.addSubject(subject);
+        entityManager.merge(teacher);
+        entityManager.merge(subject);
         return true;
     }
 
@@ -54,6 +56,8 @@ public class TeacherBean {
         }
         subject.removeTeacher(teacher);
         teacher.removeSubject(subject);
+        entityManager.merge(teacher);
+        entityManager.merge(subject);
         return true;
     }
 
@@ -74,7 +78,13 @@ public class TeacherBean {
         entityManager.merge(teacher);
     }
 
+    //TODO
     public void remove(Teacher teacher){
+        for (Subject s:
+                teacher.getSubjects()) {
+            dissociateTeacherFromSubject(teacher.getUsername(),s.getCode());
+            teacher=entityManager.find(Teacher.class,teacher.getUsername());
+        }
         Teacher teacherMerged = entityManager.merge(teacher);
         entityManager.remove(teacherMerged);
     }

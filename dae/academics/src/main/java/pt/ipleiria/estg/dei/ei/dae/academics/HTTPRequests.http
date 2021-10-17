@@ -142,19 +142,19 @@ GET http://localhost:8080/academics/api/teachers/teacherBruna/subjects
 ##### ****************************** DELETE ******************************
 
 ##### STUDENTS
-DELETE http://localhost:8080/academics/api/students/john
+DELETE http://localhost:8080/academics/api/students/carlaSoffia
 
 ##### COURSES
-DELETE http://localhost:8080/academics/api/courses/1234
+DELETE http://localhost:8080/academics/api/courses/9991
 
 ### ADMINISTRATORS
 DELETE http://localhost:8080/academics/api/administrators/nicolasGonc
 
 ### SUBJECTS
-DELETE http://localhost:8080/academics/api/subjects/6
+DELETE http://localhost:8080/academics/api/subjects/1
 
 ### TEACHERS
-DELETE http://localhost:8080/academics/api/teachers/rolandoF
+DELETE http://localhost:8080/academics/api/teachers/teacherBruna
 
 
 ##### ****************************** STUDENT SUBJECTS ******************************

@@ -44,9 +44,9 @@ public class ConfigBean {
 
         studentBean.enrollStudentInSubject("carlaSoffia", 1);
         studentBean.enrollStudentInSubject("carlaSoffia", 2);
-        studentBean.enrollStudentInSubject("claire", 1);
+       // studentBean.enrollStudentInSubject("claire", 1);
         studentBean.enrollStudentInSubject("claire", 2);
-        studentBean.enrollStudentInSubject("mary", 1);
+       // studentBean.enrollStudentInSubject("mary", 1);
         studentBean.enrollStudentInSubject("mary", 2);
         studentBean.enrollStudentInSubject("anaMendes", 3);
         studentBean.enrollStudentInSubject("anaMendes", 4);
@@ -56,7 +56,10 @@ public class ConfigBean {
 
         teacherBean.create("teacherJoao", "sjfg938_3h#", "João Martins", "joao_martins@gmail.com", "A.G.1.3");
         teacherBean.create("teacherBruna", "sjf$fjff3434_", "Bruna Fonseca", "bruna_fonseca@gmail.com", "A.G.0.1");
-
+        teacherBean.associateTeacherToSubject("teacherBruna",1);
+      //  teacherBean.associateTeacherToSubject("teacherJoao",1);
+        teacherBean.associateTeacherToSubject("teacherBruna",2);
+        teacherBean.associateTeacherToSubject("teacherBruna",3);
         System.out.println("-----------------   THE END   -----------------");
     }
 

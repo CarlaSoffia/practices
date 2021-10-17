@@ -5,6 +5,7 @@ import pt.ipleiria.estg.dei.ei.dae.academics.dtos.SubjectDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
+import pt.ipleiria.estg.dei.ei.dae.academics.entities.Teacher;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -36,11 +37,34 @@ public class SubjectBean {
     }
 
     public void remove(Subject subject){
-        Subject subjectMerged = entityManager.merge(subject);
-        entityManager.remove(subjectMerged);
+        subject.getCourse().removeSubject(subject);
+        entityManager.merge(subject.getCourse());
+        subject = entityManager.merge(subject);
+        entityManager.remove(subject);
     }
 
+    public boolean unrollStudentInSubject(String username, int subjectCode){
+        Student student = entityManager.find(Student.class, username);
+        if(student == null){
+            return false;
+        }
+        Subject subject = findSubject(subjectCode);
+        if(subject == null){
+            return false;
+        }
+        if(student.getCourse().getCode() != subject.getCourse().getCode()){
+            return false;
+        }
+        subject.removeStudent(student);
+        student.removeSubject(subject);
+        entityManager.merge(student);
+        entityManager.merge(subject);
+        return true;
+    }
+
+
     public void update(Subject subject, SubjectDTO subjectDTO) {
+
         if(subjectDTO.getName() != null && !subject.getName().equals(subjectDTO.getName())){
             subject.setName(subjectDTO.getName());
         }
@@ -53,17 +77,25 @@ public class SubjectBean {
         if( subjectDTO.getCourseCode()!= 0 && subject.getCourse().getCode() != subjectDTO.getCourseCode()){
             Course course = entityManager.find(Course.class, subjectDTO.getCourseCode());
             if(course != null){
+
+                for (Student s:
+                        subject.getStudents()) {
+                    unrollStudentInSubject(s.getUsername(), subject.getCode());
+                    subject = findSubject(subject.getCode());;
+                }
+
                 //Removes from the previous course
                 subject.getCourse().removeSubject(subject);
                 entityManager.merge(subject.getCourse());
 
-                //Adds student to new course
+                //Adds subject to new course
                 subject.setCourse(course);
                 course.addSubject(subject);
                 entityManager.merge(course);
             }
         }
         entityManager.merge(subject);
+
     }
 
 }

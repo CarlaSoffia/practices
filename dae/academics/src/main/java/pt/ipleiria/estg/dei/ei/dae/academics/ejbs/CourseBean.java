@@ -20,18 +20,8 @@ public class CourseBean {
         entityManager.persist(course);
     }
     public void remove(Course course){
-       List<Student> students = course.getStudents();
-        if(!students.isEmpty()) {
-            for (Student student : students) {
-                course.removeStudent(student);
-            }
-        }
-        Course courseWithoutStudents = entityManager.merge(course);
-
-        entityManager.remove(courseWithoutStudents);
-
-
-
+        Course courseMerged = entityManager.merge(course);
+        entityManager.remove(courseMerged);
     }
     public List<Course> getAllCourses() {
         return (List<Course>) entityManager.createNamedQuery("getAllCourses").getResultList();

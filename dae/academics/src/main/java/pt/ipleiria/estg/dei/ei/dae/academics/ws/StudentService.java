@@ -94,7 +94,7 @@ public class StudentService {
 
     @DELETE
     @Path("/{username}")
-    public Response deleteCourse(@PathParam("username") String username) {
+    public Response deleteStudent(@PathParam("username") String username) {
         Student student = studentBean.findStudent(username);
         if (student == null) {
             return Response.status(Response.Status.NOT_FOUND).build();

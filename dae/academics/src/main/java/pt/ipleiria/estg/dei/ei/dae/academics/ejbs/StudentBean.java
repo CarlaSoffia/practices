@@ -4,6 +4,7 @@ import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
+import pt.ipleiria.estg.dei.ei.dae.academics.entities.Teacher;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -27,6 +28,11 @@ public class StudentBean {
     }
 
     public void remove(Student student){
+        for (Subject s:
+                student.getSubjects()) {
+            unrollStudentInSubject(student.getUsername(),s.getCode());
+            student=entityManager.find(Student.class,student.getUsername());
+        }
         Student studentMerged = entityManager.merge(student);
         entityManager.remove(studentMerged);
     }
