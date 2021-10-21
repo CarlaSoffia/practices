@@ -20,6 +20,7 @@ import java.util.Objects;
 )
 
 public class Course {
+    @Version private int version;
     @Id
     private int code;
     private String name;

@@ -11,7 +11,7 @@ import javax.validation.constraints.Email;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
 public class User {
-
+    @Version private int version;
     @Id
     private String username;
     @NotNull

@@ -1,12 +1,14 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ws;
 
-import pt.ipleiria.estg.dei.ei.dae.academics.dtos.CourseDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.SubjectDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.StudentBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -26,11 +28,11 @@ public class StudentService {
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
     public List<StudentDTO> getAllStudentsWS() {
-        return toDTOs(studentBean.getAllStudents());
+        return toDTOsNoSubjects(studentBean.getAllStudents());
     }
 
     // Converts an entity Student to a DTO Student class
-    private StudentDTO toDTO(Student student) {
+    private StudentDTO toDTONoSubjects(Student student) {
         Course course = student.getCourse();
         return new StudentDTO(
                 student.getEmail(),
@@ -43,7 +45,24 @@ public class StudentService {
     }
 
     // converts an entire list of entities into a list of DTOs
-    private List<StudentDTO> toDTOs(List<Student> students) {
+    private List<StudentDTO> toDTOsNoSubjects(List<Student> students) {
+        return students.stream().map(this::toDTONoSubjects).collect(Collectors.toList());
+    }
+
+    private StudentDTO toDTO(Student student){
+        Course course = student.getCourse();
+        return new StudentDTO(
+                student.getEmail(),
+                student.getName(),
+                student.getUsername(),
+                student.getPassword(),
+                course.getCode(),
+                course.getName(),
+                subjectsToDTOs(student.getSubjects())
+        );
+    }
+
+    private List<StudentDTO> toDTOs(List<Student> students){
         return students.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
@@ -64,29 +83,26 @@ public class StudentService {
         return subjects.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
+
     @POST // means: to call this endpoint, we need to use the HTTP POST method
     @Path("/")
-    public Response createNewStudent(StudentDTO studentDTO) {
+    public Response createNewStudent(StudentDTO studentDTO)
+            throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
         studentBean.create(studentDTO.getUsername(),
                 studentDTO.getPassword(),
                 studentDTO.getName(),
                 studentDTO.getEmail(),
                 studentDTO.getCourseCode());
         Student newStudent = studentBean.findStudent(studentDTO.getUsername());
-        if (newStudent == null)
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         return Response.status(Response.Status.CREATED)
-                .entity(toDTO(newStudent))
+                .entity(toDTONoSubjects(newStudent))
                 .build();
     }
 
     @GET
     @Path("/{username}")
-    public Response getStudentDetails(@PathParam("username") String username) {
+    public Response getStudentDetails(@PathParam("username") String username) throws MyEntityNotFoundException {
         Student student = studentBean.findStudent(username);
-        if (student == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
         return Response.status(Response.Status.OK)
                 .entity(toDTO(student))
                 .build();
@@ -94,57 +110,38 @@ public class StudentService {
 
     @DELETE
     @Path("/{username}")
-    public Response deleteStudent(@PathParam("username") String username) {
+    public Response deleteStudent(@PathParam("username") String username) throws MyEntityNotFoundException {
         Student student = studentBean.findStudent(username);
-        if (student == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
         studentBean.remove(student);
         return Response.status(Response.Status.OK)
-                .entity(toDTO(student))
+                .entity(toDTONoSubjects(student))
                 .build();
     }
 
     @PUT
     @Path("/{username}")
-    public Response updateStudent(@PathParam("username") String username, StudentDTO studentDTO) {
+    public Response updateStudent(@PathParam("username") String username, StudentDTO studentDTO) throws MyEntityNotFoundException {
 
         Student student = studentBean.findStudent(username);
-        if (student == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
         studentBean.update(student, studentDTO);
-        Student studentUpdated = studentBean.findStudent(username);
         return Response.status(Response.Status.OK)
-                .entity(toDTO(studentUpdated))
+                .entity(toDTO(student))
                 .build();
     }
 
     @GET
     @Path("/{username}/subjects")
-    public Response getStudentSubjects(@PathParam("username") String username) {
+    public Response getStudentSubjects(@PathParam("username") String username) throws MyEntityNotFoundException {
         Student student = studentBean.findStudent(username);
-        if (student != null) {
-            return Response.ok(subjectsToDTOs(student.getSubjects())).build();
-        }
-        return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_STUDENT")
-                .build();
+        return Response.ok(subjectsToDTOs(student.getSubjects())).build();
     }
 
 
     @POST
     @Path("/{username}/unroll/{code}")
-    public Response unrollStudentSubject(@PathParam("username") String username, @PathParam("code") int code) {
+    public Response unrollStudentSubject(@PathParam("username") String username, @PathParam("code") int code) throws MyEntityNotFoundException {
 
-        boolean studentUnrolled = studentBean.unrollStudentInSubject(username, code);
-
-        if (!studentUnrolled) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("ERROR_UNROLLING_STUDENT")
-                    .build();
-
-        }
+        studentBean.unrollStudentInSubject(username, code);
         Student student = studentBean.findStudent(username);
         return Response.ok(subjectsToDTOs(student.getSubjects())).build();
     }
@@ -152,15 +149,9 @@ public class StudentService {
 
     @POST
     @Path("/{username}/enroll/{code}")
-    public Response enrollStudentSubject(@PathParam("username") String username, @PathParam("code") int code) {
-        boolean studentEnrolled = studentBean.enrollStudentInSubject(username, code);
+    public Response enrollStudentSubject(@PathParam("username") String username, @PathParam("code") int code) throws MyEntityNotFoundException {
+        studentBean.enrollStudentInSubject(username, code);
 
-        if (!studentEnrolled) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("ERROR_ENROLLING_STUDENT")
-                    .build();
-
-        }
         Student student = studentBean.findStudent(username);
         return Response.ok(subjectsToDTOs(student.getSubjects())).build();
     }

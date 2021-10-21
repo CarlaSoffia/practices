@@ -8,6 +8,7 @@ import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Teacher;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -109,7 +110,7 @@ public class SubjectService {
 
     @PUT
     @Path("/{code}")
-    public Response updateSubject(@PathParam("code") int code, SubjectDTO subjectDTO){
+    public Response updateSubject(@PathParam("code") int code, SubjectDTO subjectDTO) {
 
     Subject subject  = subjectBean.findSubject(code);
 
@@ -130,7 +131,7 @@ public class SubjectService {
 
     @GET
     @Path("/{code}")
-    public Response getSubjectDetails(@PathParam("code") int code) {
+    public Response getSubjectDetails(@PathParam("code") int code){
        Subject subject = subjectBean.findSubject(code);
         if (subject == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -143,7 +144,7 @@ public class SubjectService {
 
     @DELETE
     @Path("/{code}")
-    public Response deleteSubject(@PathParam("code") int code) {
+    public Response deleteSubject(@PathParam("code") int code){
         Subject subject = subjectBean.findSubject(code);
         if (subject == null) {
             return Response.status(Response.Status.NOT_FOUND).build();

@@ -8,6 +8,8 @@ import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.CourseBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -56,7 +58,7 @@ public class CourseService {
 
     @POST // means: to call this endpoint, we need to use the HTTP POST method
     @Path("/")
-    public Response createNewCourse (CourseDTO courseDTO){
+    public Response createNewCourse (CourseDTO courseDTO) throws MyEntityExistsException, MyEntityNotFoundException {
         courseBean.create(courseDTO.getCode(),
                 courseDTO.getName());
         Course newCourse = courseBean.findCourse(courseDTO.getCode());
@@ -69,7 +71,7 @@ public class CourseService {
 
     @PUT
     @Path("/{code}")
-    public Response updateCourse(@PathParam("code") int code, CourseDTO courseDTO){
+    public Response updateCourse(@PathParam("code") int code, CourseDTO courseDTO) throws MyEntityNotFoundException {
 
         Course course = courseBean.findCourse(code);
         if(course == null){
@@ -83,7 +85,7 @@ public class CourseService {
 
     @DELETE
     @Path("/{code}")
-    public Response deleteCourse(@PathParam("code") int code) {
+    public Response deleteCourse(@PathParam("code") int code) throws MyEntityNotFoundException {
         Course course = courseBean.findCourse(code);
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -97,7 +99,7 @@ public class CourseService {
 
     @GET
     @Path("/{code}")
-    public Response getCourse(@PathParam("code") int code)  {
+    public Response getCourse(@PathParam("code") int code) throws MyEntityNotFoundException {
         Course course = courseBean.findCourse(code);
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -110,7 +112,7 @@ public class CourseService {
 
     @GET
     @Path("/{code}/subjects")
-    public Response getCourseSubjects(@PathParam("code") int code)  {
+    public Response getCourseSubjects(@PathParam("code") int code) throws MyEntityNotFoundException {
         Course course = courseBean.findCourse(code);
         if(course == null){
             return Response.status(Response.Status.NOT_FOUND).build();

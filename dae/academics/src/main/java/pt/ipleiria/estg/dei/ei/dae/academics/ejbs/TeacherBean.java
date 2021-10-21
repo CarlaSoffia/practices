@@ -85,8 +85,7 @@ public class TeacherBean {
             dissociateTeacherFromSubject(teacher.getUsername(),s.getCode());
             teacher=entityManager.find(Teacher.class,teacher.getUsername());
         }
-        Teacher teacherMerged = entityManager.merge(teacher);
-        entityManager.remove(teacherMerged);
+        entityManager.remove(entityManager.merge(teacher));
     }
 
 }

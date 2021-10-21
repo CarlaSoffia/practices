@@ -42,7 +42,6 @@ public class AdministratorBean {
     }
 
     public void remove(Administrator administrator) {
-        Administrator administratorMerged = entityManager.merge(administrator);
-        entityManager.remove(administratorMerged);
+        entityManager.remove(entityManager.merge(administrator));
     }
 }

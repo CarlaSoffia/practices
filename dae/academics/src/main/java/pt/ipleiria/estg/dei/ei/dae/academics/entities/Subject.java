@@ -20,6 +20,7 @@ import java.util.List;
         uniqueConstraints = @UniqueConstraint(columnNames = {"NAME", "COURSE_CODE", "SCHOLAR_YEAR"})
 )
 public class Subject {
+    @Version private int version;
     @Id
     private int code;
     private String name;

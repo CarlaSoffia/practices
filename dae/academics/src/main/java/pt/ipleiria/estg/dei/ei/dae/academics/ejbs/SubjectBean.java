@@ -39,8 +39,7 @@ public class SubjectBean {
     public void remove(Subject subject){
         subject.getCourse().removeSubject(subject);
         entityManager.merge(subject.getCourse());
-        subject = entityManager.merge(subject);
-        entityManager.remove(subject);
+        entityManager.remove(entityManager.merge(subject));
     }
 
     public boolean unrollStudentInSubject(String username, int subjectCode){

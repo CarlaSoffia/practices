@@ -8,7 +8,7 @@ Content-Type: application/json
   "email": "johndoe@gmail.com",
   "name": "John Doe",
   "username": "john",
-  "password": "jd",
+  "password": "scscsc",
   "courseCode":"9991"
 }
 
@@ -142,7 +142,7 @@ GET http://localhost:8080/academics/api/teachers/teacherBruna/subjects
 ##### ****************************** DELETE ******************************
 
 ##### STUDENTS
-DELETE http://localhost:8080/academics/api/students/carlaSoffia
+DELETE http://localhost:8080/academics/api/students/bbbb
 
 ##### COURSES
 DELETE http://localhost:8080/academics/api/courses/9991
