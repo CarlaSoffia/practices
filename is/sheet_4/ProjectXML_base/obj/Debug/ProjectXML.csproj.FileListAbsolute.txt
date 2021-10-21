@@ -8,3 +8,4 @@ C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.csproj.GenerateReso
 C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.csproj.CoreCompileInputs.cache
 C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.exe
 C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.pdb
+C:\practices\is\sheet_4\ProjectXML_base\obj\Debug\ProjectXML.Form2.resources

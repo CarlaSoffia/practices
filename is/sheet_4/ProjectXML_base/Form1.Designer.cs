@@ -46,16 +46,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.labelSelectedTitle = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonEx10 = new System.Windows.Forms.Button();
-            this.textBoxISBN = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonEx11 = new System.Windows.Forms.Button();
+            this.textBoxCategoryName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.textBoxBooksByCategory = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonEx5
@@ -239,102 +234,54 @@
             this.labelSelectedTitle.TabIndex = 1;
             this.labelSelectedTitle.Text = "<Selected book title>";
             // 
-            // groupBox2
+            // buttonEx11
             // 
-            this.groupBox2.Controls.Add(this.buttonEx10);
-            this.groupBox2.Controls.Add(this.textBoxISBN);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.numericUpDown1);
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(436, 412);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox2.Size = new System.Drawing.Size(470, 146);
-            this.groupBox2.TabIndex = 12;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Book Rate or/and ISBN";
+            this.buttonEx11.Location = new System.Drawing.Point(453, 515);
+            this.buttonEx11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonEx11.Name = "buttonEx11";
+            this.buttonEx11.Size = new System.Drawing.Size(296, 43);
+            this.buttonEx11.TabIndex = 15;
+            this.buttonEx11.Text = "Ex. 11 -Number of Book by category";
+            this.buttonEx11.UseVisualStyleBackColor = true;
+            this.buttonEx11.Click += new System.EventHandler(this.buttonEx11_Click);
             // 
-            // buttonEx10
+            // textBoxCategoryName
             // 
-            this.buttonEx10.Location = new System.Drawing.Point(272, 72);
-            this.buttonEx10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.buttonEx10.Name = "buttonEx10";
-            this.buttonEx10.Size = new System.Drawing.Size(156, 43);
-            this.buttonEx10.TabIndex = 18;
-            this.buttonEx10.Text = "Ex. 10 - Add ISBN";
-            this.buttonEx10.UseVisualStyleBackColor = true;
-            // 
-            // textBoxISBN
-            // 
-            this.textBoxISBN.Location = new System.Drawing.Point(72, 85);
-            this.textBoxISBN.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBoxISBN.Name = "textBoxISBN";
-            this.textBoxISBN.Size = new System.Drawing.Size(169, 26);
-            this.textBoxISBN.TabIndex = 17;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(14, 95);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(51, 20);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "ISBN:";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(72, 28);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(99, 26);
-            this.numericUpDown1.TabIndex = 15;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(272, 20);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(156, 43);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "Ex. 9 - Add rate";
-            this.button3.UseVisualStyleBackColor = true;
+            this.textBoxCategoryName.Location = new System.Drawing.Point(599, 480);
+            this.textBoxCategoryName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxCategoryName.Name = "textBoxCategoryName";
+            this.textBoxCategoryName.Size = new System.Drawing.Size(264, 26);
+            this.textBoxCategoryName.TabIndex = 14;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 32);
+            this.label6.Location = new System.Drawing.Point(449, 484);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 20);
+            this.label6.Size = new System.Drawing.Size(121, 20);
             this.label6.TabIndex = 13;
-            this.label6.Text = "Rate:";
+            this.label6.Text = "Category name:";
+            // 
+            // textBoxBooksByCategory
+            // 
+            this.textBoxBooksByCategory.Location = new System.Drawing.Point(766, 523);
+            this.textBoxBooksByCategory.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxBooksByCategory.Name = "textBoxBooksByCategory";
+            this.textBoxBooksByCategory.Size = new System.Drawing.Size(97, 26);
+            this.textBoxBooksByCategory.TabIndex = 16;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(985, 659);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.textBoxBooksByCategory);
+            this.Controls.Add(this.buttonEx11);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.textBoxCategoryName);
             this.Controls.Add(this.buttonEx7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.labelSelectedTitle);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
@@ -352,9 +299,6 @@
             this.Text = "Worksheet 4 - XML and XPath";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -380,13 +324,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelSelectedTitle;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonEx11;
+        private System.Windows.Forms.TextBox textBoxCategoryName;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button buttonEx10;
-        private System.Windows.Forms.TextBox textBoxISBN;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxBooksByCategory;
     }
 }
 

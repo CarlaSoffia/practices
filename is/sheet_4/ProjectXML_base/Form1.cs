@@ -125,5 +125,11 @@ namespace ProjectXML
                 MessageBox.Show("NOT Updated");
             }
         }
+
+        private void buttonEx11_Click(object sender, EventArgs e)
+        {
+            HandlerXML handler = new HandlerXML(textBoxXmlFile.Text, textBoxXsdFile.Text);
+            textBoxBooksByCategory.Text = handler.NumberBooksByCategory(textBoxCategoryName.Text).ToString();
+        }
     }
 }

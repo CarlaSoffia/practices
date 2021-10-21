@@ -115,6 +115,25 @@ namespace ProjectXML
         }
         #endregion
 
+        public int NumberBooksByCategory(string category)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(XmlFilePath);
+            XmlNodeList booksNode = doc.SelectNodes($"bookstore/book[@category='{category}']");
+            return booksNode.Count;
+        }
 
+        public String executeXPath(string xpath)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(XmlFilePath);
+            XmlNodeList nodes = doc.SelectNodes($"{xpath}");
+            string result = "";
+            foreach (XmlNode node in nodes)
+            {
+                result += node.InnerText + Environment.NewLine;
+            }
+            return result;
+        }
     }
 }
