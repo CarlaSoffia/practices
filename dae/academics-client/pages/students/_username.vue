@@ -18,15 +18,8 @@
     </b-table>
      <p v-else>Student is not enrolled in any Subject</p>
       <button v-if="subjects.length" class="btn btn-info" @click.prevent="unrollStudentSubjects()">
-        Submit
+        Unroll
       </button><br><br>
-    <nuxt-link to="/students"
-      ><img
-        src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
-        alt="update"
-        width="25"
-        height="25"
-    /></nuxt-link><br>
     <b-container class="form-group">
       <h4>Enroll in Course Subjects:</h4>
       <b-table
@@ -42,8 +35,16 @@
       </b-table>
       <p v-else>Student enrolled in all the Course's subject</p>
       <button v-if="allSubjectsEnroll.length" class="btn btn-info" @click.prevent="enrollStudentSubjects()">
-        Submit
+        Enroll
       </button>
+      <br><br>
+          <nuxt-link to="/students"
+      ><img
+        src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
+        alt="update"
+        width="25"
+        height="25"
+    /></nuxt-link>
     </b-container>
   </b-container>
 </template>

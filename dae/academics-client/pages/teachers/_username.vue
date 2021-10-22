@@ -28,7 +28,7 @@
       class="btn btn-info"
       @click.prevent="dissociateTeacherSubjects()"
     >
-      Submit
+      Dissociate
     </button>
     <br /><br />
     <b-container class="form-group">
@@ -54,10 +54,10 @@
         class="btn btn-info"
         @click.prevent="associateTeacherSubjects()"
       >
-        Submit
+        Associate
       </button>
     </b-container>
-    <br /><br />
+    <br>
     <nuxt-link to="/teachers"
       ><img
         src="https://cdn-icons-png.flaticon.com/512/709/709624.png"

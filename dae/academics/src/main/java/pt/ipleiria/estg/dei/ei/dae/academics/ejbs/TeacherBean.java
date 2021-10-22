@@ -3,6 +3,8 @@ package pt.ipleiria.estg.dei.ei.dae.academics.ejbs;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.SubjectDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.TeacherDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.*;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,27 +17,29 @@ public class TeacherBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create(String username, String password, String name, String email, String office){
-        Teacher teacher = new Teacher(username, password, name, email, office);
+    public void create(String username, String password, String name, String email, String office) throws MyEntityExistsException {
+        Teacher teacher = entityManager.find(Teacher.class,username);
+        if(teacher != null) throw new MyEntityExistsException("There is a teacher with the username: "+username);
+        teacher = new Teacher(username, password, name, email, office);
         entityManager.persist(teacher);
     }
 
     public List<Teacher> getAllTeachers(){
         return (List<Teacher>) entityManager.createNamedQuery("getAllTeachers").getResultList();
     }
-    public Teacher findTeacher(String username) {
-        return entityManager.find(Teacher.class, username);
+    public Teacher findTeacher(String username) throws MyEntityNotFoundException {
+
+        Teacher teacher = entityManager.find(Teacher.class, username);
+        if(teacher == null) throw new MyEntityNotFoundException("There is no teacher with the username: "+username);
+        return teacher;
     }
 
 
-    public boolean associateTeacherToSubject(String username, int subjectCode){
-        Teacher teacher = entityManager.find(Teacher.class, username);
-        if(teacher == null){
-            return false;
-        }
+    public boolean associateTeacherToSubject(String username, int subjectCode) throws MyEntityNotFoundException {
+        Teacher teacher = findTeacher(username);
         Subject subject = entityManager.find(Subject.class, subjectCode);
         if(subject == null){
-            return false;
+            throw new MyEntityNotFoundException("There is no subject with the code: "+subjectCode);
         }
         subject.addTeacher(teacher);
         teacher.addSubject(subject);
@@ -45,14 +49,11 @@ public class TeacherBean {
     }
 
 
-    public boolean dissociateTeacherFromSubject(String username, int subjectCode){
-        Teacher teacher = entityManager.find(Teacher.class, username);
-        if(teacher == null){
-            return false;
-        }
+    public boolean dissociateTeacherFromSubject(String username, int subjectCode) throws MyEntityNotFoundException {
+        Teacher teacher = findTeacher(username);
         Subject subject = entityManager.find(Subject.class, subjectCode);
         if(subject == null){
-            return false;
+            throw new MyEntityNotFoundException("There is no subject with the code: "+subjectCode);
         }
         subject.removeTeacher(teacher);
         teacher.removeSubject(subject);
@@ -78,8 +79,8 @@ public class TeacherBean {
         entityManager.merge(teacher);
     }
 
-    //TODO
-    public void remove(Teacher teacher){
+
+    public void remove(Teacher teacher) throws MyEntityNotFoundException {
         for (Subject s:
                 teacher.getSubjects()) {
             dissociateTeacherFromSubject(teacher.getUsername(),s.getCode());

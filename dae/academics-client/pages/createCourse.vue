@@ -6,18 +6,36 @@
       @submit.prevent="create"
     >
       <h4>Create new Course</h4>
-      <div>Code: <input v-model="code" type="number" min="1"  class="form-control"/></div>
-      <div>Name: <input v-model="name" type="text"  class="form-control"/></div>
-<br>
-      <nuxt-link to="/courses"
-        ><img
-          src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
-          alt="update"
-          width="25"
-          height="25"
-      /></nuxt-link>
-      <button class="btn btn-info" type="reset">Reset</button>
-      <button class="btn btn-info" @click.prevent="create">Create</button>
+      <div>
+        Code:
+        <input v-model="code" type="number" min="1" class="form-control" />
+      </div>
+      <div>Name: <input v-model="name" type="text" class="form-control" /></div>
+      <br />
+      <p v-show="errorMsg" class="text-danger">
+        {{ errorMsg }}
+      </p>
+      <div class="d-flex justify-content-between">
+        <nuxt-link to="/courses"
+          ><img
+            src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
+            alt="update"
+            width="25"
+            height="25"
+        /></nuxt-link>
+        <div class="d-flex">
+          <button
+            class="btn btn-dark mr-1"
+            @click="errorMsg = false"
+            type="reset"
+          >
+            Reset
+          </button>
+          <button class="btn btn-info ml-1" @click.prevent="create">
+            Create
+          </button>
+        </div>
+      </div>
     </b-container>
   </div>
 </template>
@@ -28,6 +46,7 @@ export default {
       name: null,
       code: null,
       courses: [],
+      errorMsg: false,
     };
   },
   created() {
@@ -45,6 +64,9 @@ export default {
         .then(() => {
           this.$router.push("/courses");
           alert("Course created with success!");
+        })
+        .catch((error) => {
+          this.errorMsg = error.response.data;
         });
     },
   },

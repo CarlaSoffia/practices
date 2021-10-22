@@ -24,7 +24,7 @@
           </button>
         </template>
         <template v-slot:cell(delete)="row">
-          <button @click.prevent="deleteCourse(row.item.code)">
+          <button  class="btn btn-link" @click.prevent="deleteCourse(row.item.code)">
             <img
               src="https://cdn-icons-png.flaticon.com/512/447/447047.png"
               alt="update"
@@ -34,7 +34,7 @@
           </button>
         </template>
       </b-table>
-      <br>
+      <br />
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -46,8 +46,8 @@
         <nuxt-link to="/createCourse" class="btn btn-info"
           >Create a New Course</nuxt-link
         >
-      </div>
-    </b-container><br>
+      </div> </b-container
+    ><br />
     <b-container
       v-if="updateClicked"
       class="form-group w-50"
@@ -56,7 +56,10 @@
       <h4>Update Course: {{ courseCode }}</h4>
       <label for="name">Name</label>
       <input v-model="name" type="text" class="form-control" />
-      <br>
+      <br />
+      <button class="btn btn-dark" @click="errorMsg = false" type="reset">
+        Reset
+      </button>
       <button class="btn btn-info" @click.prevent="updateCourse()">
         Submit
       </button>
@@ -72,6 +75,7 @@ export default {
       courseCode: null,
       updateClicked: false,
       name: "",
+      errorMsg: false,
     };
   },
   methods: {
@@ -96,6 +100,9 @@ export default {
         .$put(`/api/courses/${this.courseCode}`, updateData)
         .then((course) => {
           alert(`Course ${course.name}  updated!`);
+        })
+        .catch((error) => {
+          this.errorMsg = error.response.data;
         });
     },
   },

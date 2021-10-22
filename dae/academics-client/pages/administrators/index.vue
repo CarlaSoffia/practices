@@ -2,9 +2,17 @@
   <div>
     <b-container>
       <h2>Administrators</h2>
-      <b-table striped over :items="administrators" :fields="fieldsAdministrators">
+      <b-table
+        striped
+        over
+        :items="administrators"
+        :fields="fieldsAdministrators"
+      >
         <template v-slot:cell(details)="row">
-          <nuxt-link class="btn btn-link" :to="`/administrators/${row.item.username}`">
+          <nuxt-link
+            class="btn btn-link"
+            :to="`/administrators/${row.item.username}`"
+          >
             <img
               src="https://cdn-icons-png.flaticon.com/512/1150/1150592.png"
               alt="view"
@@ -35,8 +43,8 @@
               height="25"
             />
           </button>
-        </template>
-      </b-table><br>
+        </template> </b-table
+      ><br />
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -48,8 +56,8 @@
         <nuxt-link to="/createAdministrator" class="btn btn-info"
           >Create a New Administrator</nuxt-link
         >
-      </div>
-    </b-container><br>
+      </div> </b-container
+    ><br />
     <b-container
       v-if="updateClicked"
       class="form-group w-50"
@@ -62,7 +70,13 @@
       <input v-model="password" type="password" class="form-control" />
       <label for="email">Email</label>
       <input v-model="email" type="email" class="form-control" />
-      <br>
+      <br />
+      <p v-show="errorMsg" class="text-danger">
+        {{ errorMsg }}
+      </p>
+      <button class="btn btn-dark" @click="errorMsg = false" type="reset">
+        Reset
+      </button>
       <button class="btn btn-info" @click.prevent="updateAdministrator()">
         Submit
       </button>
@@ -86,27 +100,27 @@ export default {
       administratorUsername: null,
       name: "",
       password: "",
-      email: ""
+      email: "",
+      errorMsg: false,
     };
   },
   methods: {
     deleteAdministrator(username) {
-      this.$axios.$delete(`/api/administrators/${username}`).then((administrator) => {
-        alert(`Administrator ${administrator.name} removed!`);
-      });
+      this.$axios
+        .$delete(`/api/administrators/${username}`)
+        .then((administrator) => {
+          alert(`Administrator ${administrator.name} removed!`);
+        });
     },
     showHideForm(username) {
-      this.administratorUsername = this.administratorUsername == username ? null : username;
+      this.administratorUsername =
+        this.administratorUsername == username ? null : username;
       this.updateClicked = !this.updateClicked;
     },
 
     updateAdministrator() {
-      let updateData = { name: "", password: "", email: ""};
-      if (
-        this.name == "" &&
-        this.password == "" &&
-        this.email == ""
-      ) {
+      let updateData = { name: "", password: "", email: "" };
+      if (this.name == "" && this.password == "" && this.email == "") {
         alert("All fields are empty!");
         return;
       }
@@ -129,6 +143,9 @@ export default {
         .$put(`/api/administrators/${this.administratorUsername}`, updateData)
         .then((administrator) => {
           alert(`Administrator ${administrator.name}  updated!`);
+        })
+        .catch((error) => {
+          this.errorMsg = error.response.data;
         });
     },
   },

@@ -24,7 +24,7 @@
           </button>
         </template>
         <template v-slot:cell(delete)="row">
-          <button @click.prevent="deleteSubject(row.item.code)">
+          <button class="btn btn-link"  @click.prevent="deleteSubject(row.item.code)">
             <img
               src="https://cdn-icons-png.flaticon.com/512/447/447047.png"
               alt="update"
@@ -34,7 +34,7 @@
           </button>
         </template>
       </b-table>
-      <br>
+      <br />
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -46,8 +46,8 @@
         <nuxt-link to="/createSubject" class="btn btn-info"
           >Create a New Subject</nuxt-link
         >
-      </div>
-    </b-container><br>
+      </div> </b-container
+    ><br />
     <b-container
       v-if="updateClicked"
       class="form-group w-50"
@@ -57,18 +57,21 @@
       <label>Name</label>
       <input v-model="name" type="text" class="form-control" />
       <label>Course Year</label>
-      <input v-model="courseYear" type="number" min="1"  class="form-control"/>
-       <label>Scholar Year</label>
-      <input v-model="scholarYear" type="number" min="1"  class="form-control"/>
+      <input v-model="courseYear" type="number" min="1" class="form-control" />
+      <label>Scholar Year</label>
+      <input v-model="scholarYear" type="number" min="1" class="form-control" />
       <label>Course code</label>
-       <select class="form-control" v-model="courseCode">
+      <select class="form-control" v-model="courseCode">
         <template v-for="course in courses">
           <option :key="course.code" :value="course.code">
             {{ course.name }}
           </option>
         </template>
       </select>
-      <br>
+      <br />
+      <button class="btn btn-dark" @click="errorMsg = false" type="reset">
+        Reset
+      </button>
       <button class="btn btn-info" @click.prevent="updateSubject()">
         Submit
       </button>
@@ -79,14 +82,22 @@
 export default {
   data() {
     return {
-      fieldsSubjects: ["code", "name", "courseName", "details", "update", "delete"],
+      fieldsSubjects: [
+        "code",
+        "name",
+        "courseName",
+        "details",
+        "update",
+        "delete",
+      ],
       subjects: [],
       subjectCode: null,
       updateClicked: false,
       name: "",
       courses: [],
       courseYear: "",
-      scholarYear:""
+      scholarYear: "",
+      errorMsg: false,
     };
   },
   methods: {
@@ -100,7 +111,12 @@ export default {
       });
     },
     updateSubject() {
-       let updateData = { name: "", courseCode: "", courseYear: "", scholarYear: "" };
+      let updateData = {
+        name: "",
+        courseCode: "",
+        courseYear: "",
+        scholarYear: "",
+      };
       if (
         this.name == "" &&
         this.courseYear == "" &&
@@ -137,6 +153,9 @@ export default {
         .$put(`/api/subjects/${this.subjectCode}`, updateData)
         .then((subject) => {
           alert(`Subject ${subject.name}  updated!`);
+        })
+        .catch((error) => {
+          this.errorMsg = error.response.data;
         });
     },
   },
@@ -144,7 +163,7 @@ export default {
     this.$axios.$get("/api/subjects/").then((subjects) => {
       this.subjects = subjects;
     });
-     this.$axios.$get("/api/courses/").then((courses) => {
+    this.$axios.$get("/api/courses/").then((courses) => {
       this.courses = courses;
     });
   },

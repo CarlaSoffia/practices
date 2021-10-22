@@ -6,6 +6,8 @@ import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.TeacherBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Teacher;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -55,7 +57,7 @@ public class TeacherService {
 
     @POST
     @Path("/{username}/associate/{code}")
-    public Response associateTeacherSubject(@PathParam("username")  String username, @PathParam("code") int code) {
+    public Response associateTeacherSubject(@PathParam("username")  String username, @PathParam("code") int code) throws MyEntityNotFoundException {
 
         boolean teacherAssociated = teacherBean.associateTeacherToSubject(username, code);
 
@@ -71,7 +73,7 @@ public class TeacherService {
 
     @POST
     @Path("/{username}/dissociate/{code}")
-    public Response dissociateTeacherSubject(@PathParam("username")  String username, @PathParam("code") int code) {
+    public Response dissociateTeacherSubject(@PathParam("username")  String username, @PathParam("code") int code) throws MyEntityNotFoundException {
 
         boolean teacherDissociated = teacherBean.dissociateTeacherFromSubject(username, code);
 
@@ -87,7 +89,7 @@ public class TeacherService {
 
     @GET
     @Path("/{username}/subjects")
-    public Response getTeacherSubjects(@PathParam("username")  String username){
+    public Response getTeacherSubjects(@PathParam("username")  String username) throws MyEntityNotFoundException {
         Teacher teacher = teacherBean.findTeacher(username);
         if (teacher != null) {
             return Response.ok(subjectsToDTOs(teacher.getSubjects())).build();
@@ -98,7 +100,7 @@ public class TeacherService {
     }
     @POST
     @Path("/")
-    public Response createTeacher(TeacherDTO teacherDTO){
+    public Response createTeacher(TeacherDTO teacherDTO) throws MyEntityNotFoundException, MyEntityExistsException {
         teacherBean.create(teacherDTO.getUsername(), teacherDTO.getPassword(), teacherDTO.getName(), teacherDTO.getEmail(), teacherDTO.getOffice());
         Teacher teacher = teacherBean.findTeacher(teacherDTO.getUsername());
         if(teacher == null){
@@ -111,7 +113,7 @@ public class TeacherService {
 
     @PUT
     @Path("/{username}")
-    public Response updateTeacher(@PathParam("username") String username, TeacherDTO teacherDTO){
+    public Response updateTeacher(@PathParam("username") String username, TeacherDTO teacherDTO) throws MyEntityNotFoundException {
 
         Teacher teacher = teacherBean.findTeacher(username);
 
@@ -132,7 +134,7 @@ public class TeacherService {
 
     @GET
     @Path("/{username}")
-    public Response getTeacherDetails(@PathParam("username") String username) {
+    public Response getTeacherDetails(@PathParam("username") String username) throws MyEntityNotFoundException {
         Teacher teacher = teacherBean.findTeacher(username);
         if (teacher == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -145,7 +147,7 @@ public class TeacherService {
 
     @DELETE
     @Path("/{username}")
-    public Response deleteTeacher(@PathParam("username") String username) {
+    public Response deleteTeacher(@PathParam("username") String username) throws MyEntityNotFoundException {
         Teacher teacher = teacherBean.findTeacher(username);
         if (teacher == null) {
             return Response.status(Response.Status.NOT_FOUND).build();

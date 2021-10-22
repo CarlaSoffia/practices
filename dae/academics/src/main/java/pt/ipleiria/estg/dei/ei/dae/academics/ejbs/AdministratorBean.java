@@ -4,6 +4,8 @@ import pt.ipleiria.estg.dei.ei.dae.academics.dtos.AdministratorDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Administrator;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Teacher;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,16 +18,20 @@ public class AdministratorBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create(String username, String password, String name, String email){
-        Administrator admin = new Administrator(username, password, name, email);
+    public void create(String username, String password, String name, String email) throws MyEntityExistsException {
+        Administrator admin = entityManager.find(Administrator.class, username);
+        if(admin != null) throw new MyEntityExistsException("There is a administrator with the username: "+username);
+        admin = new Administrator(username, password, name, email);
         entityManager.persist(admin);
     }
     public List<Administrator> getAllAdministrators(){
         return (List<Administrator>) entityManager.createNamedQuery("getAllAdministrators").getResultList();
     }
 
-    public Administrator findAdministrator(String username) {
-        return entityManager.find(Administrator.class, username);
+    public Administrator findAdministrator(String username) throws MyEntityNotFoundException {
+        Administrator admin = entityManager.find(Administrator.class, username);
+        if(admin == null) throw new MyEntityNotFoundException("There is no administrator with the username: "+username);
+        return admin;
     }
 
     public void update(Administrator administrator, AdministratorDTO administratorDTO) {

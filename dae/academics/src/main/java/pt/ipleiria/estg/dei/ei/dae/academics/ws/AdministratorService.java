@@ -5,6 +5,8 @@ import pt.ipleiria.estg.dei.ei.dae.academics.dtos.TeacherDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Administrator;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Teacher;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -36,7 +38,7 @@ public class AdministratorService {
 
     @POST
     @Path("/")
-    public Response createAdministrator(AdministratorDTO administratorDTO){
+    public Response createAdministrator(AdministratorDTO administratorDTO) throws MyEntityExistsException, MyEntityNotFoundException {
         administratorBean.create(administratorDTO.getUsername(), administratorDTO.getPassword(), administratorDTO.getName(), administratorDTO.getEmail());
         Administrator administrator = administratorBean.findAdministrator(administratorDTO.getUsername());
         if(administrator == null){
@@ -49,7 +51,7 @@ public class AdministratorService {
 
     @PUT
     @Path("/{username}")
-    public Response updateAdministrator(@PathParam("username") String username,AdministratorDTO administratorDTO){
+    public Response updateAdministrator(@PathParam("username") String username,AdministratorDTO administratorDTO) throws MyEntityNotFoundException {
 
         Administrator administrator = administratorBean.findAdministrator(username);
         if(administrator == null){
@@ -69,7 +71,7 @@ public class AdministratorService {
 
     @GET
     @Path("/{username}")
-    public Response getAdministratorDetails(@PathParam("username") String username) {
+    public Response getAdministratorDetails(@PathParam("username") String username) throws MyEntityNotFoundException {
         Administrator administrator = administratorBean.findAdministrator(username);
         if (administrator == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -82,7 +84,7 @@ public class AdministratorService {
 
     @DELETE
     @Path("/{username}")
-    public Response deleteAdministrator(@PathParam("username") String username) {
+    public Response deleteAdministrator(@PathParam("username") String username) throws MyEntityNotFoundException {
         Administrator administrator = administratorBean.findAdministrator(username);
         if (administrator == null) {
             return Response.status(Response.Status.NOT_FOUND).build();

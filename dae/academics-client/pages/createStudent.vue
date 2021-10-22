@@ -28,20 +28,25 @@
         </select>
       </div>
       <br />
-      <nuxt-link to="/students"
-        ><img
-          src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
-          alt="update"
-          width="25"
-          height="25"
-      /></nuxt-link>
+
       <p v-show="errorMsg" class="text-danger">
         {{ errorMsg }}
       </p>
-      <button class="btn btn-info" @click="errorMsg = false" type="reset">
-        Reset
-      </button>
-      <button class="btn btn-info" @click.prevent="create">Create</button>
+      <div class="d-flex justify-content-between">
+        <nuxt-link to="/students"
+          ><img
+            src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
+            alt="update"
+            width="25"
+            height="25"
+        /></nuxt-link>
+        <div class="d-flex">
+          <button class="btn btn-dark mr-1" @click="errorMsg = false" type="reset">
+            Reset
+          </button>
+          <button class="btn btn-info ml-1" @click.prevent="create">Create</button>
+        </div>
+      </div>
     </b-container>
   </div>
 </template>

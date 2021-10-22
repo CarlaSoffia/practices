@@ -4,7 +4,10 @@
       <h2>Teachers</h2>
       <b-table striped over :items="teachers" :fields="fieldsTeachers">
         <template v-slot:cell(details)="row">
-          <nuxt-link class="btn btn-link" :to="`/teachers/${row.item.username}`">
+          <nuxt-link
+            class="btn btn-link"
+            :to="`/teachers/${row.item.username}`"
+          >
             <img
               src="https://cdn-icons-png.flaticon.com/512/1150/1150592.png"
               alt="view"
@@ -35,8 +38,8 @@
               height="25"
             />
           </button>
-        </template>
-      </b-table><br>
+        </template> </b-table
+      ><br />
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -48,8 +51,8 @@
         <nuxt-link to="/createTeacher" class="btn btn-info"
           >Create a New Teacher</nuxt-link
         >
-      </div>
-    </b-container><br>
+      </div> </b-container
+    ><br />
     <b-container
       v-if="updateClicked"
       class="form-group w-50"
@@ -63,7 +66,10 @@
       <label for="email">Email</label>
       <input v-model="email" type="email" class="form-control" />
       <label for="office">Office</label>
-     <input v-model="office" type="text" class="form-control" /><br>
+      <input v-model="office" type="text" class="form-control" /><br />
+      <button class="btn btn-dark" @click="errorMsg = false" type="reset">
+        Reset
+      </button>
       <button class="btn btn-info" @click.prevent="updateTeacher()">
         Submit
       </button>
@@ -89,7 +95,8 @@ export default {
       name: "",
       password: "",
       email: "",
-      office: ""
+      office: "",
+      errorMsg: false,
     };
   },
   methods: {
@@ -139,6 +146,9 @@ export default {
         .$put(`/api/teachers/${this.teacherUsername}`, updateData)
         .then((teacher) => {
           alert(`Teacher ${teacher.name}  updated!`);
+        })
+        .catch((error) => {
+          this.errorMsg = error.response.data;
         });
     },
   },

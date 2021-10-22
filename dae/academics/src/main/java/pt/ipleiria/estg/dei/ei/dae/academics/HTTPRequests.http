@@ -59,7 +59,7 @@ Content-Type: application/json
 ##### ****************************** UPDATE ******************************
 
 ### STUDENTS
-PUT http://localhost:8080/academics/api/students/carlaSoffia
+PUT http://localhost:8080/academics/api/students/claire
 Content-Type: application/json
 
 {
@@ -142,7 +142,7 @@ GET http://localhost:8080/academics/api/teachers/teacherBruna/subjects
 ##### ****************************** DELETE ******************************
 
 ##### STUDENTS
-DELETE http://localhost:8080/academics/api/students/bbbb
+DELETE http://localhost:8080/academics/api/students/carlaSoffia
 
 ##### COURSES
 DELETE http://localhost:8080/academics/api/courses/9991
@@ -154,7 +154,7 @@ DELETE http://localhost:8080/academics/api/administrators/nicolasGonc
 DELETE http://localhost:8080/academics/api/subjects/1
 
 ### TEACHERS
-DELETE http://localhost:8080/academics/api/teachers/teacherBruna
+DELETE http://localhost:8080/academics/api/teachers/teacherJoao
 
 
 ##### ****************************** STUDENT SUBJECTS ******************************

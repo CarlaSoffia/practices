@@ -6,6 +6,8 @@ import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Teacher;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,16 +22,20 @@ public class SubjectBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create(int code, String name, int courseCode, int courseYear, int scholarYear){
+    public void create(int code, String name, int courseCode, int courseYear, int scholarYear) throws MyEntityNotFoundException, MyEntityExistsException {
         Course course= entityManager.find(Course.class, courseCode);
-        if(course == null) return;
-        Subject subject = new Subject(code, name, course,courseYear, scholarYear);
+        if(course == null) throw new MyEntityNotFoundException("There is no course with the code: "+courseCode);
+        Subject subject = entityManager.find(Subject.class, code);
+        if(subject != null) throw new MyEntityExistsException("There a subject with the code: "+code);
+         subject = new Subject(code, name, course,courseYear, scholarYear);
         course.addSubject(subject);
         entityManager.persist(subject);
         entityManager.merge(course);
     }
-    public Subject findSubject(int code) {
-        return entityManager.find(Subject.class, code);
+    public Subject findSubject(int code) throws MyEntityNotFoundException {
+        Subject subject = entityManager.find(Subject.class, code);
+        if(subject == null) throw new MyEntityNotFoundException("There is no subject with the code: "+code);
+        return subject;
     }
 
     public List<Subject> getAllSubjects(){
@@ -42,15 +48,12 @@ public class SubjectBean {
         entityManager.remove(entityManager.merge(subject));
     }
 
-    public boolean unrollStudentInSubject(String username, int subjectCode){
+    public boolean unrollStudentInSubject(String username, int subjectCode) throws MyEntityNotFoundException {
         Student student = entityManager.find(Student.class, username);
         if(student == null){
-            return false;
+            throw  new MyEntityNotFoundException("There is no student with the username: "+username);
         }
         Subject subject = findSubject(subjectCode);
-        if(subject == null){
-            return false;
-        }
         if(student.getCourse().getCode() != subject.getCourse().getCode()){
             return false;
         }
@@ -62,7 +65,7 @@ public class SubjectBean {
     }
 
 
-    public void update(Subject subject, SubjectDTO subjectDTO) {
+    public void update(Subject subject, SubjectDTO subjectDTO) throws MyEntityNotFoundException {
 
         if(subjectDTO.getName() != null && !subject.getName().equals(subjectDTO.getName())){
             subject.setName(subjectDTO.getName());

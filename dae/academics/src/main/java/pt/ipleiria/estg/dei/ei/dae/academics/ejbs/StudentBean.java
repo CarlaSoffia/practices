@@ -25,9 +25,9 @@ public class StudentBean {
 
     public void create(String username, String password, String name, String email, int courseCode) throws MyEntityNotFoundException, MyEntityExistsException, MyConstraintViolationException {
         Course course = entityManager.find(Course.class, courseCode);
-        if(course == null) throw  new MyEntityNotFoundException("There is no course with the code:"+courseCode);
+        if(course == null) throw  new MyEntityNotFoundException("There is no course with the code: "+courseCode);
         Student student = entityManager.find(Student.class, username);
-        if(student != null) throw new MyEntityExistsException("There is a student with username:"+student.getUsername());
+        if(student != null) throw new MyEntityExistsException("There is a student with username: "+student.getUsername());
         try{
             student = new Student(username, password, name, email, course);
             entityManager.persist(student);
@@ -59,7 +59,7 @@ public class StudentBean {
     }
 
     public void update(Student student, StudentDTO studentDTO) throws MyEntityNotFoundException {
-        entityManager.lock(student, LockModeType.OPTIMISTIC);
+        entityManager.lock(entityManager.merge(student), LockModeType.OPTIMISTIC);
         if(studentDTO.getName() != null && !student.getName().equals(studentDTO.getName())){
             student.setName(studentDTO.getName());
         }
@@ -87,16 +87,14 @@ public class StudentBean {
                 course.addStudent(student);
                 entityManager.merge(course);
             }
+            throw  new MyEntityNotFoundException("There is no course with the code: "+studentDTO.getCourseCode());
         }
         entityManager.merge(student);
     }
 
 
     public boolean enrollStudentInSubject(String username, int subjectCode) throws MyEntityNotFoundException {
-        Student student = entityManager.find(Student.class, username);
-        if (student == null){
-            throw  new MyEntityNotFoundException("There is no student with the username: "+username);
-        }
+        Student student = findStudent(username);
         Subject subject = entityManager.find(Subject.class, subjectCode);
         if (subject == null){
             throw  new MyEntityNotFoundException("There is no subject with the code: "+subjectCode);
@@ -113,10 +111,7 @@ public class StudentBean {
 
 
     public boolean unrollStudentInSubject(String username, int subjectCode) throws MyEntityNotFoundException {
-        Student student = entityManager.find(Student.class, username);
-        if (student == null){
-            throw  new MyEntityNotFoundException("There is no student with the username: "+username);
-        }
+        Student student = findStudent(username);
         Subject subject = entityManager.find(Subject.class, subjectCode);
         if (subject == null){
             throw  new MyEntityNotFoundException("There is no subject with the code: "+subjectCode);

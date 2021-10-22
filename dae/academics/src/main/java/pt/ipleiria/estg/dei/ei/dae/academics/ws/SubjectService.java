@@ -8,6 +8,7 @@ import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Teacher;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
@@ -73,7 +74,7 @@ public class SubjectService {
 
     @GET
     @Path("/{code}/students")
-    public Response getStudentsSubject(@PathParam("code") int code) {
+    public Response getStudentsSubject(@PathParam("code") int code) throws MyEntityNotFoundException {
         Subject subject = subjectBean.findSubject(code);
         if (subject != null) {
             return Response.ok(this.studentsToDTOs(subject.getStudents())).build();
@@ -85,7 +86,7 @@ public class SubjectService {
 
     @GET
     @Path("/{code}/teachers")
-    public Response getTeachersSubject(@PathParam("code") int code) {
+    public Response getTeachersSubject(@PathParam("code") int code) throws MyEntityNotFoundException {
         Subject subject = subjectBean.findSubject(code);
         if (subject != null) {
             return Response.ok(teacherToDTOs(subject.getTeachers())).build();
@@ -97,7 +98,7 @@ public class SubjectService {
 
     @POST
     @Path("/")
-    public Response createSubject(SubjectDTO subjectDTO){
+    public Response createSubject(SubjectDTO subjectDTO) throws MyEntityNotFoundException, MyEntityExistsException {
         subjectBean.create(subjectDTO.getCode(), subjectDTO.getName(), subjectDTO.getCourseCode(), subjectDTO.getCourseYear(), subjectDTO.getScholarYear());
         Subject subject = subjectBean.findSubject(subjectDTO.getCode());
         if(subject == null){
@@ -110,7 +111,7 @@ public class SubjectService {
 
     @PUT
     @Path("/{code}")
-    public Response updateSubject(@PathParam("code") int code, SubjectDTO subjectDTO) {
+    public Response updateSubject(@PathParam("code") int code, SubjectDTO subjectDTO) throws MyEntityNotFoundException {
 
     Subject subject  = subjectBean.findSubject(code);
 
@@ -131,7 +132,7 @@ public class SubjectService {
 
     @GET
     @Path("/{code}")
-    public Response getSubjectDetails(@PathParam("code") int code){
+    public Response getSubjectDetails(@PathParam("code") int code) throws MyEntityNotFoundException {
        Subject subject = subjectBean.findSubject(code);
         if (subject == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -144,7 +145,7 @@ public class SubjectService {
 
     @DELETE
     @Path("/{code}")
-    public Response deleteSubject(@PathParam("code") int code){
+    public Response deleteSubject(@PathParam("code") int code) throws MyEntityNotFoundException {
         Subject subject = subjectBean.findSubject(code);
         if (subject == null) {
             return Response.status(Response.Status.NOT_FOUND).build();

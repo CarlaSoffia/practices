@@ -4,7 +4,10 @@
       <h2>Students</h2>
       <b-table striped over :items="students" :fields="fieldsStudents">
         <template v-slot:cell(details)="row">
-          <nuxt-link class="btn btn-link" :to="`/students/${row.item.username}`">
+          <nuxt-link
+            class="btn btn-link"
+            :to="`/students/${row.item.username}`"
+          >
             <img
               src="https://cdn-icons-png.flaticon.com/512/1150/1150592.png"
               alt="view"
@@ -35,8 +38,8 @@
               height="25"
             />
           </button>
-        </template>
-      </b-table><br>
+        </template> </b-table
+      ><br />
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -48,8 +51,8 @@
         <nuxt-link to="/createStudent" class="btn btn-info"
           >Create a New Student</nuxt-link
         >
-      </div>
-    </b-container><br>
+      </div> </b-container
+    ><br />
     <b-container
       v-if="updateClicked"
       class="form-group w-50"
@@ -63,13 +66,16 @@
       <label for="email">Email</label>
       <input v-model="email" type="email" class="form-control" />
       <label for="course">Course</label>
-       <select class="form-control" v-model="courseCode">
+      <select class="form-control" v-model="courseCode">
         <template v-for="course in courses">
           <option :key="course.code" :value="course.code">
             {{ course.name }}
           </option>
-        </template>
-      </select><br>
+        </template></select
+      ><br />
+      <button class="btn btn-dark" @click="errorMsg = false" type="reset">
+        Reset
+      </button>
       <button class="btn btn-info" @click.prevent="updateStudent()">
         Submit
       </button>
@@ -96,7 +102,8 @@ export default {
       password: "",
       email: "",
       courseCode: "",
-      courses: []
+      courses: [],
+      errorMsg: false,
     };
   },
   methods: {
@@ -146,6 +153,9 @@ export default {
         .$put(`/api/students/${this.studentUsername}`, updateData)
         .then((student) => {
           alert(`Student ${student.name}  updated!`);
+        })
+        .catch((error) => {
+          this.errorMsg = error.response.data;
         });
     },
   },
