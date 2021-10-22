@@ -19,11 +19,11 @@ import org.openqa.selenium.Keys as Keys
 
 Mobile.startApplication('C:\\practices\\taes\\MyFirstMobileTestProject\\appForTest\\Sunflower.apk', true)
 
-Mobile.tap(findTestObject('android.widget.Button - ADD PLANT'), 0)
+Mobile.tap(findTestObject('Object Repository/android.widget.Button - ADD PLANT (5)'), 0)
 
-Mobile.tap(findTestObject('Object Repository/android.view.ViewGroup (3)'), 0)
+Mobile.tap(findTestObject('Object Repository/android.widget.TextView - Eggplant (3)'), 0)
 
-Mobile.verifyElementText(findTestObject('Object Repository/android.widget.TextView - Eggplant (1)'), 'Eggplant')
+Mobile.verifyElementText(findTestObject('android.widget.TextView - Watering needs'), 'Watering needs')
 
 Mobile.closeApplication()
 
