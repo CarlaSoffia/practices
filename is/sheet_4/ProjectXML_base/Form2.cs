@@ -36,13 +36,13 @@ namespace ProjectXML
 
         /*13.
          
-         13.1. dei/course[1] -> Daluno 10012191001@my.ipleiria.pt2445006002101001aluno 10022191002@my.ipleiria.pt2101002Nuno Costanuno.costa@ipleiria.ptA00G.1-7Marisa Maximianomarisa.maximiano@ipleiria.pt244820300A62G.1-7
-         13.2. dei/course[2]//@name -> Desenvolvimento de Aplicacoes Distribuidas
-         13.3. dei/course[last()]//@name -> Programação de Jogos
-         13.4. dei/course[last()-1]//@name -> Introdução aos Jogos Digitais
-         13.5. dei/course[1]/teachers/teacher[1]/name -> Nuno Costa
-         13.6. dei/course[@name="Integracao de Sistemas"]/teachers/teacher/name -> Nuno Costa/Marisa Maximiano
-         13.7. dei/course//@name -> Integracao de Sistemas/Desenvolvimento de Aplicacoes Distribuidas/Introdução aos Jogos Digitais/Programação de Jogos
+         13.1. dei/course[1] 
+         13.2. dei/course[2]//@name 
+         13.3. dei/course[last()]//@name 
+         13.4. dei/course[last()-1]//@name 
+         13.5. dei/course[1]/teachers/teacher[1]/name 
+         13.6. dei/course[@name="Integracao de Sistemas"]/teachers/teacher/name 
+         13.7. dei/course//@name
          13.8. dei/course/students/student/name[contains(text(), 'Manuel')]/parent::student/number
          13.9. dei/course/students/student[starts-with(name, 'M')]/number
          13.10. dei/course[starts-with(@name,'I') and @ects=6]/scheme

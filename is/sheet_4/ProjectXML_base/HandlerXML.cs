@@ -68,14 +68,41 @@ namespace ProjectXML
         //**********************************************  
         public void AddRateToBook(string title, string rate)
         {
-           
+            XmlDocument doc = new XmlDocument();
+            doc.Load(XmlFilePath);
+            XmlNode book = doc.SelectSingleNode($"bookstore/book[title='{title}']");
+            if (book["rate"] == null)
+            {
+                XmlElement rateNode = doc.CreateElement("rate");
+                rateNode.InnerText = rate;
+                book.AppendChild(rateNode);
+            }
+            else
+            {
+                book["rate"].InnerText = rate;
+            }           
+            doc.Save(XmlFilePath);
         }
         //**********************************************
         // Ex. 10 Add Attribute
         //**********************************************  
         public void AddAttributeISBNToBook(string title, string isbn)
         {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(XmlFilePath);
+            XmlNode book = doc.SelectSingleNode($"bookstore/book[title='{title}']");
+            if (book["isbn"] == null)
+            {
+                XmlAttribute isbnAtt = doc.CreateAttribute("isbn");
+                isbnAtt.InnerText = isbn;
+                book.Attributes.Append(isbnAtt);
+            }
+            else
+            {
+                book["isbn"].InnerText = isbn;
+            }
             
+            doc.Save(XmlFilePath);
         }
 
         #region Ex. 6 - Validate XML with XML Schema (xsd)

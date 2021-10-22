@@ -130,6 +130,21 @@ namespace ProjectXML
         {
             HandlerXML handler = new HandlerXML(textBoxXmlFile.Text, textBoxXsdFile.Text);
             textBoxBooksByCategory.Text = handler.NumberBooksByCategory(textBoxCategoryName.Text).ToString();
+            MessageBox.Show("Updated Category");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            HandlerXML handler = new HandlerXML(textBoxXmlFile.Text, textBoxXsdFile.Text);
+            handler.AddRateToBook(labelSelectedTitle.Text,textBoxRate.Text);
+            MessageBox.Show("Updated Rate");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            HandlerXML handler = new HandlerXML(textBoxXmlFile.Text, textBoxXsdFile.Text);
+            handler.AddAttributeISBNToBook(labelSelectedTitle.Text, textBoxISBN.Text);
+            MessageBox.Show("Updated ISBN");
         }
     }
 }

@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <bookstore>
-  <book category="CHILDREN">
+  <book category="CHILDREN" isbn="12">
     <title>Harry Potter and the Cursed Child</title>
-    <author>maria</author>
+    <author>1</author>
     <year>2016</year>
     <price>17.98</price>
+    <rate>1</rate>
   </book>
   <book category="WEB">
     <title>Beginning XML</title>
-    <author>Joe Fawcett</author>
+    <author>carla</author>
     <year>2012</year>
     <price>31.30</price>
-    <rate>4</rate>
+    <rate>3</rate>
   </book>
   <book category="WEB">
     <title>Programming .NET Web Services</title>
