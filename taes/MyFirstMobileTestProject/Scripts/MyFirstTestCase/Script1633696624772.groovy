@@ -17,9 +17,9 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-Mobile.startApplication('appForTest/Sunflower.apk', false)
+Mobile.startApplication('C:\\practices\\taes\\MyFirstMobileTestProject\\appForTest\\Sunflower.apk', true)
 
-Mobile.verifyElementExist(findTestObject('null'), 0)
+Mobile.verifyElementExist(findTestObject('android.widget.Button - ADD PLANT'), 0)
 
 Mobile.closeApplication()
 
