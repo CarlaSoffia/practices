@@ -91,7 +91,6 @@ export default {
   data() {
     return {
       student: {},
-      subjects: [],
       subjectFields: ["code", "name", "courseYear", "scholarYear","unroll"],
       allSubjectsEnroll: [],
       subjectFieldsEnRoll: [
@@ -116,16 +115,15 @@ export default {
     username() {
       return this.$route.params.username;
     },
+    subjects() {
+      return this.student.subjectDTOs || []
+    }
+
   },
   created() {
     this.$axios
       .$get(`/api/students/${this.username}`)
       .then((student) => (this.student = student || {}))
-      .then(() =>
-        this.$axios
-          .$get(`/api/students/${this.username}/subjects`)
-          .then((subjects) => (this.subjects = subjects || {}))
-      )
       .then(() =>
         this.$axios
           .$get(`/api/courses/${this.student.courseCode}/subjects`)

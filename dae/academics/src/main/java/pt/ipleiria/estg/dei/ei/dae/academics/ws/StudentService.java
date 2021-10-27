@@ -125,7 +125,7 @@ public class StudentService {
         Student student = studentBean.findStudent(username);
         studentBean.update(student, studentDTO);
         return Response.status(Response.Status.OK)
-                .entity(toDTO(student))
+                .entity(toDTONoSubjects(student))
                 .build();
     }
 
