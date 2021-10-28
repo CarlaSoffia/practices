@@ -39,7 +39,7 @@
           </template>
         </select>
       </div>
-      <br />
+      <br>
        <p v-show="errorMsg" class="text-danger">
         {{ errorMsg }}
       </p>

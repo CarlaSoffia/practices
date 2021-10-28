@@ -39,7 +39,7 @@
             />
           </button>
         </template> </b-table
-      ><br />
+      ><br>
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -52,7 +52,7 @@
           >Create a New Teacher</nuxt-link
         >
       </div> </b-container
-    ><br />
+    ><br>
     <b-container
       v-if="updateClicked"
       class="form-group w-50"
@@ -60,17 +60,21 @@
     >
       <h4>Update Teacher: {{ teacherUsername }}</h4>
       <label for="name">Name</label>
-      <input v-model="name" type="text" class="form-control" />
+      <b-input v-model.trim="name" type="text" class="form-control" :state="isNameValid" required placeholder="Enter your name" />
+      <p>{{isNameValidFeedback}}</p>
       <label for="password">Password</label>
-      <input v-model="password" type="password" class="form-control" />
+      <b-input v-model="password" type="password" class="form-control"  :state="isPasswordValid" required placeholder="Enter your password"/>
+      <p>{{isPasswordValidFeedback}}</p>
       <label for="email">Email</label>
-      <input v-model="email" type="email" class="form-control" />
+      <b-input v-model.trim="email" ref="email" type="email" class="form-control" :state="isEmailValid" required pattern=".+@my.ipleiria.pt" placeholder="Enter your e-mail"/>
+      <p>{{isEmailValidFeedback}}</p>
       <label for="office">Office</label>
-      <input v-model="office" type="text" class="form-control" /><br />
+      <b-input v-model.trim="office" type="text" class="form-control"  :state="isOfficeValid" required placeholder="Enter your office"  /><br>
+      <p>{{isOfficeValidFeedback}}</p>
       <button class="btn btn-dark" @click="errorMsg = false" type="reset">
         Reset
       </button>
-      <button class="btn btn-info" @click.prevent="updateTeacher()">
+      <button class="btn btn-info" @click.prevent="updateTeacher()" :disabled="!isFormValid">
         Submit
       </button>
     </b-container>
@@ -157,6 +161,83 @@ export default {
       this.teachers = teachers;
     });
   },
+  computed:{
+    isNameValidFeedback (){
+        if (!this.name) {
+          return null
+        }
+        let nameLen = this.name.length
+        if (nameLen < 3 || nameLen > 25) {
+           return 'Name: "'+this.name+'" is too short, lenght must be between 3 and 25'
+        }
+        return ''
+    },
+    isNameValid () {
+        if (this.isNameValidFeedback === null) {
+           return null
+        }
+        return this.isNameValidFeedback === ''
+    },
+    isEmailValidFeedback () {
+        if (!this.email) {
+          return null
+        }
+        return this.$refs.email.checkValidity() ? '':'Email is not valid, domain must be my.ipleiria.pt'
+    },
+    isEmailValid () {
+        if (this.isEmailValidFeedback === null) {
+          return null
+        }
+        return this.isEmailValidFeedback === ''
+    },
+     isPasswordValidFeedback () {
+        if (!this.password) {
+           return null
+        }
+        let passwordLen = this.password.length
+        if (passwordLen < 3 || passwordLen > 255) {
+          return 'Password is too short, lenght must be between 3 and 255'
+        }
+        return ''
+    },
+    isPasswordValid () {
+        if (this.isPasswordValidFeedback === null) {
+           return null
+        }
+        return this.isPasswordValidFeedback === ''
+    },
+    isOfficeValidFeedback(){
+       if (!this.office) {
+          return null
+        }
+        let officeLen = this.office.length
+        if (officeLen < 3 || officeLen > 15) {
+           return 'Office: "'+this.office+'" is too short, lenght must be between 3 and 15'
+        }
+        return ''
+    },
+    isOfficeValid(){
+        if (this.isOfficeValidFeedback === null) {
+           return null
+        }
+        return this.isOfficeValidFeedback === ''
+    },
+     isFormValid () {
+    if (!this.isPasswordValid) {
+      return false
+    }
+    if (!this.isNameValid) {
+      return false
+    }
+    if (!this.isEmailValid) {
+      return false
+    }
+    if (!this.isOfficeValid) {
+      return false
+    }
+      return true
+    }
+  }
 };
 </script>
 <style></style>

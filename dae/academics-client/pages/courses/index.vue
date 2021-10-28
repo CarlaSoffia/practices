@@ -34,7 +34,7 @@
           </button>
         </template>
       </b-table>
-      <br />
+      <br>
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -47,7 +47,7 @@
           >Create a New Course</nuxt-link
         >
       </div> </b-container
-    ><br />
+    ><br>
     <b-container
       v-if="updateClicked"
       class="form-group w-50"
@@ -56,7 +56,7 @@
       <h4>Update Course: {{ courseCode }}</h4>
       <label for="name">Name</label>
       <input v-model="name" type="text" class="form-control" />
-      <br />
+      <br>
       <button class="btn btn-dark" @click="errorMsg = false" type="reset">
         Reset
       </button>

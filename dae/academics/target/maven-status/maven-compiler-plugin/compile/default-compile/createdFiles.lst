@@ -5,6 +5,7 @@ pt\ipleiria\estg\dei\ei\dae\academics\ejbs\AdministratorBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyIllegalArgumentExceptionMapper.class
 pt\ipleiria\estg\dei\ei\dae\academics\ejbs\CourseBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\ejbs\StudentBean.class
+pt\ipleiria\estg\dei\ei\dae\academics\dtos\EmailDTO.class
 pt\ipleiria\estg\dei\ei\dae\academics\entities\Course.class
 pt\ipleiria\estg\dei\ei\dae\academics\ws\SubjectService.class
 pt\ipleiria\estg\dei\ei\dae\academics\entities\Administrator.class
@@ -18,6 +19,7 @@ pt\ipleiria\estg\dei\ei\dae\academics\dtos\SubjectDTO.class
 pt\ipleiria\estg\dei\ei\dae\academics\ejbs\SubjectBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\entities\Student.class
 pt\ipleiria\estg\dei\ei\dae\academics\ws\CourseService.class
+pt\ipleiria\estg\dei\ei\dae\academics\ejbs\EmailBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\dtos\CourseDTO.class
 pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyEntityNotFoundException.class
 pt\ipleiria\estg\dei\ei\dae\academics\dtos\AdministratorDTO.class

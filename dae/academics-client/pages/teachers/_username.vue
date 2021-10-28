@@ -30,7 +30,7 @@
     >
       Dissociate
     </button>
-    <br /><br />
+    <br><br>
     <b-container class="form-group">
       <h4>Associate teacher to Course Subjects:</h4>
       <b-table

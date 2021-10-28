@@ -11,7 +11,7 @@
         <input v-model="code" type="number" min="1" class="form-control" />
       </div>
       <div>Name: <input v-model="name" type="text" class="form-control" /></div>
-      <br />
+      <br>
       <p v-show="errorMsg" class="text-danger">
         {{ errorMsg }}
       </p>

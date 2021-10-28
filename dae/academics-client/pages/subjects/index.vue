@@ -34,7 +34,7 @@
           </button>
         </template>
       </b-table>
-      <br />
+      <br>
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -47,7 +47,7 @@
           >Create a New Subject</nuxt-link
         >
       </div> </b-container
-    ><br />
+    ><br>
     <b-container
       v-if="updateClicked"
       class="form-group w-50"
@@ -68,7 +68,7 @@
           </option>
         </template>
       </select>
-      <br />
+      <br>
       <button class="btn btn-dark" @click="errorMsg = false" type="reset">
         Reset
       </button>

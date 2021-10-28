@@ -215,4 +215,13 @@ POST http://localhost:8080/academics/api/teachers/teacherBruna/dissociate/1
 ### Teachers
 POST http://localhost:8080/academics/api/teachers/teacherJoao/dissociate/4
 
+##### ****************************** STUDENT EMAIL ******************************
 
+### Email
+POST http://localhost:8080/academics/api/students/carlaSoffia/email/send
+Content-Type: application/json
+
+{
+  "subject": "Homework - worksheet 6",
+  "message":"Hello teacher, I have a doubt on exercise 3 of worksheet 6. Send help."
+}

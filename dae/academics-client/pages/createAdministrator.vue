@@ -17,7 +17,7 @@
       <div>
         Email: <input v-model="email" class="form-control" type="email" />
       </div>
-      <br />
+      <br>
       <p v-show="errorMsg" class="text-danger">
         {{ errorMsg }}
       </p>

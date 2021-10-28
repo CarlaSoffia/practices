@@ -44,7 +44,7 @@
             />
           </button>
         </template> </b-table
-      ><br />
+      ><br>
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -57,7 +57,7 @@
           >Create a New Administrator</nuxt-link
         >
       </div> </b-container
-    ><br />
+    ><br>
     <b-container
       v-if="updateClicked"
       class="form-group w-50"
@@ -70,7 +70,7 @@
       <input v-model="password" type="password" class="form-control" />
       <label for="email">Email</label>
       <input v-model="email" type="email" class="form-control" />
-      <br />
+      <br>
       <p v-show="errorMsg" class="text-danger">
         {{ errorMsg }}
       </p>

@@ -1,26 +1,28 @@
 <template>
-  <div>
-    <b-container
-      class="form-group w-50"
-      style="margin-left: 75px"
-      @submit.prevent="create"
-    >
+    <b-container>
       <h4>Create new Teacher</h4>
-      <div>
-        Username: <input v-model="username" type="text" class="form-control" />
+     <form @submit.prevent="create" class="form-group w-50"  :disabled="!isFormValid">
+        <div>
+        Username: <b-input v-model.trim="username" type="text" class="form-control" :state="isUsernameValid" required placeholder="Enter your username"/>
+        <p>{{isUsernameValidFeedback}}</p>
       </div>
       <div>
         Password:
-        <input v-model="password" type="password" class="form-control" />
+        <b-input v-model="password" type="password" class="form-control"  :state="isPasswordValid" required placeholder="Enter your password"/>
+        <p>{{isPasswordValidFeedback}}</p>
       </div>
-      <div>Name: <input v-model="name" class="form-control" type="text" /></div>
+      <div>Name: <b-input v-model.trim="name" class="form-control" type="text"  :state="isNameValid" required placeholder="Enter your name"/>
+       <p>{{isNameValidFeedback}}</p>
+      </div>
       <div>
-        Email: <input v-model="email" class="form-control" type="email" />
+        Email: <b-input v-model.trim="email" ref="email" class="form-control" type="email" :state="isEmailValid" required pattern=".+@my.ipleiria.pt" placeholder="Enter your e-mail"/>
+       <p>{{isEmailValidFeedback}}</p>
       </div>
       <div>
-        Office: <input v-model="office" class="form-control" type="text" />
+        Office: <input v-model.trim="office" class="form-control" type="text" :state="isOfficeValid" required placeholder="Enter your office"/>
+         <p>{{isOfficeValidFeedback}}</p>
       </div>
-      <br />
+      <br>
       <p v-show="errorMsg" class="text-danger">
         {{ errorMsg }}
       </p>
@@ -40,13 +42,13 @@
           >
             Reset
           </button>
-          <button class="btn btn-info ml-1" @click.prevent="create">
+          <button class="btn btn-info ml-1" @click.prevent="create" :disabled="!isFormValid">
             Create
           </button>
         </div>
       </div>
+       </form>
     </b-container>
-  </div>
 </template>
 <script>
 export default {
@@ -79,5 +81,98 @@ export default {
         });
     },
   },
+    computed:{
+    isUsernameValidFeedback(){
+        if (!this.username) {
+            return null
+        }
+        let usernameLen = this.username.length
+        if (usernameLen < 3 || usernameLen > 15) {
+           return 'Username: "'+this.username+'" is too short, lenght must be between 3 and 15'
+        }
+        return ''
+    },
+    isUsernameValid () {
+        if (this.isUsernameValidFeedback === null) {
+           return null
+        }
+        return this.isUsernameValidFeedback === ''
+    },
+    isPasswordValidFeedback () {
+        if (!this.password) {
+           return null
+        }
+        let passwordLen = this.password.length
+        if (passwordLen < 3 || passwordLen > 255) {
+          return 'Password is too short, lenght must be between 3 and 255'
+        }
+        return ''
+    },
+    isPasswordValid () {
+        if (this.isPasswordValidFeedback === null) {
+           return null
+        }
+        return this.isPasswordValidFeedback === ''
+    },
+    isNameValidFeedback (){
+        if (!this.name) {
+          return null
+        }
+        let nameLen = this.name.length
+        if (nameLen < 3 || nameLen > 25) {
+           return 'Name: "'+this.name+'" is too short, lenght must be between 3 and 25'
+        }
+        return ''
+    },
+    isNameValid () {
+        if (this.isNameValidFeedback === null) {
+           return null
+        }
+        return this.isNameValidFeedback === ''
+    },
+     isEmailValidFeedback () {
+        if (!this.email) {
+          return null
+        }
+        return this.$refs.email.checkValidity() ? '':'Email is not valid, domain must be my.ipleiria.pt'
+    },
+    isEmailValid () {
+        if (this.isEmailValidFeedback === null) {
+          return null
+        }
+        return this.isEmailValidFeedback === ''
+    },
+     isOfficeValidFeedback(){
+       if (!this.office) {
+          return null
+        }
+        let officeLen = this.office.length
+        if (officeLen < 3 || officeLen > 15) {
+           return 'Office: "'+this.office+'" is too short, lenght must be between 3 and 15'
+        }
+        return ''
+    },
+    isOfficeValid(){
+        if (this.isOfficeValidFeedback === null) {
+           return null
+        }
+        return this.isOfficeValidFeedback === ''
+    },
+     isFormValid () {
+        if (!this.isPasswordValid) {
+           return false
+        }
+        if (!this.isNameValid) {
+           return false
+        }
+        if (!this.isEmailValid) {
+           return false
+        }
+        if (!this.isOfficeValid) {
+           return false
+        }
+        return true
+      }
+    }
 };
 </script>

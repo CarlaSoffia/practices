@@ -17,8 +17,10 @@ C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\e
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\User.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ws\StudentService.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\TeacherBean.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\dtos\EmailDTO.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\Subject.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\AcademicsApplication.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\EmailBean.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\Student.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyEntityNotFoundException.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\dtos\StudentDTO.java

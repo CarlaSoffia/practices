@@ -38,8 +38,17 @@
               height="25"
             />
           </button>
-        </template> </b-table
-      ><br />
+        </template>
+        <template v-slot:cell(sendEmail)="row">
+          <nuxt-link :to="`/students/${row.item.username}/send-email`"><img
+              src="https://cdn-icons-png.flaticon.com/512/116/116340.png"
+              alt="email"
+              width="25"
+              height="25"
+            /></nuxt-link>
+        </template>
+           </b-table
+      ><br>
       <div class="d-flex justify-content-between">
         <nuxt-link to="/"
           ><img
@@ -52,33 +61,32 @@
           >Create a New Student</nuxt-link
         >
       </div> </b-container
-    ><br />
-    <b-container
-      v-if="updateClicked"
-      class="form-group w-50"
-      style="margin-left: 75px"
-    >
+    ><br>
+    <b-container>
       <h4>Update Student: {{ studentUsername }}</h4>
+      <form @submit.prevent="create" class="form-group w-50"  :disabled="!isFormValid">
       <label for="name">Name</label>
-      <input v-model="name" type="text" class="form-control" />
+      <b-input v-model.trim="name" type="text" class="form-control" :state="isNameValid" required placeholder="Enter your name" />
+      <p>{{isNameValidFeedback}}</p>
       <label for="password">Password</label>
-      <input v-model="password" type="password" class="form-control" />
+      <b-input v-model="password" type="password" class="form-control"  :state="isPasswordValid" required placeholder="Enter your password"/>
+      <p>{{isPasswordValidFeedback}}</p>
       <label for="email">Email</label>
-      <input v-model="email" type="email" class="form-control" />
+      <b-input v-model.trim="email" ref="email" type="email" class="form-control" :state="isEmailValid" required pattern=".+@my.ipleiria.pt" placeholder="Enter your e-mail"/>
+      <p>{{isEmailValidFeedback}}</p>
       <label for="course">Course</label>
-      <select class="form-control" v-model="courseCode">
-        <template v-for="course in courses">
-          <option :key="course.code" :value="course.code">
-            {{ course.name }}
-          </option>
-        </template></select
-      ><br />
+       <b-select v-model="courseCode" :options="courses" :state="isCourseValid" required value-field="code" text-field="name">
+            <template v-slot:first>
+                <option :value="null" disabled>-- Please select the Course --</option>
+            </template>
+        </b-select><br><br>
       <button class="btn btn-dark" @click="errorMsg = false" type="reset">
         Reset
       </button>
-      <button class="btn btn-info" @click.prevent="updateStudent()">
+      <button class="btn btn-info" @click.prevent="updateStudent()" :disabled="!isFormValid">
         Submit
       </button>
+       </form>
     </b-container>
   </div>
 </template>
@@ -94,6 +102,7 @@ export default {
         "details",
         "update",
         "delete",
+        "sendEmail"
       ],
       students: [],
       updateClicked: false,
@@ -167,6 +176,73 @@ export default {
       this.courses = courses;
     });
   },
+  computed:{
+    isNameValidFeedback (){
+        if (!this.name) {
+          return null
+        }
+        let nameLen = this.name.length
+        if (nameLen < 3 || nameLen > 25) {
+           return 'Name: "'+this.name+'" is too short, lenght must be between 3 and 25'
+        }
+        return ''
+    },
+    isNameValid () {
+        if (this.isNameValidFeedback === null) {
+           return null
+        }
+        return this.isNameValidFeedback === ''
+    },
+    isEmailValidFeedback () {
+        if (!this.email) {
+          return null
+        }
+        return this.$refs.email.checkValidity() ? '':'Email is not valid, domain must be my.ipleiria.pt'
+    },
+    isEmailValid () {
+        if (this.isEmailValidFeedback === null) {
+          return null
+        }
+        return this.isEmailValidFeedback === ''
+    },
+     isPasswordValidFeedback () {
+        if (!this.password) {
+           return null
+        }
+        let passwordLen = this.password.length
+        if (passwordLen < 3 || passwordLen > 255) {
+          return 'Password is too short, lenght must be between 3 and 255'
+        }
+        return ''
+    },
+    isPasswordValid () {
+        if (this.isPasswordValidFeedback === null) {
+           return null
+        }
+        return this.isPasswordValidFeedback === ''
+    },
+    isCourseValid () {
+        if (!this.courseCode) {
+            return null
+        }
+       return this.courses.some(course => this.courseCode === course.code)
+    },
+     isFormValid () {
+    if (!this.isPasswordValid) {
+      return false
+    }
+    if (!this.isNameValid) {
+      return false
+    }
+    if (!this.isEmailValid) {
+      return false
+    }
+    if (!this.isCourseValid) {
+      return false
+    }
+      return true
+    }
+  }
 };
 </script>
 <style></style>

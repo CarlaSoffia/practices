@@ -1,7 +1,9 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ws;
 
+import pt.ipleiria.estg.dei.ei.dae.academics.dtos.EmailDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.SubjectDTO;
+import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.EmailBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.StudentBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
@@ -11,6 +13,7 @@ import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
+import javax.mail.MessagingException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,6 +27,8 @@ import java.util.stream.Collectors;
 public class StudentService {
     @EJB
     private StudentBean studentBean;
+    @EJB
+    private EmailBean emailBean;
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
@@ -154,5 +159,18 @@ public class StudentService {
 
         Student student = studentBean.findStudent(username);
         return Response.ok(subjectsToDTOs(student.getSubjects())).build();
+    }
+
+    @POST
+    @Path("/{username}/email/send")
+    public Response sendEmail(@PathParam("username") String username, EmailDTO email)
+            throws MyEntityNotFoundException, MessagingException {
+        Student student = studentBean.findStudent(username);
+        if (student == null) {
+            throw new MyEntityNotFoundException("Student with username '" + username
+                    + "' not found in our records.");
+        }
+        emailBean.send(student.getEmail(), email.getSubject(), email.getMessage());
+        return Response.status(Response.Status.OK).entity("E-mail sent").build();
     }
 }
