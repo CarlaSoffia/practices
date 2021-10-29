@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsApplicationGlobalCli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServiceBookstore", "WcfServiceBookstore\WcfServiceBookstore.csproj", "{EA501AF9-C29D-4583-B29D-D8E2F91FF11D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientBookstore", "ClientBookstore\ClientBookstore.csproj", "{EA321594-8DB3-4B28-B2B6-242FA470564F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EA501AF9-C29D-4583-B29D-D8E2F91FF11D} = {EA501AF9-C29D-4583-B29D-D8E2F91FF11D}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +26,10 @@ Global
 		{EA501AF9-C29D-4583-B29D-D8E2F91FF11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA501AF9-C29D-4583-B29D-D8E2F91FF11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA501AF9-C29D-4583-B29D-D8E2F91FF11D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA321594-8DB3-4B28-B2B6-242FA470564F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA321594-8DB3-4B28-B2B6-242FA470564F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA321594-8DB3-4B28-B2B6-242FA470564F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA321594-8DB3-4B28-B2B6-242FA470564F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

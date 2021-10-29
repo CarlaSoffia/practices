@@ -33,6 +33,8 @@ namespace WcfServiceBookstore
         Book GetBookByTitle(string title);
 
         [OperationContract]
+        Book[] GetBooksByTitle(string title);
+        [OperationContract]
         bool DeleteBook(string title);
     }
 

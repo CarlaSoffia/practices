@@ -6,24 +6,28 @@
     <year>1952</year>
     <price>13.60</price>
   </book>
-  <book category="WEB">
-    <title>Beginning XML</title>
-    <author>Joe Fawcett</author>
-    <year>2012</year>
-    <price>31.30</price>
-    <rate>4</rate>
-  </book>
-  <book category="WEB">
-    <title>Programming .NET Web Services</title>
-    <author>Alex Ferrara</author>
-    <year>2002</year>
-    <price>38.36</price>
-    <rate>3</rate>
-  </book>
   <book category="SCIENCE">
     <title>abc</title>
     <author>xyz</author>
     <year>2021</year>
     <price>10</price>
+  </book>
+  <book category="ROMANCE">
+    <title>uprooted</title>
+    <author>naomi novik</author>
+    <year>2018</year>
+    <price>18</price>
+  </book>
+  <book category="BIOGRAPHIES">
+    <title>In order to live</title>
+    <author>yeonmi park</author>
+    <year>2010</year>
+    <price>20</price>
+  </book>
+  <book category="OTHER">
+    <title>extraordinary tales</title>
+    <author>Edgar Allan Poe</author>
+    <year>2009</year>
+    <price>8</price>
   </book>
 </bookstore>

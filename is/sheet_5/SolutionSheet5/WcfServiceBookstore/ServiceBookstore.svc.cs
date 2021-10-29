@@ -134,5 +134,27 @@ namespace WcfServiceBookstore
             }
             return composite;
         }
+
+        public Book[] GetBooksByTitle(string title)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(FILEPATH);
+
+            XmlNodeList books = doc.SelectNodes($"/bookstore/book/title[contains(text(), '{title}')]/parent::book");
+            Book[] booksReceived = new Book[books.Count]; 
+            int i = 0;
+            foreach (XmlNode book in books)
+            {
+                Book bookNew = new Book();
+                bookNew.Author = book["author"].InnerText;
+                bookNew.Title = book["title"].InnerText;
+                bookNew.Price = Convert.ToDouble(book["price"].InnerText, System.Globalization.NumberFormatInfo.InvariantInfo);
+                bookNew.Year = int.Parse(book["year"].InnerText);
+                bookNew.Category = (BookCategory)Enum.Parse(typeof(BookCategory), book.Attributes["category"].Value);
+                booksReceived[i] = bookNew;
+                i++;
+            }
+            return booksReceived;
+        }
     }
 }
