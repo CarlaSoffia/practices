@@ -11,6 +11,7 @@ import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
 import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -28,6 +29,7 @@ public class CourseService {
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is "/api/courses/"
+    @RolesAllowed({"Administrator","Student"})
     public List<CourseDTO> getAllCoursesWS() {
         return toDTOs(courseBean.getAllCourses());
     }

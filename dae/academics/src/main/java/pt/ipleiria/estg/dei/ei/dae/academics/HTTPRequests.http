@@ -163,14 +163,14 @@ DELETE http://localhost:8080/academics/api/teachers/teacherJoao
 GET http://localhost:8080/academics/api/students/anaMendes/subjects
 
 ### STUDENTS
-POST http://localhost:8080/academics/api/students/carlaSoffia/unroll/5
+PUT http://localhost:8080/academics/api/students/carlaSoffia/unroll/5
 
 ### STUDENTS
-POST http://localhost:8080/academics/api/students/carlaSoffia/unroll/6
+PUT http://localhost:8080/academics/api/students/carlaSoffia/unroll/6
 
 
 ### STUDENTS
-POST http://localhost:8080/academics/api/students/carlaSoffia/enroll/5
+PUT http://localhost:8080/academics/api/students/carlaSoffia/enroll/5
 
 
 ##### ****************************** SUBJECT STUDENTS ******************************
@@ -225,3 +225,114 @@ Content-Type: application/json
   "subject": "Homework - worksheet 6",
   "message":"Hello teacher, I have a doubt on exercise 3 of worksheet 6. Send help."
 }
+
+##### ****************************** JWT ******************************
+
+
+### Get JWT token
+POST http://localhost:8080/academics/api/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=adminMaria&password=123_qwe
+
+
+### Get JWT token
+POST http://localhost:8080/academics/api/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=carlaSoffia&password=1234dae
+
+### Get JWT token
+POST http://localhost:8080/academics/api/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=teacherBruna&password=sjf$fjff3434_
+
+### Get JWT token
+POST http://localhost:8080/academics/api/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=anaMendes&password=Sk43#Wk76
+
+
+### Who am I? -> login done with admin
+GET http://localhost:8080/academics/api/auth/user
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbk1hcmlhIiwiaXNzIjoicXVpY2tzdGFydC1qd3QtaXNzdWVyIiwiYXVkIjoiand0LWF1ZGllbmNlIiwiZ3JvdXBzIjpbIkFkbWluaXN0cmF0b3IiXSwiZXhwIjoxNjM2MDU2ODkyfQ.aj6zXac1eyOjLV0qllVNEIiMyjfWH05Yn-dsIpu7vloUtTbopwuY3K-s22wgqItzBBWEYwab7MFDcK8k8gK9T_iMOtZAPSh90sCyT97v8ngKwS2Lw167seTiD0oT_aiCw2utMuLgM6qfkPdRNJGnmIoF9yrSsaB7-7Bp0trYAUe9bH6fW5u4eEFXx2bN8BS-p8e7Phy2tpkU-9fq51d9eGbz_xXk5w5OS2PLf37iHLdtIZyq2LAFRZf1K97QkO2w4x4KEW-rroCzIk0HX8N4WzcrgkVFVPeWkNJKIxWnGJHZWdo0lRCAGgGZZnic15pIkK_ShVzwu3CuPiR5Iaibtw
+
+##### Get students list -> login done with teacher
+GET http://localhost:8080/academics/api/students
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbk1hcmlhIiwiaXNzIjoicXVpY2tzdGFydC1qd3QtaXNzdWVyIiwiYXVkIjoiand0LWF1ZGllbmNlIiwiZ3JvdXBzIjpbIkFkbWluaXN0cmF0b3IiXSwiZXhwIjoxNjM2MDU2ODkyfQ.aj6zXac1eyOjLV0qllVNEIiMyjfWH05Yn-dsIpu7vloUtTbopwuY3K-s22wgqItzBBWEYwab7MFDcK8k8gK9T_iMOtZAPSh90sCyT97v8ngKwS2Lw167seTiD0oT_aiCw2utMuLgM6qfkPdRNJGnmIoF9yrSsaB7-7Bp0trYAUe9bH6fW5u4eEFXx2bN8BS-p8e7Phy2tpkU-9fq51d9eGbz_xXk5w5OS2PLf37iHLdtIZyq2LAFRZf1K97QkO2w4x4KEW-rroCzIk0HX8N4WzcrgkVFVPeWkNJKIxWnGJHZWdo0lRCAGgGZZnic15pIkK_ShVzwu3CuPiR5Iaibtw
+
+### Create new student with the administrator -> WORKS
+POST http://localhost:8080/academics/api/students
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbk1hcmlhIiwiaXNzIjoicXVpY2tzdGFydC1qd3QtaXNzdWVyIiwiYXVkIjoiand0LWF1ZGllbmNlIiwiZ3JvdXBzIjpbIkFkbWluaXN0cmF0b3IiXSwiZXhwIjoxNjM2MDU2ODkyfQ.aj6zXac1eyOjLV0qllVNEIiMyjfWH05Yn-dsIpu7vloUtTbopwuY3K-s22wgqItzBBWEYwab7MFDcK8k8gK9T_iMOtZAPSh90sCyT97v8ngKwS2Lw167seTiD0oT_aiCw2utMuLgM6qfkPdRNJGnmIoF9yrSsaB7-7Bp0trYAUe9bH6fW5u4eEFXx2bN8BS-p8e7Phy2tpkU-9fq51d9eGbz_xXk5w5OS2PLf37iHLdtIZyq2LAFRZf1K97QkO2w4x4KEW-rroCzIk0HX8N4WzcrgkVFVPeWkNJKIxWnGJHZWdo0lRCAGgGZZnic15pIkK_ShVzwu3CuPiR5Iaibtw
+
+{
+"email": "jane@mail.com",
+"name": "Jane Doe",
+"username": "1234567",
+"password": "aaaaa",
+"courseCode":"9991",
+"courseName": "Computer Engineer"
+}
+
+
+### Enroll student in a subject - run after the previous POST
+PUT http://localhost:8080/academics/api/students/1234567/enroll/1
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbk1hcmlhIiwiaXNzIjoicXVpY2tzdGFydC1qd3QtaXNzdWVyIiwiYXVkIjoiand0LWF1ZGllbmNlIiwiZ3JvdXBzIjpbIkFkbWluaXN0cmF0b3IiXSwiZXhwIjoxNjM2MDU2ODkyfQ.aj6zXac1eyOjLV0qllVNEIiMyjfWH05Yn-dsIpu7vloUtTbopwuY3K-s22wgqItzBBWEYwab7MFDcK8k8gK9T_iMOtZAPSh90sCyT97v8ngKwS2Lw167seTiD0oT_aiCw2utMuLgM6qfkPdRNJGnmIoF9yrSsaB7-7Bp0trYAUe9bH6fW5u4eEFXx2bN8BS-p8e7Phy2tpkU-9fq51d9eGbz_xXk5w5OS2PLf37iHLdtIZyq2LAFRZf1K97QkO2w4x4KEW-rroCzIk0HX8N4WzcrgkVFVPeWkNJKIxWnGJHZWdo0lRCAGgGZZnic15pIkK_ShVzwu3CuPiR5Iaibtw
+
+### Get a student’s details
+GET http://localhost:8080/academics/api/students/carlaSoffia
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbk1hcmlhIiwiaXNzIjoicXVpY2tzdGFydC1qd3QtaXNzdWVyIiwiYXVkIjoiand0LWF1ZGllbmNlIiwiZ3JvdXBzIjpbIkFkbWluaXN0cmF0b3IiXSwiZXhwIjoxNjM2MDU2ODkyfQ.aj6zXac1eyOjLV0qllVNEIiMyjfWH05Yn-dsIpu7vloUtTbopwuY3K-s22wgqItzBBWEYwab7MFDcK8k8gK9T_iMOtZAPSh90sCyT97v8ngKwS2Lw167seTiD0oT_aiCw2utMuLgM6qfkPdRNJGnmIoF9yrSsaB7-7Bp0trYAUe9bH6fW5u4eEFXx2bN8BS-p8e7Phy2tpkU-9fq51d9eGbz_xXk5w5OS2PLf37iHLdtIZyq2LAFRZf1K97QkO2w4x4KEW-rroCzIk0HX8N4WzcrgkVFVPeWkNJKIxWnGJHZWdo0lRCAGgGZZnic15pIkK_ShVzwu3CuPiR5Iaibtw
+
+### Delete a student - run after the previous POST
+DELETE http://localhost:8080/academics/api/students/1234567
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbk1hcmlhIiwiaXNzIjoicXVpY2tzdGFydC1qd3QtaXNzdWVyIiwiYXVkIjoiand0LWF1ZGllbmNlIiwiZ3JvdXBzIjpbIkFkbWluaXN0cmF0b3IiXSwiZXhwIjoxNjM2MDU2ODkyfQ.aj6zXac1eyOjLV0qllVNEIiMyjfWH05Yn-dsIpu7vloUtTbopwuY3K-s22wgqItzBBWEYwab7MFDcK8k8gK9T_iMOtZAPSh90sCyT97v8ngKwS2Lw167seTiD0oT_aiCw2utMuLgM6qfkPdRNJGnmIoF9yrSsaB7-7Bp0trYAUe9bH6fW5u4eEFXx2bN8BS-p8e7Phy2tpkU-9fq51d9eGbz_xXk5w5OS2PLf37iHLdtIZyq2LAFRZf1K97QkO2w4x4KEW-rroCzIk0HX8N4WzcrgkVFVPeWkNJKIxWnGJHZWdo0lRCAGgGZZnic15pIkK_ShVzwu3CuPiR5Iaibtw
+
+##### ****************************** JWT Roles allowed ******************************
+
+### Get all courses -> login ADMIN -> WORKS
+GET http://localhost:8080/academics/api/courses
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbk1hcmlhIiwiaXNzIjoicXVpY2tzdGFydC1qd3QtaXNzdWVyIiwiYXVkIjoiand0LWF1ZGllbmNlIiwiZ3JvdXBzIjpbIkFkbWluaXN0cmF0b3IiXSwiZXhwIjoxNjM2MDU3NDA5fQ.bcEg0u43UZ5VAeFUD2zitue6HMZsmLxD9Lmr9kHElxZnGEcsjo9IzFGGVKrXSd6TFvuayGIlO0bkPCMpGkBmpzVmP2srLwHHdHR6eqC7Jog7TM-UG0YqcMRT_P5XqeE1WiQ3a1VqrreGDy5EoEJCCV5QjjDOmELxmDmviIfpJlMZEs_C3ue65jCz8aY0D4wLIBBXk56HKNg8_eusj6Lu7zWwWPdm5u433A7Ga4hl5WEEXBeNv1UTJ6itBLzBZarWL7zEDajo8A-j737hoNx4KO29BALRbrN0gl1rqaBdLbJmKOYHjOS623ZfNPnrGFglcdIcAtAFUwrNoXl5fx_dfQ
+
+### Get all courses -> login student -> WORKS
+GET http://localhost:8080/academics/api/courses
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJjYXJsYVNvZmZpYSIsImlzcyI6InF1aWNrc3RhcnQtand0LWlzc3VlciIsImF1ZCI6Imp3dC1hdWRpZW5jZSIsImdyb3VwcyI6WyJTdHVkZW50Il0sImV4cCI6MTYzNjA1NzQ4MX0.AyZsZMVcQTQqqIRI1WXT92unpks37Fm1oaGhjqrDY8-B1_Nw_38DhUiRFa9Z7w6gStLPPR8AvczGbVev9eSzwelFfdJnXLJU4ekgxlCPMdMF9K2qWvBcGCyq-nmMx9ywsjORgRMRk-NyepsUbSsHZL4GnNdIyftlzjDmkQLjWRL_BCt4ES7X7S1D5bnsx7bKih5MOVzlAo3OrO92xgMYyYrb-2bEw_nBSyRfTFYq2g3-8cqqUkyGua3PZQ24t_5lpsnnETT-HYJItS2EuT8R5tywqA8JNfTp0p65O2ILe-5Glyym6Kviy6jaHQVDSxmDY_1mRNpq-U7qA_5odOgxQw
+
+
+### Get all courses -> login teacher -> DOESNT (ITS NORMAL)
+GET http://localhost:8080/academics/api/courses
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQnJ1bmEiLCJpc3MiOiJxdWlja3N0YXJ0LWp3dC1pc3N1ZXIiLCJhdWQiOiJqd3QtYXVkaWVuY2UiLCJncm91cHMiOlsiVGVhY2hlciJdLCJleHAiOjE2MzYwNTc1MTV9.mFSNDKk6VUy_TrpegEJ-2AIMHxyPW5WsYCfucs3zycKs-mc4HOokLxMfkyf5LkDb274Pc1ASpUeqKJ4CJmwqdUcXkDmN12hbLKLLmeGjXkFzJJxRHRENjHAEbWsgaL1O_W3W-vUwbu2GIMOfdYqS5WvJD4DLdVTSb5w3g6GMYsXKsbD399qRkIFsbr9kWh_f7LAxYgwwgS_cwXptbZ2aMetLM-DD2Ied_Fpzd4MpxT6ScA6MexzjC_of81spVzGQ7TM_sk2TUSW_2m3FjUFYr33FrwgRpEEGweDzBZ5rdXb0KyiQ4UbjbxiSRqacBlq8yL1JL-nurNWF6nfLY3Fxnw
+
+
+
+### Get a student’s details -> LOGIN TEACHER
+GET http://localhost:8080/academics/api/students/carlaSoffia
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQnJ1bmEiLCJpc3MiOiJxdWlja3N0YXJ0LWp3dC1pc3N1ZXIiLCJhdWQiOiJqd3QtYXVkaWVuY2UiLCJncm91cHMiOlsiVGVhY2hlciJdLCJleHAiOjE2MzYwNTc1MTV9.mFSNDKk6VUy_TrpegEJ-2AIMHxyPW5WsYCfucs3zycKs-mc4HOokLxMfkyf5LkDb274Pc1ASpUeqKJ4CJmwqdUcXkDmN12hbLKLLmeGjXkFzJJxRHRENjHAEbWsgaL1O_W3W-vUwbu2GIMOfdYqS5WvJD4DLdVTSb5w3g6GMYsXKsbD399qRkIFsbr9kWh_f7LAxYgwwgS_cwXptbZ2aMetLM-DD2Ied_Fpzd4MpxT6ScA6MexzjC_of81spVzGQ7TM_sk2TUSW_2m3FjUFYr33FrwgRpEEGweDzBZ5rdXb0KyiQ4UbjbxiSRqacBlq8yL1JL-nurNWF6nfLY3Fxnw
+
+### Get a student’s details -> LOGIN ADMIN
+GET http://localhost:8080/academics/api/students/carlaSoffia
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbk1hcmlhIiwiaXNzIjoicXVpY2tzdGFydC1qd3QtaXNzdWVyIiwiYXVkIjoiand0LWF1ZGllbmNlIiwiZ3JvdXBzIjpbIkFkbWluaXN0cmF0b3IiXSwiZXhwIjoxNjM2MDU3NDA5fQ.bcEg0u43UZ5VAeFUD2zitue6HMZsmLxD9Lmr9kHElxZnGEcsjo9IzFGGVKrXSd6TFvuayGIlO0bkPCMpGkBmpzVmP2srLwHHdHR6eqC7Jog7TM-UG0YqcMRT_P5XqeE1WiQ3a1VqrreGDy5EoEJCCV5QjjDOmELxmDmviIfpJlMZEs_C3ue65jCz8aY0D4wLIBBXk56HKNg8_eusj6Lu7zWwWPdm5u433A7Ga4hl5WEEXBeNv1UTJ6itBLzBZarWL7zEDajo8A-j737hoNx4KO29BALRbrN0gl1rqaBdLbJmKOYHjOS623ZfNPnrGFglcdIcAtAFUwrNoXl5fx_dfQ
+
+### Get a student’s details -> LOGIN STUDENT THATS IS THE STUDENT carlaSoffia
+GET http://localhost:8080/academics/api/students/carlaSoffia
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJjYXJsYVNvZmZpYSIsImlzcyI6InF1aWNrc3RhcnQtand0LWlzc3VlciIsImF1ZCI6Imp3dC1hdWRpZW5jZSIsImdyb3VwcyI6WyJTdHVkZW50Il0sImV4cCI6MTYzNjA1NzQ4MX0.AyZsZMVcQTQqqIRI1WXT92unpks37Fm1oaGhjqrDY8-B1_Nw_38DhUiRFa9Z7w6gStLPPR8AvczGbVev9eSzwelFfdJnXLJU4ekgxlCPMdMF9K2qWvBcGCyq-nmMx9ywsjORgRMRk-NyepsUbSsHZL4GnNdIyftlzjDmkQLjWRL_BCt4ES7X7S1D5bnsx7bKih5MOVzlAo3OrO92xgMYyYrb-2bEw_nBSyRfTFYq2g3-8cqqUkyGua3PZQ24t_5lpsnnETT-HYJItS2EuT8R5tywqA8JNfTp0p65O2ILe-5Glyym6Kviy6jaHQVDSxmDY_1mRNpq-U7qA_5odOgxQw
+
+### Get a student’s details -> LOGIN STUDENT THATS IS NOT carlaSoffia
+GET http://localhost:8080/academics/api/students/carlaSoffia
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhbmFNZW5kZXMiLCJpc3MiOiJxdWlja3N0YXJ0LWp3dC1pc3N1ZXIiLCJhdWQiOiJqd3QtYXVkaWVuY2UiLCJncm91cHMiOlsiU3R1ZGVudCJdLCJleHAiOjE2MzYwNTgxMTZ9.pZsVAxvyi6Q4rygBwh4M3xruPDODX6OUZQJwdyuFHZ5fnlEYGcV8bYrgPz3zSmXtO2lZ5jV1xf1NTEy4mOIvI37Bq4lBr0_bYWilTAcrfzTJCJgXmE6vTghuHBTpFWO4Idke50oySTG7evVVRfdLGeKxW4gwt2Uy1vf8QL92_Td9dStgvSXBrUKK7kCb8BFp9b8AT0yN4h-qJ0I39Sz_-yYGOg1sNQKWrXtUChLoyToCaCmbug79dtRrUDyDbGNL6XorQgsMGxxQq4o3GGn6v_ZXxxTzX__SxUyaeo2FD2vCqLqNOQ69yumM4p5IuXRyftpuUF7p2nMO97e1GApIAg
+
+
+

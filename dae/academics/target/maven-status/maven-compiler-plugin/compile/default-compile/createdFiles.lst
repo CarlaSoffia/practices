@@ -3,6 +3,7 @@ pt\ipleiria\estg\dei\ei\dae\academics\entities\Teacher.class
 pt\ipleiria\estg\dei\ei\dae\academics\AcademicsApplication.class
 pt\ipleiria\estg\dei\ei\dae\academics\ejbs\AdministratorBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyIllegalArgumentExceptionMapper.class
+pt\ipleiria\estg\dei\ei\dae\academics\jwt\Jwt.class
 pt\ipleiria\estg\dei\ei\dae\academics\ejbs\CourseBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\ejbs\StudentBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\dtos\EmailDTO.class
@@ -12,13 +13,16 @@ pt\ipleiria\estg\dei\ei\dae\academics\entities\Administrator.class
 pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyConstraintViolationException.class
 pt\ipleiria\estg\dei\ei\dae\academics\ws\TeacherService.class
 pt\ipleiria\estg\dei\ei\dae\academics\entities\User.class
+pt\ipleiria\estg\dei\ei\dae\academics\ejbs\UserBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyEntityExistsExceptionMapper.class
+pt\ipleiria\estg\dei\ei\dae\academics\ejbs\JwtBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\exceptions\CatchAllExceptionMapper.class
 pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyConstraintViolationExceptionMapper.class
 pt\ipleiria\estg\dei\ei\dae\academics\dtos\SubjectDTO.class
 pt\ipleiria\estg\dei\ei\dae\academics\ejbs\SubjectBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\entities\Student.class
 pt\ipleiria\estg\dei\ei\dae\academics\ws\CourseService.class
+pt\ipleiria\estg\dei\ei\dae\academics\ws\LoginService.class
 pt\ipleiria\estg\dei\ei\dae\academics\ejbs\EmailBean.class
 pt\ipleiria\estg\dei\ei\dae\academics\dtos\CourseDTO.class
 pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyEntityNotFoundException.class

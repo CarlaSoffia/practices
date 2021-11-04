@@ -15,8 +15,11 @@ import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundExceptio
 import javax.ejb.EJB;
 import javax.mail.MessagingException;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +32,9 @@ public class StudentService {
     private StudentBean studentBean;
     @EJB
     private EmailBean emailBean;
+
+    @Context
+    private SecurityContext securityContext;
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
@@ -107,6 +113,13 @@ public class StudentService {
     @GET
     @Path("/{username}")
     public Response getStudentDetails(@PathParam("username") String username) throws MyEntityNotFoundException {
+        Principal principal = securityContext.getUserPrincipal();
+        if(!(securityContext.isUserInRole("Administrator") ||
+                securityContext.isUserInRole("Teacher") ||
+                securityContext.isUserInRole("Student") &&
+                        principal.getName().equals(username))) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
         Student student = studentBean.findStudent(username);
         return Response.status(Response.Status.OK)
                 .entity(toDTO(student))
@@ -142,7 +155,7 @@ public class StudentService {
     }
 
 
-    @POST
+    @PUT
     @Path("/{username}/unroll/{code}")
     public Response unrollStudentSubject(@PathParam("username") String username, @PathParam("code") int code) throws MyEntityNotFoundException {
 
@@ -152,7 +165,7 @@ public class StudentService {
     }
 
 
-    @POST
+    @PUT
     @Path("/{username}/enroll/{code}")
     public Response enrollStudentSubject(@PathParam("username") String username, @PathParam("code") int code) throws MyEntityNotFoundException {
         studentBean.enrollStudentInSubject(username, code);
