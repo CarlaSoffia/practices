@@ -1,0 +1,12 @@
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\bin\Debug\Mosquitto_1.exe.config
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\bin\Debug\Mosquitto_1.exe
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\bin\Debug\Mosquitto_1.pdb
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\bin\Debug\M2Mqtt.Net.dll
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\bin\Debug\M2Mqtt.Net.pdb
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\obj\Debug\Mosquitto_1.csproj.AssemblyReference.cache
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\obj\Debug\Mosquitto_1.Form1.resources
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\obj\Debug\Mosquitto_1.Properties.Resources.resources
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\obj\Debug\Mosquitto_1.csproj.GenerateResource.cache
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\obj\Debug\Mosquitto_1.csproj.CoreCompileInputs.cache
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\obj\Debug\Mosquitto_1.exe
+C:\practices\is\sheet_7\SolutionMosquitto\Mosquitto_1\obj\Debug\Mosquitto_1.pdb
