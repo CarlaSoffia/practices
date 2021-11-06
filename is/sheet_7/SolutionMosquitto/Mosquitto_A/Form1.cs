@@ -24,10 +24,15 @@ namespace Mosquitto_A
 
         private void btnConnectSubscribe_Click(object sender, EventArgs e)
         {
-            broker = new MqttClient(textBoxBrokerDomain.Text);
-            broker.Connect(Guid.NewGuid().ToString());
+            if (broker == null)
+            {
+                broker = new MqttClient(textBoxBrokerDomain.Text);
+                broker.Connect(Guid.NewGuid().ToString());
+            }
+            
             byte[] qosLevels = { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE };
             broker.Subscribe(topics, qosLevels);
+            
             if (!broker.IsConnected)
             {
                 MessageBox.Show("Error connecting to broker");
