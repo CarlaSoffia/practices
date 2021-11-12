@@ -12,6 +12,7 @@ public class StudentDTO implements Serializable {
     private int courseCode;
     private String courseName;
     private List<SubjectDTO> subjectDTOs;
+    private List<DocumentDTO> documentDTOS;
     public StudentDTO() {
     }
 
@@ -23,11 +24,20 @@ public class StudentDTO implements Serializable {
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.subjectDTOs = new ArrayList<>();
+        this.documentDTOS = new ArrayList<>();
     }
 
     public StudentDTO(String username, String password, String name, String email, int courseCode, String courseName, List<SubjectDTO> subjectDTOs) {
         this(username,password,name,email,courseCode,courseName);
         this.subjectDTOs = subjectDTOs;
+    }
+
+    public List<DocumentDTO> getDocumentDTOS() {
+        return documentDTOS;
+    }
+
+    public void setDocumentDTOS(List<DocumentDTO> documentDTOS) {
+        this.documentDTOS = documentDTOS;
     }
 
     public List<SubjectDTO> getSubjectDTOs() {

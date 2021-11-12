@@ -335,4 +335,22 @@ Accept: application/json
 Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhbmFNZW5kZXMiLCJpc3MiOiJxdWlja3N0YXJ0LWp3dC1pc3N1ZXIiLCJhdWQiOiJqd3QtYXVkaWVuY2UiLCJncm91cHMiOlsiU3R1ZGVudCJdLCJleHAiOjE2MzYwNTgxMTZ9.pZsVAxvyi6Q4rygBwh4M3xruPDODX6OUZQJwdyuFHZ5fnlEYGcV8bYrgPz3zSmXtO2lZ5jV1xf1NTEy4mOIvI37Bq4lBr0_bYWilTAcrfzTJCJgXmE6vTghuHBTpFWO4Idke50oySTG7evVVRfdLGeKxW4gwt2Uy1vf8QL92_Td9dStgvSXBrUKK7kCb8BFp9b8AT0yN4h-qJ0I39Sz_-yYGOg1sNQKWrXtUChLoyToCaCmbug79dtRrUDyDbGNL6XorQgsMGxxQq4o3GGn6v_ZXxxTzX__SxUyaeo2FD2vCqLqNOQ69yumM4p5IuXRyftpuUF7p2nMO97e1GApIAg
 
 
+##### ****************************** File upload ******************************
 
+### Get JWT token
+POST http://localhost:8080/academics/api/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=carlaSoffia&password=1234dae
+
+### File upload
+POST http://localhost:8080/academics/api/documents/upload HTTP/1.1
+Authorization: Bearer <replace by the authentication token here>
+Content-Type: multipart/form-data; boundary=boundary
+--boundary
+Content-Disposition: form-data; name="file"; filename="<filename goes here>"
+< <full path including filename goes here – do not remove the first ‘<’ sign>
+--boundary
+Content-Disposition: form-data; name="username"
+<username of the token goes here>
+--boundary

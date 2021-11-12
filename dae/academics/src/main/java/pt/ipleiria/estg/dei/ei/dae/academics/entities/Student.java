@@ -25,6 +25,8 @@ public class Student extends User{
     private Course course;
     @ManyToMany(mappedBy = "students")
     private List<Subject> subjects;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE)
+    private List<Document> documents;
 
     public Student() {
         this.subjects = new LinkedList<Subject>();
@@ -34,6 +36,28 @@ public class Student extends User{
         super(username,password,name, email);
         this.course = course;
         this.subjects = new LinkedList<Subject>();
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
+
+    public void addDocument(Document document){
+        if(document == null || documents.contains(document)){
+            return;
+        }
+        documents.add(document);
+    }
+
+    public void removeDocument(Document document){
+        if(document == null || !documents.contains(document)){
+            return;
+        }
+        documents.remove(document);
     }
 
     public Course getCourse() {

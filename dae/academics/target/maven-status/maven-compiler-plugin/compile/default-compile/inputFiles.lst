@@ -12,11 +12,15 @@ C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\e
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ws\SubjectService.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\dtos\TeacherDTO.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyEntityNotFoundExceptionMapper.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\dtos\DocumentDTO.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\JwtBean.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\DocumentBean.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyIllegalArgumentExceptionMapper.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ws\DocumentService.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\Teacher.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyConstraintViolationException.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyEntityExistsException.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\dtos\AuthDTO.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\User.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ws\StudentService.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\TeacherBean.java
@@ -25,6 +29,7 @@ C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\e
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\AcademicsApplication.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\EmailBean.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\ejbs\UserBean.java
+C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\Document.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\entities\Student.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\exceptions\MyEntityNotFoundException.java
 C:\practices\dae\academics\src\main\java\pt\ipleiria\estg\dei\ei\dae\academics\dtos\StudentDTO.java
