@@ -58,7 +58,6 @@ namespace WcfServiceBookstore
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(FILEPATH);
-
          
             XmlNodeList books = doc.SelectNodes("/bookstore/book");
             List<Book> booksReceived = new List<Book>();
@@ -119,7 +118,8 @@ namespace WcfServiceBookstore
 
         public string GetData(int value)
         {
-            return string.Format("You entered: {0}", value);
+            //return string.Format("You entered: {0}", value);
+            return AppDomain.CurrentDomain.BaseDirectory;
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
