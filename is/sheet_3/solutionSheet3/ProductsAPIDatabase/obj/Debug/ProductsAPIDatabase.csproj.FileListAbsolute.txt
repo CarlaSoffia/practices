@@ -61,7 +61,6 @@ C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\bin\System.Web.Http.x
 C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\bin\System.Web.Http.WebHost.xml
 C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\obj\Debug\ProductsAPIDatabase.csproj.CoreCompileInputs.cache
-C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\obj\Debug\ProductsAPIDatabase.csproj.CopyComplete
 C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\obj\Debug\ProductsAPIDatabase.dll
 C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\obj\Debug\ProductsAPIDatabase.pdb
 C:\practices\is\sheet_3\solutionSheet3\ProductsAPIDatabase\obj\Debug\ProductsAPIDatabase.csproj.AssemblyReference.cache

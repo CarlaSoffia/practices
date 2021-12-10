@@ -197,14 +197,14 @@ namespace ProductsAPIDatabase.Controllers
                     return BadRequest();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 if (connection.State == System.Data.ConnectionState.Open)
                 {
                     connection.Close();
                 }
-                return InternalServerError();
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
 
