@@ -494,7 +494,7 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Remove NIF" width="90" x="2189" y="595">
+      <operator activated="true" class="select_attributes" compatibility="9.10.001" expanded="true" height="82" name="Remove NIF" width="90" x="2256" y="595">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="NIF"/>
@@ -508,15 +508,26 @@
         <parameter key="invert_selection" value="true"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="write_csv" compatibility="9.10.001" expanded="true" height="82" name="Write CSV" width="90" x="2591" y="544">
-        <parameter key="csv_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_2/Final_Data_Sheet_2.csv"/>
+      <operator activated="true" class="generate_id" compatibility="9.10.001" expanded="true" height="82" name="Generate ID" width="90" x="2390" y="595">
+        <parameter key="create_nominal_ids" value="false"/>
+        <parameter key="offset" value="0"/>
+      </operator>
+      <operator activated="true" class="order_attributes" compatibility="9.10.001" expanded="true" height="82" name="Reorder Attributes" width="90" x="2524" y="595">
+        <parameter key="sort_mode" value="user specified"/>
+        <parameter key="attribute_ordering" value="Tipo|Escalão|Sexo|Distrito|Concelho|Idade"/>
+        <parameter key="use_regular_expressions" value="false"/>
+        <parameter key="handle_unmatched" value="append"/>
+        <parameter key="sort_direction" value="ascending"/>
+      </operator>
+      <operator activated="true" class="write_csv" compatibility="9.10.001" expanded="true" height="82" name="Write CSV" width="90" x="2658" y="595">
+        <parameter key="csv_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_2/Final_Data_Sheet.csv"/>
         <parameter key="column_separator" value=","/>
         <parameter key="write_attribute_names" value="true"/>
-        <parameter key="quote_nominal_values" value="true"/>
+        <parameter key="quote_nominal_values" value="false"/>
         <parameter key="format_date_attributes" value="true"/>
         <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
         <parameter key="append_to_file" value="false"/>
-        <parameter key="encoding" value="SYSTEM"/>
+        <parameter key="encoding" value="UTF-8"/>
       </operator>
       <connect from_op="Read Database" from_port="output" to_op="Store" to_port="input"/>
       <connect from_op="Retrieve Database Stored result" from_port="output" to_op="Map - Tipo" to_port="example set input"/>
@@ -553,7 +564,9 @@
       <connect from_op="Rename Final Att." from_port="example set output" to_op="Select Concelho e Distrito" to_port="example set input"/>
       <connect from_op="Select Concelho e Distrito" from_port="example set output" to_op="Join - NIF - Final" to_port="right"/>
       <connect from_op="Join - NIF - Final" from_port="join" to_op="Remove NIF" to_port="example set input"/>
-      <connect from_op="Remove NIF" from_port="example set output" to_op="Write CSV" to_port="input"/>
+      <connect from_op="Remove NIF" from_port="example set output" to_op="Generate ID" to_port="example set input"/>
+      <connect from_op="Generate ID" from_port="example set output" to_op="Reorder Attributes" to_port="example set input"/>
+      <connect from_op="Reorder Attributes" from_port="example set output" to_op="Write CSV" to_port="input"/>
       <connect from_op="Write CSV" from_port="through" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
