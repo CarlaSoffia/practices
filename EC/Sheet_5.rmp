@@ -1,0 +1,1613 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="9.10.008">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="9.10.008" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="68" name="Scenery 1" width="90" x="112" y="85">
+        <process expanded="true">
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="ID3" width="90" x="45" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - ID3" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - ID3" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="weka:W-Id3" compatibility="7.3.000" expanded="true" height="82" name="W-Id3" width="90" x="313" y="85">
+                <parameter key="D" value="false"/>
+              </operator>
+              <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - ID3" width="90" x="447" y="85">
+                <list key="application_parameters"/>
+                <parameter key="create_view" value="false"/>
+              </operator>
+              <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - ID3" width="90" x="581" y="34">
+                <parameter key="manually_set_positive_class" value="false"/>
+                <parameter key="main_criterion" value="first"/>
+                <parameter key="accuracy" value="true"/>
+                <parameter key="classification_error" value="false"/>
+                <parameter key="kappa" value="false"/>
+                <parameter key="AUC (optimistic)" value="false"/>
+                <parameter key="AUC" value="false"/>
+                <parameter key="AUC (pessimistic)" value="false"/>
+                <parameter key="precision" value="false"/>
+                <parameter key="recall" value="false"/>
+                <parameter key="lift" value="false"/>
+                <parameter key="fallout" value="false"/>
+                <parameter key="f_measure" value="false"/>
+                <parameter key="false_positive" value="false"/>
+                <parameter key="false_negative" value="false"/>
+                <parameter key="true_positive" value="false"/>
+                <parameter key="true_negative" value="false"/>
+                <parameter key="sensitivity" value="false"/>
+                <parameter key="specificity" value="false"/>
+                <parameter key="youden" value="false"/>
+                <parameter key="positive_predictive_value" value="false"/>
+                <parameter key="negative_predictive_value" value="false"/>
+                <parameter key="psep" value="false"/>
+                <parameter key="skip_undefined_labels" value="true"/>
+                <parameter key="use_example_weights" value="true"/>
+              </operator>
+              <connect from_op="Read ARFF - ID3" from_port="output" to_op="Set Role - ID3" to_port="example set input"/>
+              <connect from_op="Set Role - ID3" from_port="example set output" to_op="W-Id3" to_port="training set"/>
+              <connect from_op="W-Id3" from_port="model" to_op="Apply Model - ID3" to_port="model"/>
+              <connect from_op="W-Id3" from_port="exampleSet" to_op="Apply Model - ID3" to_port="unlabelled data"/>
+              <connect from_op="Apply Model - ID3" from_port="labelled data" to_op="Performance Binominal - ID3" to_port="labelled data"/>
+              <connect from_op="Apply Model - ID3" from_port="model" to_port="out 2"/>
+              <connect from_op="Performance Binominal - ID3" from_port="performance" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="OneR" width="90" x="179" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - OneR" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - OneR" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="weka:W-OneR" compatibility="7.3.000" expanded="true" height="82" name="W-OneR" width="90" x="313" y="85">
+                <parameter key="B" value="6.0"/>
+              </operator>
+              <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - OneR" width="90" x="447" y="85">
+                <list key="application_parameters"/>
+                <parameter key="create_view" value="false"/>
+              </operator>
+              <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - OneR" width="90" x="581" y="34">
+                <parameter key="manually_set_positive_class" value="false"/>
+                <parameter key="main_criterion" value="first"/>
+                <parameter key="accuracy" value="true"/>
+                <parameter key="classification_error" value="false"/>
+                <parameter key="kappa" value="false"/>
+                <parameter key="AUC (optimistic)" value="false"/>
+                <parameter key="AUC" value="false"/>
+                <parameter key="AUC (pessimistic)" value="false"/>
+                <parameter key="precision" value="false"/>
+                <parameter key="recall" value="false"/>
+                <parameter key="lift" value="false"/>
+                <parameter key="fallout" value="false"/>
+                <parameter key="f_measure" value="false"/>
+                <parameter key="false_positive" value="false"/>
+                <parameter key="false_negative" value="false"/>
+                <parameter key="true_positive" value="false"/>
+                <parameter key="true_negative" value="false"/>
+                <parameter key="sensitivity" value="false"/>
+                <parameter key="specificity" value="false"/>
+                <parameter key="youden" value="false"/>
+                <parameter key="positive_predictive_value" value="false"/>
+                <parameter key="negative_predictive_value" value="false"/>
+                <parameter key="psep" value="false"/>
+                <parameter key="skip_undefined_labels" value="true"/>
+                <parameter key="use_example_weights" value="true"/>
+              </operator>
+              <connect from_op="Read ARFF - OneR" from_port="output" to_op="Set Role - OneR" to_port="example set input"/>
+              <connect from_op="Set Role - OneR" from_port="example set output" to_op="W-OneR" to_port="training set"/>
+              <connect from_op="W-OneR" from_port="model" to_op="Apply Model - OneR" to_port="model"/>
+              <connect from_op="W-OneR" from_port="exampleSet" to_op="Apply Model - OneR" to_port="unlabelled data"/>
+              <connect from_op="Apply Model - OneR" from_port="labelled data" to_op="Performance Binominal - OneR" to_port="labelled data"/>
+              <connect from_op="Apply Model - OneR" from_port="model" to_port="out 2"/>
+              <connect from_op="Performance Binominal - OneR" from_port="performance" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="J48" width="90" x="313" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - J48" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - J48" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="weka:W-J48" compatibility="7.3.000" expanded="true" height="82" name="W-J48" width="90" x="313" y="85">
+                <parameter key="U" value="false"/>
+                <parameter key="C" value="0.25"/>
+                <parameter key="M" value="2.0"/>
+                <parameter key="R" value="false"/>
+                <parameter key="B" value="false"/>
+                <parameter key="S" value="false"/>
+                <parameter key="L" value="false"/>
+                <parameter key="A" value="false"/>
+              </operator>
+              <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - J48" width="90" x="447" y="85">
+                <list key="application_parameters"/>
+                <parameter key="create_view" value="false"/>
+              </operator>
+              <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - J48" width="90" x="581" y="34">
+                <parameter key="manually_set_positive_class" value="false"/>
+                <parameter key="main_criterion" value="first"/>
+                <parameter key="accuracy" value="true"/>
+                <parameter key="classification_error" value="false"/>
+                <parameter key="kappa" value="false"/>
+                <parameter key="AUC (optimistic)" value="false"/>
+                <parameter key="AUC" value="false"/>
+                <parameter key="AUC (pessimistic)" value="false"/>
+                <parameter key="precision" value="false"/>
+                <parameter key="recall" value="false"/>
+                <parameter key="lift" value="false"/>
+                <parameter key="fallout" value="false"/>
+                <parameter key="f_measure" value="false"/>
+                <parameter key="false_positive" value="false"/>
+                <parameter key="false_negative" value="false"/>
+                <parameter key="true_positive" value="false"/>
+                <parameter key="true_negative" value="false"/>
+                <parameter key="sensitivity" value="false"/>
+                <parameter key="specificity" value="false"/>
+                <parameter key="youden" value="false"/>
+                <parameter key="positive_predictive_value" value="false"/>
+                <parameter key="negative_predictive_value" value="false"/>
+                <parameter key="psep" value="false"/>
+                <parameter key="skip_undefined_labels" value="true"/>
+                <parameter key="use_example_weights" value="true"/>
+              </operator>
+              <connect from_op="Read ARFF - J48" from_port="output" to_op="Set Role - J48" to_port="example set input"/>
+              <connect from_op="Set Role - J48" from_port="example set output" to_op="W-J48" to_port="training set"/>
+              <connect from_op="W-J48" from_port="model" to_op="Apply Model - J48" to_port="model"/>
+              <connect from_op="W-J48" from_port="exampleSet" to_op="Apply Model - J48" to_port="unlabelled data"/>
+              <connect from_op="Apply Model - J48" from_port="labelled data" to_op="Performance Binominal - J48" to_port="labelled data"/>
+              <connect from_op="Apply Model - J48" from_port="model" to_port="out 2"/>
+              <connect from_op="Performance Binominal - J48" from_port="performance" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="PRISM" width="90" x="447" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - PRISM" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - PRISM" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="weka:W-Prism" compatibility="7.3.000" expanded="true" height="82" name="W-Prism" width="90" x="313" y="85">
+                <parameter key="D" value="false"/>
+              </operator>
+              <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - PRISM" width="90" x="447" y="85">
+                <list key="application_parameters"/>
+                <parameter key="create_view" value="false"/>
+              </operator>
+              <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - PRISM" width="90" x="581" y="34">
+                <parameter key="manually_set_positive_class" value="false"/>
+                <parameter key="main_criterion" value="first"/>
+                <parameter key="accuracy" value="true"/>
+                <parameter key="classification_error" value="false"/>
+                <parameter key="kappa" value="false"/>
+                <parameter key="AUC (optimistic)" value="false"/>
+                <parameter key="AUC" value="false"/>
+                <parameter key="AUC (pessimistic)" value="false"/>
+                <parameter key="precision" value="false"/>
+                <parameter key="recall" value="false"/>
+                <parameter key="lift" value="false"/>
+                <parameter key="fallout" value="false"/>
+                <parameter key="f_measure" value="false"/>
+                <parameter key="false_positive" value="false"/>
+                <parameter key="false_negative" value="false"/>
+                <parameter key="true_positive" value="false"/>
+                <parameter key="true_negative" value="false"/>
+                <parameter key="sensitivity" value="false"/>
+                <parameter key="specificity" value="false"/>
+                <parameter key="youden" value="false"/>
+                <parameter key="positive_predictive_value" value="false"/>
+                <parameter key="negative_predictive_value" value="false"/>
+                <parameter key="psep" value="false"/>
+                <parameter key="skip_undefined_labels" value="true"/>
+                <parameter key="use_example_weights" value="true"/>
+              </operator>
+              <connect from_op="Read ARFF - PRISM" from_port="output" to_op="Set Role - PRISM" to_port="example set input"/>
+              <connect from_op="Set Role - PRISM" from_port="example set output" to_op="W-Prism" to_port="training set"/>
+              <connect from_op="W-Prism" from_port="model" to_op="Apply Model - PRISM" to_port="model"/>
+              <connect from_op="W-Prism" from_port="exampleSet" to_op="Apply Model - PRISM" to_port="unlabelled data"/>
+              <connect from_op="Apply Model - PRISM" from_port="labelled data" to_op="Performance Binominal - PRISM" to_port="labelled data"/>
+              <connect from_op="Apply Model - PRISM" from_port="model" to_port="out 2"/>
+              <connect from_op="Performance Binominal - PRISM" from_port="performance" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="68" name="Scenery 2" width="90" x="246" y="85">
+        <process expanded="true">
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="ID3 (2)" width="90" x="45" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - ID3 (2)" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - ID3 (2)" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="split_validation" compatibility="9.10.008" expanded="true" height="124" name="Validation - ID3 (2)" width="90" x="313" y="85">
+                <parameter key="create_complete_model" value="false"/>
+                <parameter key="split" value="relative"/>
+                <parameter key="split_ratio" value="0.7"/>
+                <parameter key="training_set_size" value="100"/>
+                <parameter key="test_set_size" value="-1"/>
+                <parameter key="sampling_type" value="linear sampling"/>
+                <parameter key="use_local_random_seed" value="false"/>
+                <parameter key="local_random_seed" value="1992"/>
+                <process expanded="true">
+                  <operator activated="true" class="weka:W-Id3" compatibility="7.3.000" expanded="true" height="82" name="W-Id3 (2)" width="90" x="112" y="34">
+                    <parameter key="D" value="false"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="103" name="Write as Text - ID3 (2)" width="90" x="246" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/model_S2_ID3.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="training" to_op="W-Id3 (2)" to_port="training set"/>
+                  <connect from_op="W-Id3 (2)" from_port="model" to_op="Write as Text - ID3 (2)" to_port="input 1"/>
+                  <connect from_op="W-Id3 (2)" from_port="exampleSet" to_op="Write as Text - ID3 (2)" to_port="input 2"/>
+                  <connect from_op="Write as Text - ID3 (2)" from_port="input 1" to_port="model"/>
+                  <connect from_op="Write as Text - ID3 (2)" from_port="input 2" to_port="through 1"/>
+                  <portSpacing port="source_training" spacing="0"/>
+                  <portSpacing port="sink_model" spacing="0"/>
+                  <portSpacing port="sink_through 1" spacing="0"/>
+                  <portSpacing port="sink_through 2" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - ID3 (2)" width="90" x="45" y="34">
+                    <list key="application_parameters"/>
+                    <parameter key="create_view" value="false"/>
+                  </operator>
+                  <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - ID3 (2)" width="90" x="179" y="34">
+                    <parameter key="manually_set_positive_class" value="false"/>
+                    <parameter key="main_criterion" value="first"/>
+                    <parameter key="accuracy" value="true"/>
+                    <parameter key="classification_error" value="false"/>
+                    <parameter key="kappa" value="false"/>
+                    <parameter key="AUC (optimistic)" value="false"/>
+                    <parameter key="AUC" value="false"/>
+                    <parameter key="AUC (pessimistic)" value="false"/>
+                    <parameter key="precision" value="false"/>
+                    <parameter key="recall" value="false"/>
+                    <parameter key="lift" value="false"/>
+                    <parameter key="fallout" value="false"/>
+                    <parameter key="f_measure" value="false"/>
+                    <parameter key="false_positive" value="false"/>
+                    <parameter key="false_negative" value="false"/>
+                    <parameter key="true_positive" value="false"/>
+                    <parameter key="true_negative" value="false"/>
+                    <parameter key="sensitivity" value="false"/>
+                    <parameter key="specificity" value="false"/>
+                    <parameter key="youden" value="false"/>
+                    <parameter key="positive_predictive_value" value="false"/>
+                    <parameter key="negative_predictive_value" value="false"/>
+                    <parameter key="psep" value="false"/>
+                    <parameter key="skip_undefined_labels" value="true"/>
+                    <parameter key="use_example_weights" value="true"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="82" name="Write as Text - ID3 (3)" width="90" x="313" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/Performance_S2_ID3.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="model" to_op="Apply Model - ID3 (2)" to_port="model"/>
+                  <connect from_port="test set" to_op="Apply Model - ID3 (2)" to_port="unlabelled data"/>
+                  <connect from_op="Apply Model - ID3 (2)" from_port="labelled data" to_op="Performance Binominal - ID3 (2)" to_port="labelled data"/>
+                  <connect from_op="Performance Binominal - ID3 (2)" from_port="performance" to_op="Write as Text - ID3 (3)" to_port="input 1"/>
+                  <connect from_op="Write as Text - ID3 (3)" from_port="input 1" to_port="averagable 1"/>
+                  <portSpacing port="source_model" spacing="0"/>
+                  <portSpacing port="source_test set" spacing="0"/>
+                  <portSpacing port="source_through 1" spacing="0"/>
+                  <portSpacing port="source_through 2" spacing="0"/>
+                  <portSpacing port="sink_averagable 1" spacing="0"/>
+                  <portSpacing port="sink_averagable 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_op="Read ARFF - ID3 (2)" from_port="output" to_op="Set Role - ID3 (2)" to_port="example set input"/>
+              <connect from_op="Set Role - ID3 (2)" from_port="example set output" to_op="Validation - ID3 (2)" to_port="training"/>
+              <connect from_op="Validation - ID3 (2)" from_port="model" to_port="out 1"/>
+              <connect from_op="Validation - ID3 (2)" from_port="averagable 1" to_port="out 2"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="J48 (2)" width="90" x="179" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - J48 (2)" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - J48 (2)" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="split_validation" compatibility="9.10.008" expanded="true" height="124" name="Validation - J48 (2)" width="90" x="313" y="85">
+                <parameter key="create_complete_model" value="false"/>
+                <parameter key="split" value="relative"/>
+                <parameter key="split_ratio" value="0.7"/>
+                <parameter key="training_set_size" value="100"/>
+                <parameter key="test_set_size" value="-1"/>
+                <parameter key="sampling_type" value="linear sampling"/>
+                <parameter key="use_local_random_seed" value="false"/>
+                <parameter key="local_random_seed" value="1992"/>
+                <process expanded="true">
+                  <operator activated="true" class="weka:W-J48" compatibility="7.3.000" expanded="true" height="82" name="W-J48 (2)" width="90" x="112" y="34">
+                    <parameter key="U" value="false"/>
+                    <parameter key="C" value="0.25"/>
+                    <parameter key="M" value="2.0"/>
+                    <parameter key="R" value="false"/>
+                    <parameter key="B" value="false"/>
+                    <parameter key="S" value="false"/>
+                    <parameter key="L" value="false"/>
+                    <parameter key="A" value="false"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="103" name="Write as Text - J48 (2)" width="90" x="246" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/model_S2_J48.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="training" to_op="W-J48 (2)" to_port="training set"/>
+                  <connect from_op="W-J48 (2)" from_port="model" to_op="Write as Text - J48 (2)" to_port="input 1"/>
+                  <connect from_op="W-J48 (2)" from_port="exampleSet" to_op="Write as Text - J48 (2)" to_port="input 2"/>
+                  <connect from_op="Write as Text - J48 (2)" from_port="input 1" to_port="model"/>
+                  <connect from_op="Write as Text - J48 (2)" from_port="input 2" to_port="through 1"/>
+                  <portSpacing port="source_training" spacing="0"/>
+                  <portSpacing port="sink_model" spacing="0"/>
+                  <portSpacing port="sink_through 1" spacing="0"/>
+                  <portSpacing port="sink_through 2" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - J48 (2)" width="90" x="45" y="34">
+                    <list key="application_parameters"/>
+                    <parameter key="create_view" value="false"/>
+                  </operator>
+                  <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - J48 (2)" width="90" x="246" y="34">
+                    <parameter key="manually_set_positive_class" value="false"/>
+                    <parameter key="main_criterion" value="first"/>
+                    <parameter key="accuracy" value="true"/>
+                    <parameter key="classification_error" value="false"/>
+                    <parameter key="kappa" value="false"/>
+                    <parameter key="AUC (optimistic)" value="false"/>
+                    <parameter key="AUC" value="false"/>
+                    <parameter key="AUC (pessimistic)" value="false"/>
+                    <parameter key="precision" value="false"/>
+                    <parameter key="recall" value="false"/>
+                    <parameter key="lift" value="false"/>
+                    <parameter key="fallout" value="false"/>
+                    <parameter key="f_measure" value="false"/>
+                    <parameter key="false_positive" value="false"/>
+                    <parameter key="false_negative" value="false"/>
+                    <parameter key="true_positive" value="false"/>
+                    <parameter key="true_negative" value="false"/>
+                    <parameter key="sensitivity" value="false"/>
+                    <parameter key="specificity" value="false"/>
+                    <parameter key="youden" value="false"/>
+                    <parameter key="positive_predictive_value" value="false"/>
+                    <parameter key="negative_predictive_value" value="false"/>
+                    <parameter key="psep" value="false"/>
+                    <parameter key="skip_undefined_labels" value="true"/>
+                    <parameter key="use_example_weights" value="true"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="82" name="Write as Text - J48 (3)" width="90" x="380" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/Performance_S2_J48.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="model" to_op="Apply Model - J48 (2)" to_port="model"/>
+                  <connect from_port="test set" to_op="Apply Model - J48 (2)" to_port="unlabelled data"/>
+                  <connect from_op="Apply Model - J48 (2)" from_port="labelled data" to_op="Performance Binominal - J48 (2)" to_port="labelled data"/>
+                  <connect from_op="Performance Binominal - J48 (2)" from_port="performance" to_op="Write as Text - J48 (3)" to_port="input 1"/>
+                  <connect from_op="Write as Text - J48 (3)" from_port="input 1" to_port="averagable 1"/>
+                  <portSpacing port="source_model" spacing="0"/>
+                  <portSpacing port="source_test set" spacing="0"/>
+                  <portSpacing port="source_through 1" spacing="0"/>
+                  <portSpacing port="source_through 2" spacing="0"/>
+                  <portSpacing port="sink_averagable 1" spacing="0"/>
+                  <portSpacing port="sink_averagable 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_op="Read ARFF - J48 (2)" from_port="output" to_op="Set Role - J48 (2)" to_port="example set input"/>
+              <connect from_op="Set Role - J48 (2)" from_port="example set output" to_op="Validation - J48 (2)" to_port="training"/>
+              <connect from_op="Validation - J48 (2)" from_port="model" to_port="out 1"/>
+              <connect from_op="Validation - J48 (2)" from_port="averagable 1" to_port="out 2"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="OneR (2)" width="90" x="313" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - OneR (2)" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - OneR (2)" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="split_validation" compatibility="9.10.008" expanded="true" height="124" name="Validation - OneR (2)" width="90" x="313" y="85">
+                <parameter key="create_complete_model" value="false"/>
+                <parameter key="split" value="relative"/>
+                <parameter key="split_ratio" value="0.7"/>
+                <parameter key="training_set_size" value="100"/>
+                <parameter key="test_set_size" value="-1"/>
+                <parameter key="sampling_type" value="linear sampling"/>
+                <parameter key="use_local_random_seed" value="false"/>
+                <parameter key="local_random_seed" value="1992"/>
+                <process expanded="true">
+                  <operator activated="true" class="weka:W-OneR" compatibility="7.3.000" expanded="true" height="82" name="W-OneR (2)" width="90" x="112" y="34">
+                    <parameter key="B" value="6.0"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="103" name="Write as Text - OneR (2)" width="90" x="246" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/model_S2_OneR.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="training" to_op="W-OneR (2)" to_port="training set"/>
+                  <connect from_op="W-OneR (2)" from_port="model" to_op="Write as Text - OneR (2)" to_port="input 1"/>
+                  <connect from_op="W-OneR (2)" from_port="exampleSet" to_op="Write as Text - OneR (2)" to_port="input 2"/>
+                  <connect from_op="Write as Text - OneR (2)" from_port="input 1" to_port="model"/>
+                  <connect from_op="Write as Text - OneR (2)" from_port="input 2" to_port="through 1"/>
+                  <portSpacing port="source_training" spacing="0"/>
+                  <portSpacing port="sink_model" spacing="0"/>
+                  <portSpacing port="sink_through 1" spacing="0"/>
+                  <portSpacing port="sink_through 2" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - OneR (3)" width="90" x="45" y="34">
+                    <list key="application_parameters"/>
+                    <parameter key="create_view" value="false"/>
+                  </operator>
+                  <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - OneR (3)" width="90" x="246" y="34">
+                    <parameter key="manually_set_positive_class" value="false"/>
+                    <parameter key="main_criterion" value="first"/>
+                    <parameter key="accuracy" value="true"/>
+                    <parameter key="classification_error" value="false"/>
+                    <parameter key="kappa" value="false"/>
+                    <parameter key="AUC (optimistic)" value="false"/>
+                    <parameter key="AUC" value="false"/>
+                    <parameter key="AUC (pessimistic)" value="false"/>
+                    <parameter key="precision" value="false"/>
+                    <parameter key="recall" value="false"/>
+                    <parameter key="lift" value="false"/>
+                    <parameter key="fallout" value="false"/>
+                    <parameter key="f_measure" value="false"/>
+                    <parameter key="false_positive" value="false"/>
+                    <parameter key="false_negative" value="false"/>
+                    <parameter key="true_positive" value="false"/>
+                    <parameter key="true_negative" value="false"/>
+                    <parameter key="sensitivity" value="false"/>
+                    <parameter key="specificity" value="false"/>
+                    <parameter key="youden" value="false"/>
+                    <parameter key="positive_predictive_value" value="false"/>
+                    <parameter key="negative_predictive_value" value="false"/>
+                    <parameter key="psep" value="false"/>
+                    <parameter key="skip_undefined_labels" value="true"/>
+                    <parameter key="use_example_weights" value="true"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="82" name="Write as Text - OneR (3)" width="90" x="380" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/model_S2_OneR.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="model" to_op="Apply Model - OneR (3)" to_port="model"/>
+                  <connect from_port="test set" to_op="Apply Model - OneR (3)" to_port="unlabelled data"/>
+                  <connect from_op="Apply Model - OneR (3)" from_port="labelled data" to_op="Performance Binominal - OneR (3)" to_port="labelled data"/>
+                  <connect from_op="Performance Binominal - OneR (3)" from_port="performance" to_op="Write as Text - OneR (3)" to_port="input 1"/>
+                  <connect from_op="Write as Text - OneR (3)" from_port="input 1" to_port="averagable 1"/>
+                  <portSpacing port="source_model" spacing="0"/>
+                  <portSpacing port="source_test set" spacing="0"/>
+                  <portSpacing port="source_through 1" spacing="0"/>
+                  <portSpacing port="source_through 2" spacing="0"/>
+                  <portSpacing port="sink_averagable 1" spacing="0"/>
+                  <portSpacing port="sink_averagable 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_op="Read ARFF - OneR (2)" from_port="output" to_op="Set Role - OneR (2)" to_port="example set input"/>
+              <connect from_op="Set Role - OneR (2)" from_port="example set output" to_op="Validation - OneR (2)" to_port="training"/>
+              <connect from_op="Validation - OneR (2)" from_port="model" to_port="out 1"/>
+              <connect from_op="Validation - OneR (2)" from_port="averagable 1" to_port="out 2"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="PRISM (2)" width="90" x="447" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - PRISM (2)" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - PRISM (2)" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="split_validation" compatibility="9.10.008" expanded="true" height="124" name="Validation - PRISM (2)" width="90" x="313" y="85">
+                <parameter key="create_complete_model" value="false"/>
+                <parameter key="split" value="relative"/>
+                <parameter key="split_ratio" value="0.7"/>
+                <parameter key="training_set_size" value="100"/>
+                <parameter key="test_set_size" value="-1"/>
+                <parameter key="sampling_type" value="linear sampling"/>
+                <parameter key="use_local_random_seed" value="false"/>
+                <parameter key="local_random_seed" value="1992"/>
+                <process expanded="true">
+                  <operator activated="true" class="weka:W-Prism" compatibility="7.3.000" expanded="true" height="82" name="W-Prism (2)" width="90" x="112" y="34">
+                    <parameter key="D" value="false"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="103" name="Write as Text - PRISM (2)" width="90" x="246" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/model_S2_PRISM.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="training" to_op="W-Prism (2)" to_port="training set"/>
+                  <connect from_op="W-Prism (2)" from_port="model" to_op="Write as Text - PRISM (2)" to_port="input 1"/>
+                  <connect from_op="W-Prism (2)" from_port="exampleSet" to_op="Write as Text - PRISM (2)" to_port="input 2"/>
+                  <connect from_op="Write as Text - PRISM (2)" from_port="input 1" to_port="model"/>
+                  <connect from_op="Write as Text - PRISM (2)" from_port="input 2" to_port="through 1"/>
+                  <portSpacing port="source_training" spacing="0"/>
+                  <portSpacing port="sink_model" spacing="0"/>
+                  <portSpacing port="sink_through 1" spacing="0"/>
+                  <portSpacing port="sink_through 2" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - PRISM (2)" width="90" x="45" y="34">
+                    <list key="application_parameters"/>
+                    <parameter key="create_view" value="false"/>
+                  </operator>
+                  <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - PRISM (2)" width="90" x="179" y="34">
+                    <parameter key="manually_set_positive_class" value="false"/>
+                    <parameter key="main_criterion" value="first"/>
+                    <parameter key="accuracy" value="true"/>
+                    <parameter key="classification_error" value="false"/>
+                    <parameter key="kappa" value="false"/>
+                    <parameter key="AUC (optimistic)" value="false"/>
+                    <parameter key="AUC" value="false"/>
+                    <parameter key="AUC (pessimistic)" value="false"/>
+                    <parameter key="precision" value="false"/>
+                    <parameter key="recall" value="false"/>
+                    <parameter key="lift" value="false"/>
+                    <parameter key="fallout" value="false"/>
+                    <parameter key="f_measure" value="false"/>
+                    <parameter key="false_positive" value="false"/>
+                    <parameter key="false_negative" value="false"/>
+                    <parameter key="true_positive" value="false"/>
+                    <parameter key="true_negative" value="false"/>
+                    <parameter key="sensitivity" value="false"/>
+                    <parameter key="specificity" value="false"/>
+                    <parameter key="youden" value="false"/>
+                    <parameter key="positive_predictive_value" value="false"/>
+                    <parameter key="negative_predictive_value" value="false"/>
+                    <parameter key="psep" value="false"/>
+                    <parameter key="skip_undefined_labels" value="true"/>
+                    <parameter key="use_example_weights" value="true"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="82" name="Write as Text - PRISM (3)" width="90" x="313" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/Performance_S2_PRISM.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="model" to_op="Apply Model - PRISM (2)" to_port="model"/>
+                  <connect from_port="test set" to_op="Apply Model - PRISM (2)" to_port="unlabelled data"/>
+                  <connect from_op="Apply Model - PRISM (2)" from_port="labelled data" to_op="Performance Binominal - PRISM (2)" to_port="labelled data"/>
+                  <connect from_op="Performance Binominal - PRISM (2)" from_port="performance" to_op="Write as Text - PRISM (3)" to_port="input 1"/>
+                  <connect from_op="Write as Text - PRISM (3)" from_port="input 1" to_port="averagable 1"/>
+                  <portSpacing port="source_model" spacing="0"/>
+                  <portSpacing port="source_test set" spacing="0"/>
+                  <portSpacing port="source_through 1" spacing="0"/>
+                  <portSpacing port="source_through 2" spacing="0"/>
+                  <portSpacing port="sink_averagable 1" spacing="0"/>
+                  <portSpacing port="sink_averagable 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_op="Read ARFF - PRISM (2)" from_port="output" to_op="Set Role - PRISM (2)" to_port="example set input"/>
+              <connect from_op="Set Role - PRISM (2)" from_port="example set output" to_op="Validation - PRISM (2)" to_port="training"/>
+              <connect from_op="Validation - PRISM (2)" from_port="model" to_port="out 1"/>
+              <connect from_op="Validation - PRISM (2)" from_port="averagable 1" to_port="out 2"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="Scenery 3" width="90" x="380" y="85">
+        <process expanded="true">
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="ID3 (3)" width="90" x="45" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - ID3 (3)" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - ID3 (3)" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation - ID3 (3)" width="90" x="313" y="85">
+                <parameter key="split_on_batch_attribute" value="false"/>
+                <parameter key="leave_one_out" value="false"/>
+                <parameter key="number_of_folds" value="10"/>
+                <parameter key="sampling_type" value="automatic"/>
+                <parameter key="use_local_random_seed" value="false"/>
+                <parameter key="local_random_seed" value="1992"/>
+                <parameter key="enable_parallel_execution" value="false"/>
+                <process expanded="true">
+                  <operator activated="true" class="weka:W-Id3" compatibility="7.3.000" expanded="true" height="82" name="W-Id3 (3)" width="90" x="112" y="34">
+                    <parameter key="D" value="false"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="103" name="Write as Text - ID3" width="90" x="246" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/model_S3_ID3.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="training set" to_op="W-Id3 (3)" to_port="training set"/>
+                  <connect from_op="W-Id3 (3)" from_port="model" to_op="Write as Text - ID3" to_port="input 1"/>
+                  <connect from_op="W-Id3 (3)" from_port="exampleSet" to_op="Write as Text - ID3" to_port="input 2"/>
+                  <connect from_op="Write as Text - ID3" from_port="input 1" to_port="model"/>
+                  <connect from_op="Write as Text - ID3" from_port="input 2" to_port="through 1"/>
+                  <portSpacing port="source_training set" spacing="0"/>
+                  <portSpacing port="sink_model" spacing="0"/>
+                  <portSpacing port="sink_through 1" spacing="0"/>
+                  <portSpacing port="sink_through 2" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - ID3 (3)" width="90" x="45" y="34">
+                    <list key="application_parameters"/>
+                    <parameter key="create_view" value="false"/>
+                  </operator>
+                  <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - ID3 (3)" width="90" x="179" y="34">
+                    <parameter key="manually_set_positive_class" value="false"/>
+                    <parameter key="main_criterion" value="first"/>
+                    <parameter key="accuracy" value="true"/>
+                    <parameter key="classification_error" value="false"/>
+                    <parameter key="kappa" value="false"/>
+                    <parameter key="AUC (optimistic)" value="false"/>
+                    <parameter key="AUC" value="false"/>
+                    <parameter key="AUC (pessimistic)" value="false"/>
+                    <parameter key="precision" value="false"/>
+                    <parameter key="recall" value="false"/>
+                    <parameter key="lift" value="false"/>
+                    <parameter key="fallout" value="false"/>
+                    <parameter key="f_measure" value="false"/>
+                    <parameter key="false_positive" value="false"/>
+                    <parameter key="false_negative" value="false"/>
+                    <parameter key="true_positive" value="false"/>
+                    <parameter key="true_negative" value="false"/>
+                    <parameter key="sensitivity" value="false"/>
+                    <parameter key="specificity" value="false"/>
+                    <parameter key="youden" value="false"/>
+                    <parameter key="positive_predictive_value" value="false"/>
+                    <parameter key="negative_predictive_value" value="false"/>
+                    <parameter key="psep" value="false"/>
+                    <parameter key="skip_undefined_labels" value="true"/>
+                    <parameter key="use_example_weights" value="true"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="82" name="Write as Text - ID3 (4)" width="90" x="313" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/Performance_S3_ID3.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="model" to_op="Apply Model - ID3 (3)" to_port="model"/>
+                  <connect from_port="test set" to_op="Apply Model - ID3 (3)" to_port="unlabelled data"/>
+                  <connect from_op="Apply Model - ID3 (3)" from_port="labelled data" to_op="Performance Binominal - ID3 (3)" to_port="labelled data"/>
+                  <connect from_op="Performance Binominal - ID3 (3)" from_port="performance" to_op="Write as Text - ID3 (4)" to_port="input 1"/>
+                  <connect from_op="Write as Text - ID3 (4)" from_port="input 1" to_port="performance 1"/>
+                  <portSpacing port="source_model" spacing="0"/>
+                  <portSpacing port="source_test set" spacing="0"/>
+                  <portSpacing port="source_through 1" spacing="0"/>
+                  <portSpacing port="source_through 2" spacing="0"/>
+                  <portSpacing port="sink_test set results" spacing="0"/>
+                  <portSpacing port="sink_performance 1" spacing="0"/>
+                  <portSpacing port="sink_performance 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_op="Read ARFF - ID3 (3)" from_port="output" to_op="Set Role - ID3 (3)" to_port="example set input"/>
+              <connect from_op="Set Role - ID3 (3)" from_port="example set output" to_op="Cross Validation - ID3 (3)" to_port="example set"/>
+              <connect from_op="Cross Validation - ID3 (3)" from_port="model" to_port="out 1"/>
+              <connect from_op="Cross Validation - ID3 (3)" from_port="performance 1" to_port="out 2"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="J48 (3)" width="90" x="179" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - J48 (3)" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - J48 (3)" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation - J48" width="90" x="313" y="85">
+                <parameter key="split_on_batch_attribute" value="false"/>
+                <parameter key="leave_one_out" value="false"/>
+                <parameter key="number_of_folds" value="10"/>
+                <parameter key="sampling_type" value="automatic"/>
+                <parameter key="use_local_random_seed" value="false"/>
+                <parameter key="local_random_seed" value="1992"/>
+                <parameter key="enable_parallel_execution" value="false"/>
+                <process expanded="true">
+                  <operator activated="true" class="weka:W-J48" compatibility="7.3.000" expanded="true" height="82" name="W-J48 (3)" width="90" x="112" y="34">
+                    <parameter key="U" value="false"/>
+                    <parameter key="C" value="0.25"/>
+                    <parameter key="M" value="2.0"/>
+                    <parameter key="R" value="false"/>
+                    <parameter key="B" value="false"/>
+                    <parameter key="S" value="false"/>
+                    <parameter key="L" value="false"/>
+                    <parameter key="A" value="false"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="103" name="Write as Text - J48" width="90" x="313" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/model_S3_J48.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="training set" to_op="W-J48 (3)" to_port="training set"/>
+                  <connect from_op="W-J48 (3)" from_port="model" to_op="Write as Text - J48" to_port="input 1"/>
+                  <connect from_op="W-J48 (3)" from_port="exampleSet" to_op="Write as Text - J48" to_port="input 2"/>
+                  <connect from_op="Write as Text - J48" from_port="input 1" to_port="model"/>
+                  <connect from_op="Write as Text - J48" from_port="input 2" to_port="through 1"/>
+                  <portSpacing port="source_training set" spacing="0"/>
+                  <portSpacing port="sink_model" spacing="0"/>
+                  <portSpacing port="sink_through 1" spacing="0"/>
+                  <portSpacing port="sink_through 2" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - J48 (3)" width="90" x="45" y="34">
+                    <list key="application_parameters"/>
+                    <parameter key="create_view" value="false"/>
+                  </operator>
+                  <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - J48 (3)" width="90" x="179" y="34">
+                    <parameter key="manually_set_positive_class" value="false"/>
+                    <parameter key="main_criterion" value="first"/>
+                    <parameter key="accuracy" value="true"/>
+                    <parameter key="classification_error" value="false"/>
+                    <parameter key="kappa" value="false"/>
+                    <parameter key="AUC (optimistic)" value="false"/>
+                    <parameter key="AUC" value="false"/>
+                    <parameter key="AUC (pessimistic)" value="false"/>
+                    <parameter key="precision" value="false"/>
+                    <parameter key="recall" value="false"/>
+                    <parameter key="lift" value="false"/>
+                    <parameter key="fallout" value="false"/>
+                    <parameter key="f_measure" value="false"/>
+                    <parameter key="false_positive" value="false"/>
+                    <parameter key="false_negative" value="false"/>
+                    <parameter key="true_positive" value="false"/>
+                    <parameter key="true_negative" value="false"/>
+                    <parameter key="sensitivity" value="false"/>
+                    <parameter key="specificity" value="false"/>
+                    <parameter key="youden" value="false"/>
+                    <parameter key="positive_predictive_value" value="false"/>
+                    <parameter key="negative_predictive_value" value="false"/>
+                    <parameter key="psep" value="false"/>
+                    <parameter key="skip_undefined_labels" value="true"/>
+                    <parameter key="use_example_weights" value="true"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="82" name="Write as Text - J48 (4)" width="90" x="313" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/Performance_S3_J48.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="model" to_op="Apply Model - J48 (3)" to_port="model"/>
+                  <connect from_port="test set" to_op="Apply Model - J48 (3)" to_port="unlabelled data"/>
+                  <connect from_op="Apply Model - J48 (3)" from_port="labelled data" to_op="Performance Binominal - J48 (3)" to_port="labelled data"/>
+                  <connect from_op="Performance Binominal - J48 (3)" from_port="performance" to_op="Write as Text - J48 (4)" to_port="input 1"/>
+                  <connect from_op="Write as Text - J48 (4)" from_port="input 1" to_port="performance 1"/>
+                  <portSpacing port="source_model" spacing="0"/>
+                  <portSpacing port="source_test set" spacing="0"/>
+                  <portSpacing port="source_through 1" spacing="0"/>
+                  <portSpacing port="source_through 2" spacing="0"/>
+                  <portSpacing port="sink_test set results" spacing="0"/>
+                  <portSpacing port="sink_performance 1" spacing="0"/>
+                  <portSpacing port="sink_performance 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_op="Read ARFF - J48 (3)" from_port="output" to_op="Set Role - J48 (3)" to_port="example set input"/>
+              <connect from_op="Set Role - J48 (3)" from_port="example set output" to_op="Cross Validation - J48" to_port="example set"/>
+              <connect from_op="Cross Validation - J48" from_port="model" to_port="out 1"/>
+              <connect from_op="Cross Validation - J48" from_port="performance 1" to_port="out 2"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="OneR (3)" width="90" x="313" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - OneR (3)" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - OneR (3)" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation - OneR" width="90" x="313" y="85">
+                <parameter key="split_on_batch_attribute" value="false"/>
+                <parameter key="leave_one_out" value="false"/>
+                <parameter key="number_of_folds" value="10"/>
+                <parameter key="sampling_type" value="automatic"/>
+                <parameter key="use_local_random_seed" value="false"/>
+                <parameter key="local_random_seed" value="1992"/>
+                <parameter key="enable_parallel_execution" value="false"/>
+                <process expanded="true">
+                  <operator activated="true" class="weka:W-OneR" compatibility="7.3.000" expanded="true" height="82" name="W-OneR (3)" width="90" x="45" y="34">
+                    <parameter key="B" value="6.0"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="103" name="Write as Text - OneR" width="90" x="246" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/model_S3_OneR.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="training set" to_op="W-OneR (3)" to_port="training set"/>
+                  <connect from_op="W-OneR (3)" from_port="model" to_op="Write as Text - OneR" to_port="input 1"/>
+                  <connect from_op="W-OneR (3)" from_port="exampleSet" to_op="Write as Text - OneR" to_port="input 2"/>
+                  <connect from_op="Write as Text - OneR" from_port="input 1" to_port="model"/>
+                  <connect from_op="Write as Text - OneR" from_port="input 2" to_port="through 1"/>
+                  <portSpacing port="source_training set" spacing="0"/>
+                  <portSpacing port="sink_model" spacing="0"/>
+                  <portSpacing port="sink_through 1" spacing="0"/>
+                  <portSpacing port="sink_through 2" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - OneR (2)" width="90" x="45" y="34">
+                    <list key="application_parameters"/>
+                    <parameter key="create_view" value="false"/>
+                  </operator>
+                  <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - OneR (2)" width="90" x="246" y="34">
+                    <parameter key="manually_set_positive_class" value="false"/>
+                    <parameter key="main_criterion" value="first"/>
+                    <parameter key="accuracy" value="true"/>
+                    <parameter key="classification_error" value="false"/>
+                    <parameter key="kappa" value="false"/>
+                    <parameter key="AUC (optimistic)" value="false"/>
+                    <parameter key="AUC" value="false"/>
+                    <parameter key="AUC (pessimistic)" value="false"/>
+                    <parameter key="precision" value="false"/>
+                    <parameter key="recall" value="false"/>
+                    <parameter key="lift" value="false"/>
+                    <parameter key="fallout" value="false"/>
+                    <parameter key="f_measure" value="false"/>
+                    <parameter key="false_positive" value="false"/>
+                    <parameter key="false_negative" value="false"/>
+                    <parameter key="true_positive" value="false"/>
+                    <parameter key="true_negative" value="false"/>
+                    <parameter key="sensitivity" value="false"/>
+                    <parameter key="specificity" value="false"/>
+                    <parameter key="youden" value="false"/>
+                    <parameter key="positive_predictive_value" value="false"/>
+                    <parameter key="negative_predictive_value" value="false"/>
+                    <parameter key="psep" value="false"/>
+                    <parameter key="skip_undefined_labels" value="true"/>
+                    <parameter key="use_example_weights" value="true"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="82" name="Write as Text - OneR (4)" width="90" x="380" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/Performance_S3_OneR.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="model" to_op="Apply Model - OneR (2)" to_port="model"/>
+                  <connect from_port="test set" to_op="Apply Model - OneR (2)" to_port="unlabelled data"/>
+                  <connect from_op="Apply Model - OneR (2)" from_port="labelled data" to_op="Performance Binominal - OneR (2)" to_port="labelled data"/>
+                  <connect from_op="Performance Binominal - OneR (2)" from_port="performance" to_op="Write as Text - OneR (4)" to_port="input 1"/>
+                  <connect from_op="Write as Text - OneR (4)" from_port="input 1" to_port="performance 1"/>
+                  <portSpacing port="source_model" spacing="0"/>
+                  <portSpacing port="source_test set" spacing="0"/>
+                  <portSpacing port="source_through 1" spacing="0"/>
+                  <portSpacing port="source_through 2" spacing="0"/>
+                  <portSpacing port="sink_test set results" spacing="0"/>
+                  <portSpacing port="sink_performance 1" spacing="0"/>
+                  <portSpacing port="sink_performance 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_op="Read ARFF - OneR (3)" from_port="output" to_op="Set Role - OneR (3)" to_port="example set input"/>
+              <connect from_op="Set Role - OneR (3)" from_port="example set output" to_op="Cross Validation - OneR" to_port="example set"/>
+              <connect from_op="Cross Validation - OneR" from_port="model" to_port="out 1"/>
+              <connect from_op="Cross Validation - OneR" from_port="performance 1" to_port="out 2"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="PRISM (3)" width="90" x="447" y="34">
+            <process expanded="true">
+              <operator activated="true" class="advanced_file_connectors:read_arff" compatibility="9.10.008" expanded="true" height="68" name="Read ARFF - PRISM (3)" width="90" x="45" y="85">
+                <parameter key="data_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/weather.nominal.arff"/>
+                <parameter key="encoding" value="SYSTEM"/>
+                <parameter key="read_not_matching_values_as_missings" value="true"/>
+                <list key="data_set_meta_data_information"/>
+                <parameter key="attribute_names_already_defined" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+              </operator>
+              <operator activated="true" class="set_role" compatibility="9.10.008" expanded="true" height="82" name="Set Role - PRISM (3)" width="90" x="179" y="85">
+                <parameter key="attribute_name" value="play"/>
+                <parameter key="target_role" value="label"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation - PRISM" width="90" x="313" y="85">
+                <parameter key="split_on_batch_attribute" value="false"/>
+                <parameter key="leave_one_out" value="false"/>
+                <parameter key="number_of_folds" value="10"/>
+                <parameter key="sampling_type" value="automatic"/>
+                <parameter key="use_local_random_seed" value="false"/>
+                <parameter key="local_random_seed" value="1992"/>
+                <parameter key="enable_parallel_execution" value="false"/>
+                <process expanded="true">
+                  <operator activated="true" class="weka:W-Prism" compatibility="7.3.000" expanded="true" height="82" name="W-Prism (3)" width="90" x="112" y="34">
+                    <parameter key="D" value="false"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="103" name="Write as Text - PRISM" width="90" x="246" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/model_S3_PRISM.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="training set" to_op="W-Prism (3)" to_port="training set"/>
+                  <connect from_op="W-Prism (3)" from_port="model" to_op="Write as Text - PRISM" to_port="input 1"/>
+                  <connect from_op="W-Prism (3)" from_port="exampleSet" to_op="Write as Text - PRISM" to_port="input 2"/>
+                  <connect from_op="Write as Text - PRISM" from_port="input 1" to_port="model"/>
+                  <connect from_op="Write as Text - PRISM" from_port="input 2" to_port="through 1"/>
+                  <portSpacing port="source_training set" spacing="0"/>
+                  <portSpacing port="sink_model" spacing="0"/>
+                  <portSpacing port="sink_through 1" spacing="0"/>
+                  <portSpacing port="sink_through 2" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - PRISM (3)" width="90" x="45" y="34">
+                    <list key="application_parameters"/>
+                    <parameter key="create_view" value="false"/>
+                  </operator>
+                  <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - PRISM (3)" width="90" x="179" y="34">
+                    <parameter key="manually_set_positive_class" value="false"/>
+                    <parameter key="main_criterion" value="first"/>
+                    <parameter key="accuracy" value="true"/>
+                    <parameter key="classification_error" value="false"/>
+                    <parameter key="kappa" value="false"/>
+                    <parameter key="AUC (optimistic)" value="false"/>
+                    <parameter key="AUC" value="false"/>
+                    <parameter key="AUC (pessimistic)" value="false"/>
+                    <parameter key="precision" value="false"/>
+                    <parameter key="recall" value="false"/>
+                    <parameter key="lift" value="false"/>
+                    <parameter key="fallout" value="false"/>
+                    <parameter key="f_measure" value="false"/>
+                    <parameter key="false_positive" value="false"/>
+                    <parameter key="false_negative" value="false"/>
+                    <parameter key="true_positive" value="false"/>
+                    <parameter key="true_negative" value="false"/>
+                    <parameter key="sensitivity" value="false"/>
+                    <parameter key="specificity" value="false"/>
+                    <parameter key="youden" value="false"/>
+                    <parameter key="positive_predictive_value" value="false"/>
+                    <parameter key="negative_predictive_value" value="false"/>
+                    <parameter key="psep" value="false"/>
+                    <parameter key="skip_undefined_labels" value="true"/>
+                    <parameter key="use_example_weights" value="true"/>
+                  </operator>
+                  <operator activated="true" class="write_as_text" compatibility="9.10.008" expanded="true" height="82" name="Write as Text - PRISM (4)" width="90" x="313" y="34">
+                    <parameter key="result_file" value="C:/Users/User/Desktop/University/3_year/2_Semester/EC/Practice/Class_8/Performance_S3_PRISM.res"/>
+                    <parameter key="encoding" value="SYSTEM"/>
+                  </operator>
+                  <connect from_port="model" to_op="Apply Model - PRISM (3)" to_port="model"/>
+                  <connect from_port="test set" to_op="Apply Model - PRISM (3)" to_port="unlabelled data"/>
+                  <connect from_op="Apply Model - PRISM (3)" from_port="labelled data" to_op="Performance Binominal - PRISM (3)" to_port="labelled data"/>
+                  <connect from_op="Performance Binominal - PRISM (3)" from_port="performance" to_op="Write as Text - PRISM (4)" to_port="input 1"/>
+                  <connect from_op="Write as Text - PRISM (4)" from_port="input 1" to_port="performance 1"/>
+                  <portSpacing port="source_model" spacing="0"/>
+                  <portSpacing port="source_test set" spacing="0"/>
+                  <portSpacing port="source_through 1" spacing="0"/>
+                  <portSpacing port="source_through 2" spacing="0"/>
+                  <portSpacing port="sink_test set results" spacing="0"/>
+                  <portSpacing port="sink_performance 1" spacing="0"/>
+                  <portSpacing port="sink_performance 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_op="Read ARFF - PRISM (3)" from_port="output" to_op="Set Role - PRISM (3)" to_port="example set input"/>
+              <connect from_op="Set Role - PRISM (3)" from_port="example set output" to_op="Cross Validation - PRISM" to_port="example set"/>
+              <connect from_op="Cross Validation - PRISM" from_port="model" to_port="out 1"/>
+              <connect from_op="Cross Validation - PRISM" from_port="performance 1" to_port="out 2"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+          </operator>
+          <connect from_op="J48 (3)" from_port="out 1" to_port="out 1"/>
+          <connect from_op="J48 (3)" from_port="out 2" to_port="out 2"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <portSpacing port="sink_out 3" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="Scenery 2 (2)" width="90" x="246" y="289">
+        <process expanded="true">
+          <operator activated="true" class="read_csv" compatibility="9.10.008" expanded="true" height="68" name="Read CSV - Bank Full" width="90" x="45" y="85">
+            <parameter key="csv_file" value="C:\Users\User\Desktop\University\3_year\2_Semester\EC\Practice\Class_8\bank-full.csv"/>
+            <parameter key="column_separators" value=","/>
+            <parameter key="trim_lines" value="false"/>
+            <parameter key="use_quotes" value="true"/>
+            <parameter key="quotes_character" value="&quot;"/>
+            <parameter key="escape_character" value="\"/>
+            <parameter key="skip_comments" value="true"/>
+            <parameter key="comment_characters" value="#"/>
+            <parameter key="starting_row" value="1"/>
+            <parameter key="parse_numbers" value="true"/>
+            <parameter key="decimal_character" value="."/>
+            <parameter key="grouped_digits" value="false"/>
+            <parameter key="grouping_character" value=","/>
+            <parameter key="infinity_representation" value=""/>
+            <parameter key="date_format" value=""/>
+            <parameter key="first_row_as_names" value="true"/>
+            <list key="annotations"/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="encoding" value="windows-1252"/>
+            <parameter key="read_all_values_as_polynominal" value="false"/>
+            <list key="data_set_meta_data_information">
+              <parameter key="0" value="age.true.integer.attribute"/>
+              <parameter key="1" value="job.true.polynominal.attribute"/>
+              <parameter key="2" value="marital.true.polynominal.attribute"/>
+              <parameter key="3" value="education.true.polynominal.attribute"/>
+              <parameter key="4" value="default.true.polynominal.attribute"/>
+              <parameter key="5" value="balance.true.integer.attribute"/>
+              <parameter key="6" value="housing.true.polynominal.attribute"/>
+              <parameter key="7" value="loan.true.polynominal.attribute"/>
+              <parameter key="8" value="contact.true.polynominal.attribute"/>
+              <parameter key="9" value="day.true.integer.attribute"/>
+              <parameter key="10" value="month.true.polynominal.attribute"/>
+              <parameter key="11" value="duration.true.integer.attribute"/>
+              <parameter key="12" value="campaign.true.integer.attribute"/>
+              <parameter key="13" value="pdays.true.integer.attribute"/>
+              <parameter key="14" value="previous.true.integer.attribute"/>
+              <parameter key="15" value="poutcome.true.polynominal.attribute"/>
+              <parameter key="16" value="y.true.polynominal.label"/>
+            </list>
+            <parameter key="read_not_matching_values_as_missings" value="false"/>
+          </operator>
+          <operator activated="true" class="discretize_by_entropy" compatibility="9.10.008" expanded="true" height="103" name="Discretize - Entropy" width="90" x="179" y="85">
+            <parameter key="return_preprocessing_model" value="false"/>
+            <parameter key="create_view" value="false"/>
+            <parameter key="attribute_filter_type" value="value_type"/>
+            <parameter key="attribute" value=""/>
+            <parameter key="attributes" value=""/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="numeric"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="real"/>
+            <parameter key="block_type" value="value_series"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="value_series_end"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="false"/>
+            <parameter key="remove_useless" value="true"/>
+            <parameter key="range_name_type" value="long"/>
+            <parameter key="automatic_number_of_digits" value="true"/>
+            <parameter key="number_of_digits" value="-1"/>
+          </operator>
+          <operator activated="true" class="weight_by_information_gain_ratio" compatibility="9.10.008" expanded="true" height="82" name="Weight by Information Gain Ratio" width="90" x="313" y="85">
+            <parameter key="normalize_weights" value="false"/>
+            <parameter key="sort_weights" value="true"/>
+            <parameter key="sort_direction" value="ascending"/>
+          </operator>
+          <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights" width="90" x="447" y="85">
+            <parameter key="weight_relation" value="greater equals"/>
+            <parameter key="weight" value="0.02"/>
+            <parameter key="k" value="10"/>
+            <parameter key="p" value="0.5"/>
+            <parameter key="deselect_unknown" value="true"/>
+            <parameter key="use_absolute_weights" value="true"/>
+          </operator>
+          <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation - J48 (2)" width="90" x="581" y="85">
+            <parameter key="split_on_batch_attribute" value="false"/>
+            <parameter key="leave_one_out" value="false"/>
+            <parameter key="number_of_folds" value="10"/>
+            <parameter key="sampling_type" value="automatic"/>
+            <parameter key="use_local_random_seed" value="false"/>
+            <parameter key="local_random_seed" value="1992"/>
+            <parameter key="enable_parallel_execution" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="weka:W-J48" compatibility="7.3.000" expanded="true" height="82" name="W-J48 (4)" width="90" x="112" y="34">
+                <parameter key="U" value="false"/>
+                <parameter key="C" value="0.25"/>
+                <parameter key="M" value="2.0"/>
+                <parameter key="R" value="false"/>
+                <parameter key="B" value="false"/>
+                <parameter key="S" value="false"/>
+                <parameter key="L" value="false"/>
+                <parameter key="A" value="false"/>
+              </operator>
+              <connect from_port="training set" to_op="W-J48 (4)" to_port="training set"/>
+              <connect from_op="W-J48 (4)" from_port="model" to_port="model"/>
+              <connect from_op="W-J48 (4)" from_port="exampleSet" to_port="through 1"/>
+              <portSpacing port="source_training set" spacing="0"/>
+              <portSpacing port="sink_model" spacing="0"/>
+              <portSpacing port="sink_through 1" spacing="0"/>
+              <portSpacing port="sink_through 2" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - J48 (4)" width="90" x="45" y="34">
+                <list key="application_parameters"/>
+                <parameter key="create_view" value="false"/>
+              </operator>
+              <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - J48 (4)" width="90" x="246" y="34">
+                <parameter key="manually_set_positive_class" value="false"/>
+                <parameter key="main_criterion" value="first"/>
+                <parameter key="accuracy" value="true"/>
+                <parameter key="classification_error" value="false"/>
+                <parameter key="kappa" value="false"/>
+                <parameter key="AUC (optimistic)" value="false"/>
+                <parameter key="AUC" value="false"/>
+                <parameter key="AUC (pessimistic)" value="false"/>
+                <parameter key="precision" value="false"/>
+                <parameter key="recall" value="false"/>
+                <parameter key="lift" value="false"/>
+                <parameter key="fallout" value="false"/>
+                <parameter key="f_measure" value="false"/>
+                <parameter key="false_positive" value="false"/>
+                <parameter key="false_negative" value="false"/>
+                <parameter key="true_positive" value="false"/>
+                <parameter key="true_negative" value="false"/>
+                <parameter key="sensitivity" value="false"/>
+                <parameter key="specificity" value="false"/>
+                <parameter key="youden" value="false"/>
+                <parameter key="positive_predictive_value" value="false"/>
+                <parameter key="negative_predictive_value" value="false"/>
+                <parameter key="psep" value="false"/>
+                <parameter key="skip_undefined_labels" value="true"/>
+                <parameter key="use_example_weights" value="true"/>
+              </operator>
+              <connect from_port="model" to_op="Apply Model - J48 (4)" to_port="model"/>
+              <connect from_port="test set" to_op="Apply Model - J48 (4)" to_port="unlabelled data"/>
+              <connect from_op="Apply Model - J48 (4)" from_port="labelled data" to_op="Performance Binominal - J48 (4)" to_port="labelled data"/>
+              <connect from_op="Performance Binominal - J48 (4)" from_port="performance" to_port="performance 1"/>
+              <portSpacing port="source_model" spacing="0"/>
+              <portSpacing port="source_test set" spacing="0"/>
+              <portSpacing port="source_through 1" spacing="0"/>
+              <portSpacing port="source_through 2" spacing="0"/>
+              <portSpacing port="sink_test set results" spacing="0"/>
+              <portSpacing port="sink_performance 1" spacing="0"/>
+              <portSpacing port="sink_performance 2" spacing="0"/>
+            </process>
+          </operator>
+          <connect from_op="Read CSV - Bank Full" from_port="output" to_op="Discretize - Entropy" to_port="example set input"/>
+          <connect from_op="Discretize - Entropy" from_port="example set output" to_op="Weight by Information Gain Ratio" to_port="example set"/>
+          <connect from_op="Weight by Information Gain Ratio" from_port="weights" to_op="Select by Weights" to_port="weights"/>
+          <connect from_op="Weight by Information Gain Ratio" from_port="example set" to_op="Select by Weights" to_port="example set input"/>
+          <connect from_op="Select by Weights" from_port="example set output" to_op="Cross Validation - J48 (2)" to_port="example set"/>
+          <connect from_op="Cross Validation - J48 (2)" from_port="model" to_port="out 1"/>
+          <connect from_op="Cross Validation - J48 (2)" from_port="performance 1" to_port="out 2"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <portSpacing port="sink_out 3" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="false" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="Scenery 1 (2)" width="90" x="112" y="289">
+        <process expanded="true">
+          <operator activated="true" class="read_csv" compatibility="9.10.008" expanded="true" height="68" name="Read CSV - Bank Full (2)" width="90" x="45" y="85">
+            <parameter key="csv_file" value="C:\Users\User\Desktop\University\3_year\2_Semester\EC\Practice\Class_8\bank-full.csv"/>
+            <parameter key="column_separators" value=","/>
+            <parameter key="trim_lines" value="false"/>
+            <parameter key="use_quotes" value="true"/>
+            <parameter key="quotes_character" value="&quot;"/>
+            <parameter key="escape_character" value="\"/>
+            <parameter key="skip_comments" value="true"/>
+            <parameter key="comment_characters" value="#"/>
+            <parameter key="starting_row" value="1"/>
+            <parameter key="parse_numbers" value="true"/>
+            <parameter key="decimal_character" value="."/>
+            <parameter key="grouped_digits" value="false"/>
+            <parameter key="grouping_character" value=","/>
+            <parameter key="infinity_representation" value=""/>
+            <parameter key="date_format" value=""/>
+            <parameter key="first_row_as_names" value="true"/>
+            <list key="annotations"/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="encoding" value="windows-1252"/>
+            <parameter key="read_all_values_as_polynominal" value="false"/>
+            <list key="data_set_meta_data_information">
+              <parameter key="0" value="age.true.integer.attribute"/>
+              <parameter key="1" value="job.true.polynominal.attribute"/>
+              <parameter key="2" value="marital.true.polynominal.attribute"/>
+              <parameter key="3" value="education.true.polynominal.attribute"/>
+              <parameter key="4" value="default.true.polynominal.attribute"/>
+              <parameter key="5" value="balance.true.integer.attribute"/>
+              <parameter key="6" value="housing.true.polynominal.attribute"/>
+              <parameter key="7" value="loan.true.polynominal.attribute"/>
+              <parameter key="8" value="contact.true.polynominal.attribute"/>
+              <parameter key="9" value="day.true.integer.attribute"/>
+              <parameter key="10" value="month.true.polynominal.attribute"/>
+              <parameter key="11" value="duration.true.integer.attribute"/>
+              <parameter key="12" value="campaign.true.integer.attribute"/>
+              <parameter key="13" value="pdays.true.integer.attribute"/>
+              <parameter key="14" value="previous.true.integer.attribute"/>
+              <parameter key="15" value="poutcome.true.polynominal.attribute"/>
+              <parameter key="16" value="y.true.polynominal.label"/>
+            </list>
+            <parameter key="read_not_matching_values_as_missings" value="false"/>
+          </operator>
+          <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation - J48 (3)" width="90" x="246" y="85">
+            <parameter key="split_on_batch_attribute" value="false"/>
+            <parameter key="leave_one_out" value="false"/>
+            <parameter key="number_of_folds" value="10"/>
+            <parameter key="sampling_type" value="automatic"/>
+            <parameter key="use_local_random_seed" value="false"/>
+            <parameter key="local_random_seed" value="1992"/>
+            <parameter key="enable_parallel_execution" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="weka:W-J48" compatibility="7.3.000" expanded="true" height="82" name="W-J48 (5)" width="90" x="112" y="34">
+                <parameter key="U" value="false"/>
+                <parameter key="C" value="0.25"/>
+                <parameter key="M" value="2.0"/>
+                <parameter key="R" value="false"/>
+                <parameter key="B" value="false"/>
+                <parameter key="S" value="false"/>
+                <parameter key="L" value="false"/>
+                <parameter key="A" value="false"/>
+              </operator>
+              <connect from_port="training set" to_op="W-J48 (5)" to_port="training set"/>
+              <connect from_op="W-J48 (5)" from_port="model" to_port="model"/>
+              <connect from_op="W-J48 (5)" from_port="exampleSet" to_port="through 1"/>
+              <portSpacing port="source_training set" spacing="0"/>
+              <portSpacing port="sink_model" spacing="0"/>
+              <portSpacing port="sink_through 1" spacing="0"/>
+              <portSpacing port="sink_through 2" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - J48 (5)" width="90" x="45" y="34">
+                <list key="application_parameters"/>
+                <parameter key="create_view" value="false"/>
+              </operator>
+              <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - J48 (5)" width="90" x="246" y="34">
+                <parameter key="manually_set_positive_class" value="false"/>
+                <parameter key="main_criterion" value="first"/>
+                <parameter key="accuracy" value="true"/>
+                <parameter key="classification_error" value="false"/>
+                <parameter key="kappa" value="false"/>
+                <parameter key="AUC (optimistic)" value="false"/>
+                <parameter key="AUC" value="false"/>
+                <parameter key="AUC (pessimistic)" value="false"/>
+                <parameter key="precision" value="false"/>
+                <parameter key="recall" value="false"/>
+                <parameter key="lift" value="false"/>
+                <parameter key="fallout" value="false"/>
+                <parameter key="f_measure" value="false"/>
+                <parameter key="false_positive" value="false"/>
+                <parameter key="false_negative" value="false"/>
+                <parameter key="true_positive" value="false"/>
+                <parameter key="true_negative" value="false"/>
+                <parameter key="sensitivity" value="false"/>
+                <parameter key="specificity" value="false"/>
+                <parameter key="youden" value="false"/>
+                <parameter key="positive_predictive_value" value="false"/>
+                <parameter key="negative_predictive_value" value="false"/>
+                <parameter key="psep" value="false"/>
+                <parameter key="skip_undefined_labels" value="true"/>
+                <parameter key="use_example_weights" value="true"/>
+              </operator>
+              <connect from_port="model" to_op="Apply Model - J48 (5)" to_port="model"/>
+              <connect from_port="test set" to_op="Apply Model - J48 (5)" to_port="unlabelled data"/>
+              <connect from_op="Apply Model - J48 (5)" from_port="labelled data" to_op="Performance Binominal - J48 (5)" to_port="labelled data"/>
+              <connect from_op="Performance Binominal - J48 (5)" from_port="performance" to_port="performance 1"/>
+              <portSpacing port="source_model" spacing="0"/>
+              <portSpacing port="source_test set" spacing="0"/>
+              <portSpacing port="source_through 1" spacing="0"/>
+              <portSpacing port="source_through 2" spacing="0"/>
+              <portSpacing port="sink_test set results" spacing="0"/>
+              <portSpacing port="sink_performance 1" spacing="0"/>
+              <portSpacing port="sink_performance 2" spacing="0"/>
+            </process>
+          </operator>
+          <connect from_op="Read CSV - Bank Full (2)" from_port="output" to_op="Cross Validation - J48 (3)" to_port="example set"/>
+          <connect from_op="Cross Validation - J48 (3)" from_port="model" to_port="out 1"/>
+          <connect from_op="Cross Validation - J48 (3)" from_port="performance 1" to_port="out 2"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <portSpacing port="sink_out 3" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="subprocess" compatibility="9.10.008" expanded="true" height="103" name="Scenery 3 (2)" width="90" x="380" y="289">
+        <process expanded="true">
+          <operator activated="true" class="read_csv" compatibility="9.10.008" expanded="true" height="68" name="Read CSV - Bank Full (3)" width="90" x="45" y="85">
+            <parameter key="csv_file" value="C:\Users\User\Desktop\University\3_year\2_Semester\EC\Practice\Class_8\bank-full.csv"/>
+            <parameter key="column_separators" value=","/>
+            <parameter key="trim_lines" value="false"/>
+            <parameter key="use_quotes" value="true"/>
+            <parameter key="quotes_character" value="&quot;"/>
+            <parameter key="escape_character" value="\"/>
+            <parameter key="skip_comments" value="true"/>
+            <parameter key="comment_characters" value="#"/>
+            <parameter key="starting_row" value="1"/>
+            <parameter key="parse_numbers" value="true"/>
+            <parameter key="decimal_character" value="."/>
+            <parameter key="grouped_digits" value="false"/>
+            <parameter key="grouping_character" value=","/>
+            <parameter key="infinity_representation" value=""/>
+            <parameter key="date_format" value=""/>
+            <parameter key="first_row_as_names" value="true"/>
+            <list key="annotations"/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="encoding" value="windows-1252"/>
+            <parameter key="read_all_values_as_polynominal" value="false"/>
+            <list key="data_set_meta_data_information">
+              <parameter key="0" value="age.true.integer.attribute"/>
+              <parameter key="1" value="job.true.polynominal.attribute"/>
+              <parameter key="2" value="marital.true.polynominal.attribute"/>
+              <parameter key="3" value="education.true.polynominal.attribute"/>
+              <parameter key="4" value="default.true.polynominal.attribute"/>
+              <parameter key="5" value="balance.true.integer.attribute"/>
+              <parameter key="6" value="housing.true.polynominal.attribute"/>
+              <parameter key="7" value="loan.true.polynominal.attribute"/>
+              <parameter key="8" value="contact.true.polynominal.attribute"/>
+              <parameter key="9" value="day.true.integer.attribute"/>
+              <parameter key="10" value="month.true.polynominal.attribute"/>
+              <parameter key="11" value="duration.true.integer.attribute"/>
+              <parameter key="12" value="campaign.true.integer.attribute"/>
+              <parameter key="13" value="pdays.true.integer.attribute"/>
+              <parameter key="14" value="previous.true.integer.attribute"/>
+              <parameter key="15" value="poutcome.true.polynominal.attribute"/>
+              <parameter key="16" value="y.true.polynominal.label"/>
+            </list>
+            <parameter key="read_not_matching_values_as_missings" value="false"/>
+          </operator>
+          <operator activated="true" class="discretize_by_entropy" compatibility="9.10.008" expanded="true" height="103" name="Discretize - Entropy (2)" width="90" x="179" y="85">
+            <parameter key="return_preprocessing_model" value="false"/>
+            <parameter key="create_view" value="false"/>
+            <parameter key="attribute_filter_type" value="value_type"/>
+            <parameter key="attribute" value=""/>
+            <parameter key="attributes" value=""/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="numeric"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="real"/>
+            <parameter key="block_type" value="value_series"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="value_series_end"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="false"/>
+            <parameter key="remove_useless" value="true"/>
+            <parameter key="range_name_type" value="long"/>
+            <parameter key="automatic_number_of_digits" value="true"/>
+            <parameter key="number_of_digits" value="-1"/>
+          </operator>
+          <operator activated="true" class="weight_by_information_gain_ratio" compatibility="9.10.008" expanded="true" height="82" name="Weight by Information Gain Ratio (2)" width="90" x="313" y="85">
+            <parameter key="normalize_weights" value="false"/>
+            <parameter key="sort_weights" value="true"/>
+            <parameter key="sort_direction" value="ascending"/>
+          </operator>
+          <operator activated="true" class="select_by_weights" compatibility="9.10.008" expanded="true" height="103" name="Select by Weights (2)" width="90" x="447" y="85">
+            <parameter key="weight_relation" value="greater equals"/>
+            <parameter key="weight" value="0.02"/>
+            <parameter key="k" value="10"/>
+            <parameter key="p" value="0.5"/>
+            <parameter key="deselect_unknown" value="true"/>
+            <parameter key="use_absolute_weights" value="true"/>
+          </operator>
+          <operator activated="true" class="concurrency:cross_validation" compatibility="9.10.008" expanded="true" height="145" name="Cross Validation - J48 (4)" width="90" x="581" y="85">
+            <parameter key="split_on_batch_attribute" value="false"/>
+            <parameter key="leave_one_out" value="false"/>
+            <parameter key="number_of_folds" value="10"/>
+            <parameter key="sampling_type" value="automatic"/>
+            <parameter key="use_local_random_seed" value="false"/>
+            <parameter key="local_random_seed" value="1992"/>
+            <parameter key="enable_parallel_execution" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="weka:W-J48" compatibility="7.3.000" expanded="true" height="82" name="W-J48 (6)" width="90" x="112" y="34">
+                <parameter key="U" value="false"/>
+                <parameter key="C" value="0.1"/>
+                <parameter key="M" value="2.0"/>
+                <parameter key="R" value="false"/>
+                <parameter key="B" value="false"/>
+                <parameter key="S" value="false"/>
+                <parameter key="L" value="false"/>
+                <parameter key="A" value="false"/>
+              </operator>
+              <connect from_port="training set" to_op="W-J48 (6)" to_port="training set"/>
+              <connect from_op="W-J48 (6)" from_port="model" to_port="model"/>
+              <connect from_op="W-J48 (6)" from_port="exampleSet" to_port="through 1"/>
+              <portSpacing port="source_training set" spacing="0"/>
+              <portSpacing port="sink_model" spacing="0"/>
+              <portSpacing port="sink_through 1" spacing="0"/>
+              <portSpacing port="sink_through 2" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <operator activated="true" class="apply_model" compatibility="9.10.008" expanded="true" height="82" name="Apply Model - J48 (6)" width="90" x="45" y="34">
+                <list key="application_parameters"/>
+                <parameter key="create_view" value="false"/>
+              </operator>
+              <operator activated="true" class="performance_binominal_classification" compatibility="9.10.008" expanded="true" height="82" name="Performance Binominal - J48 (6)" width="90" x="246" y="34">
+                <parameter key="manually_set_positive_class" value="false"/>
+                <parameter key="main_criterion" value="first"/>
+                <parameter key="accuracy" value="true"/>
+                <parameter key="classification_error" value="false"/>
+                <parameter key="kappa" value="false"/>
+                <parameter key="AUC (optimistic)" value="false"/>
+                <parameter key="AUC" value="false"/>
+                <parameter key="AUC (pessimistic)" value="false"/>
+                <parameter key="precision" value="false"/>
+                <parameter key="recall" value="false"/>
+                <parameter key="lift" value="false"/>
+                <parameter key="fallout" value="false"/>
+                <parameter key="f_measure" value="false"/>
+                <parameter key="false_positive" value="false"/>
+                <parameter key="false_negative" value="false"/>
+                <parameter key="true_positive" value="false"/>
+                <parameter key="true_negative" value="false"/>
+                <parameter key="sensitivity" value="false"/>
+                <parameter key="specificity" value="false"/>
+                <parameter key="youden" value="false"/>
+                <parameter key="positive_predictive_value" value="false"/>
+                <parameter key="negative_predictive_value" value="false"/>
+                <parameter key="psep" value="false"/>
+                <parameter key="skip_undefined_labels" value="true"/>
+                <parameter key="use_example_weights" value="true"/>
+              </operator>
+              <connect from_port="model" to_op="Apply Model - J48 (6)" to_port="model"/>
+              <connect from_port="test set" to_op="Apply Model - J48 (6)" to_port="unlabelled data"/>
+              <connect from_op="Apply Model - J48 (6)" from_port="labelled data" to_op="Performance Binominal - J48 (6)" to_port="labelled data"/>
+              <connect from_op="Performance Binominal - J48 (6)" from_port="performance" to_port="performance 1"/>
+              <portSpacing port="source_model" spacing="0"/>
+              <portSpacing port="source_test set" spacing="0"/>
+              <portSpacing port="source_through 1" spacing="0"/>
+              <portSpacing port="source_through 2" spacing="0"/>
+              <portSpacing port="sink_test set results" spacing="0"/>
+              <portSpacing port="sink_performance 1" spacing="0"/>
+              <portSpacing port="sink_performance 2" spacing="0"/>
+            </process>
+          </operator>
+          <connect from_op="Read CSV - Bank Full (3)" from_port="output" to_op="Discretize - Entropy (2)" to_port="example set input"/>
+          <connect from_op="Discretize - Entropy (2)" from_port="example set output" to_op="Weight by Information Gain Ratio (2)" to_port="example set"/>
+          <connect from_op="Weight by Information Gain Ratio (2)" from_port="weights" to_op="Select by Weights (2)" to_port="weights"/>
+          <connect from_op="Weight by Information Gain Ratio (2)" from_port="example set" to_op="Select by Weights (2)" to_port="example set input"/>
+          <connect from_op="Select by Weights (2)" from_port="example set output" to_op="Cross Validation - J48 (4)" to_port="example set"/>
+          <connect from_op="Cross Validation - J48 (4)" from_port="model" to_port="out 1"/>
+          <connect from_op="Cross Validation - J48 (4)" from_port="performance 1" to_port="out 2"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <portSpacing port="sink_out 3" spacing="0"/>
+        </process>
+      </operator>
+      <connect from_op="Scenery 3 (2)" from_port="out 1" to_port="result 1"/>
+      <connect from_op="Scenery 3 (2)" from_port="out 2" to_port="result 2"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <description align="center" color="red" colored="true" height="177" resized="true" width="421" x="79" y="33">2.1 Play Golf</description>
+      <description align="center" color="orange" colored="true" height="179" resized="true" width="425" x="77" y="242">2.2 Bank</description>
+    </process>
+  </operator>
+</process>
