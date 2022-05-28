@@ -1,7 +1,0 @@
-C:\practices\is\sheet_5\SolutionSheet5\WcfServiceBookstore\bin\WcfServiceBookstore.dll.config
-C:\practices\is\sheet_5\SolutionSheet5\WcfServiceBookstore\bin\WcfServiceBookstore.dll
-C:\practices\is\sheet_5\SolutionSheet5\WcfServiceBookstore\bin\WcfServiceBookstore.pdb
-C:\practices\is\sheet_5\SolutionSheet5\WcfServiceBookstore\obj\Debug\WcfServiceBookstore.csproj.AssemblyReference.cache
-C:\practices\is\sheet_5\SolutionSheet5\WcfServiceBookstore\obj\Debug\WcfServiceBookstore.csproj.CoreCompileInputs.cache
-C:\practices\is\sheet_5\SolutionSheet5\WcfServiceBookstore\obj\Debug\WcfServiceBookstore.dll
-C:\practices\is\sheet_5\SolutionSheet5\WcfServiceBookstore\obj\Debug\WcfServiceBookstore.pdb

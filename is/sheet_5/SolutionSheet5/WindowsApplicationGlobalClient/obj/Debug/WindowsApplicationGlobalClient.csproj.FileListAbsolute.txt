@@ -1,9 +1,0 @@
-C:\practices\is\sheet_5\SolutionSheet5\WindowsApplicationGlobalClient\bin\Debug\WindowsApplicationGlobalClient.exe.config
-C:\practices\is\sheet_5\SolutionSheet5\WindowsApplicationGlobalClient\bin\Debug\WindowsApplicationGlobalClient.exe
-C:\practices\is\sheet_5\SolutionSheet5\WindowsApplicationGlobalClient\bin\Debug\WindowsApplicationGlobalClient.pdb
-C:\practices\is\sheet_5\SolutionSheet5\WindowsApplicationGlobalClient\obj\Debug\WindowsApplicationGlobalClient.Form1.resources
-C:\practices\is\sheet_5\SolutionSheet5\WindowsApplicationGlobalClient\obj\Debug\WindowsApplicationGlobalClient.Properties.Resources.resources
-C:\practices\is\sheet_5\SolutionSheet5\WindowsApplicationGlobalClient\obj\Debug\WindowsApplicationGlobalClient.csproj.GenerateResource.cache
-C:\practices\is\sheet_5\SolutionSheet5\WindowsApplicationGlobalClient\obj\Debug\WindowsApplicationGlobalClient.csproj.CoreCompileInputs.cache
-C:\practices\is\sheet_5\SolutionSheet5\WindowsApplicationGlobalClient\obj\Debug\WindowsApplicationGlobalClient.exe
-C:\practices\is\sheet_5\SolutionSheet5\WindowsApplicationGlobalClient\obj\Debug\WindowsApplicationGlobalClient.pdb
